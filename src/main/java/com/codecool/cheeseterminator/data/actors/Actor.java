@@ -2,7 +2,7 @@ package com.codecool.cheeseterminator.data.actors;
 
 import com.codecool.cheeseterminator.data.Cell;
 import com.codecool.cheeseterminator.data.Drawable;
-
+//TODO no need for Actor class
 public abstract class Actor implements Drawable {
     protected Cell cell;
 

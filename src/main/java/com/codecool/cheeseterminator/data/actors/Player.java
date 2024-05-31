@@ -33,48 +33,6 @@ public class Player extends Actor {
     }
 
 
-    private void equipHelmet(Helmet helmet) {
-        addAttack(helmet.getAttackBonus());
-        addHealth(helmet.getHealthBonus());
-        this.hasHelmet = true;
-    }
-
-
-    public void setHasSword(boolean hasSword) {
-        this.hasSword = hasSword;
-    }
-
-    public void setHasArmor(boolean hasArmor) {
-        this.hasArmor = hasArmor;
-    }
-
-    public void setHasHelmet(boolean hasHelmet) {
-        this.hasHelmet = hasHelmet;
-    }
-
-    public void addItemWithoutEquip(Item item) {
-        this.inventory.add(item);
-    }
-
-    private void removeItem(Item item) {
-        this.inventory.remove(item);
-    }
-
-    public String getInventory() {
-        StringBuilder stringBuilder = new StringBuilder("Inventory:\n");
-        for (Item item : inventory) {
-            stringBuilder.append(item.getTileName()).append("\n");
-        }
-        return String.valueOf(stringBuilder);
-    }
-
-    public List<String> getInventoryList() {
-        List<String> inventoryList = new ArrayList<>();
-        for (Item item : inventory) {
-            inventoryList.add(item.getTileName());
-        }
-        return inventoryList;
-    }
 
     public Item getItem(String itemName) {
         for (Item item : inventory) {
@@ -88,8 +46,6 @@ public class Player extends Actor {
         Cell nextCell = cell.getNeighbor(dx, dy);
         Item item = nextCell.getItem();
         boolean allowToMove = true;
-        Actor actor = nextCell.getActor();
-        if (actor != null) allowToMove = false;
         if (item != null) {
             allowToMove = handleItemEncounter(item, nextCell, dx, dy);
         }

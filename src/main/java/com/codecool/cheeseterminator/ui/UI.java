@@ -73,7 +73,7 @@ public class UI {
         if (logic.isLevelUp())
             mainStage.setGameMessage("Congratulations!\n\nYou have completed LEVEL " + logic.getLevel()
                     + "\n\nPress 'SPACE' to proceed!\n ");
-        else mainStage.setGameMessage("Push all cheeses \nto the mouse hole!\n ");
+        else mainStage.setGameMessage("Push all the cheeses \nto the mouse hole!\n ");
         mainStage.setLevelText("LEVEL " + logic.getLevel());
 
         mainStage.setNumberOfCheesesValue(String.valueOf(logic.getNumberOfCheese()));

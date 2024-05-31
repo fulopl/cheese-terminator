@@ -27,7 +27,7 @@ public class StatusPane {
         numberOfCheesesValue = new Label();
         numberToPlaceLabel = new Label("Number to place: ");
         numberToPlaceValue = new Label();
-        keyMapText = new Label("\nUse \nARROW KEYS to move\n'R' to retry level\n'Q' to quit game");
+        keyMapText = new Label("\nUse ARROW KEYS to move,\npush 'R' to retry level,\npush 'Q' to quit game");
     }
 
     public BorderPane build() {
