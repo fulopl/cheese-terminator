@@ -1,11 +1,11 @@
 package com.codecool.cheeseterminator.data;
 
-import com.codecool.cheeseterminator.data.actors.Actor;
+import com.codecool.cheeseterminator.data.player.Player;
 import com.codecool.cheeseterminator.data.items.Item;
 
 public class Cell implements Drawable {
     private CellType type;
-    private Actor actor;
+    private Player player;
     private Item item;
     private GameMap gameMap;
     private int x, y;
@@ -25,13 +25,13 @@ public class Cell implements Drawable {
         this.type = type;
     }
 
-    public void setActor(Actor actor) {
-        this.actor = actor;
+    public void setPlayer(Player player) {
+        this.player = player;
     }
     public void setItem(Item item) {this.item = item; }
 
-    public Actor getActor() {
-        return actor;
+    public Player getPlayer() {
+        return player;
     }
     public Item getItem() { return item; }
 

@@ -3,14 +3,12 @@ package com.codecool.cheeseterminator.logic;
 import com.codecool.cheeseterminator.data.Cell;
 import com.codecool.cheeseterminator.data.CellType;
 import com.codecool.cheeseterminator.data.GameMap;
-import com.codecool.cheeseterminator.data.actors.Actor;
-import com.codecool.cheeseterminator.data.actors.Player;
+import com.codecool.cheeseterminator.data.player.Player;
 import com.codecool.cheeseterminator.data.items.Cheese;
 
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.Scanner;
 
 public class MapLoader {
@@ -21,21 +19,20 @@ public class MapLoader {
         int width = scanner.nextInt();
         int height = scanner.nextInt();
 
-        List<Actor> enemyList = new ArrayList<>();
         List<String> lines = new ArrayList<>();
         scanner.nextLine(); // empty line
 
-        GameMap map = new GameMap(width, height, CellType.EMPTY, enemyList);
+        GameMap map = new GameMap(width, height, CellType.EMPTY);
 
         for (int y = 0; y < height; y++) {
             String line = scanner.nextLine();
             lines.add(line);
         }
-        buildMap(map, lines, enemyList);
+        buildMap(map, lines);
         return map;
     }
 
-    public static void buildMap(GameMap map, List<String> lines, List<Actor> enemyList) {
+    public static void buildMap(GameMap map, List<String> lines) {
 
         int height = lines.size();
         for (int y = 0; y < height; y++) {
