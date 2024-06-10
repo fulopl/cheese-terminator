@@ -71,8 +71,6 @@ public class DbManager {
         } catch (SQLException throwables) {
             System.err.println("Could not connect to the database.");
         }
-        map.getPlayer().setHealth(playerAttributes.get("health"));
-        map.getPlayer().setBaseAttack(playerAttributes.get("attack"));
         return inventoryList;
     }
 }

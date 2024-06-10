@@ -1,7 +1,7 @@
 package com.codecool.cheeseterminator.logic;
 
 import com.codecool.cheeseterminator.data.Cell;
-import com.codecool.cheeseterminator.data.CellType;
+import com.codecool.cheeseterminator.ui.TileType;
 import com.codecool.cheeseterminator.data.GameMap;
 import com.codecool.cheeseterminator.data.player.Player;
 import com.codecool.cheeseterminator.data.items.Cheese;
@@ -22,7 +22,7 @@ public class MapLoader {
         List<String> lines = new ArrayList<>();
         scanner.nextLine(); // empty line
 
-        GameMap map = new GameMap(width, height, CellType.EMPTY);
+        GameMap map = new GameMap(width, height, TileType.EMPTY);
 
         for (int y = 0; y < height; y++) {
             String line = scanner.nextLine();
@@ -43,25 +43,25 @@ public class MapLoader {
                     Cell cell = map.getCell(x, y);
                     switch (line.charAt(x)) {
                         case ' ':
-                            cell.setType(CellType.EMPTY);
+                            cell.setType(TileType.EMPTY);
                             break;
                         case '#':
-                            cell.setType(CellType.WALL);
+                            cell.setType(TileType.WALL);
                             break;
                         case '.':
-                            cell.setType(CellType.FLOOR);
+                            cell.setType(TileType.FLOOR);
                             break;
                         case 'h':
-                            cell.setType(CellType.HOLE);
+                            cell.setType(TileType.HOLE);
                             break;
                         case 'c':
-                            cell.setType(CellType.FLOOR);
+                            cell.setType(TileType.FLOOR);
                             new Cheese(cell);
                             map.incrementCheeseNumber();
                             break;
                         case '@':
-                            cell.setType(CellType.FLOOR);
-                            map.setPlayer(new Player(cell));
+                            cell.setType(TileType.FLOOR);
+                            map.setPlayer(new Player(cell, TileType.MOUSE));
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

@@ -4,22 +4,23 @@ import com.codecool.cheeseterminator.data.Cell;
 import com.codecool.cheeseterminator.data.Drawable;
 import com.codecool.cheeseterminator.data.items.Cheese;
 import com.codecool.cheeseterminator.data.items.Item;
+import com.codecool.cheeseterminator.ui.TileType;
 
 public class Player implements Drawable {
     private Cell cell;
     private Direction direction;
+    private TileType tileType;
 
-    private String playerApperience;
-
-    public Player(Cell cell) {
+    public Player(Cell cell, TileType tileType) {
         this.cell = cell;
+        this.tileType = tileType;
         this.cell.setPlayer(this);
         direction = Direction.EAST;
     }
 
     @Override
     public String getTileName() {
-        return playerApperience;
+        return tileType.getTileName();
     }
 
     public void move(int dx, int dy) {
@@ -41,9 +42,5 @@ public class Player implements Drawable {
     public boolean handleItemEncounter(Item item, Cell nextCell, int dx, int dy) {
         if (item instanceof Cheese) return ((Cheese) item).move(nextCell, dx, dy);
         return false;
-    }
-
-    public void setPlayerApperience(String playerApperience) {
-        this.playerApperience = playerApperience;
     }
 }

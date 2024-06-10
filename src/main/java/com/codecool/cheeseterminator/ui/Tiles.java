@@ -12,8 +12,10 @@ public class Tiles {
 
     private static Image tileset = new Image("/tiles.png", 543 * 2, 543 * 2, true, false);
     private static Map<String, Tile> tileMap = new HashMap<>();
+
     public static class Tile {
         public final int x, y, w, h;
+
         Tile(int i, int j) {
             x = i * (TILE_WIDTH + 2);
             y = j * (TILE_WIDTH + 2);
@@ -23,23 +25,20 @@ public class Tiles {
     }
 
     static {
-        tileMap.put("empty", new Tile(0, 0));
-        tileMap.put("wall", new Tile(10, 17));
-        tileMap.put("floor", new Tile(2, 0));
-        tileMap.put("cheese", new Tile(18, 28));
-        tileMap.put("hole", new Tile(23, 25));
-
-        tileMap.put("player", new Tile(31, 8));
-        tileMap.put("playerS", new Tile(27, 0));
-        tileMap.put("playerSA", new Tile(28, 0));
-        tileMap.put("playerSAH", new Tile(31, 0));
-        tileMap.put("playerA", new Tile(30, 0));
-
+        for (TileType tileType : TileType.values()) {
+            tileMap.put(tileType.getTileName(), new Tile(tileType.getFileCoordinateX(), tileType.getFileCoordinateY()));
+            System.out.println(tileType.getTileName());
+        }
+//        tileMap.put("empty", new Tile(0, 0));
+//        tileMap.put("wall", new Tile(10, 17));
+//        tileMap.put("floor", new Tile(2, 0));
+//        tileMap.put("cheese", new Tile(18, 28));
+//        tileMap.put("hole", new Tile(23, 25));
+//        tileMap.put("player", new Tile(31, 8));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
         Tile tile = tileMap.get(d.getTileName());
-        context.drawImage(tileset, tile.x, tile.y, tile.w, tile.h,
-                x * TILE_WIDTH, y * TILE_WIDTH, TILE_WIDTH, TILE_WIDTH);
+        context.drawImage(tileset, tile.x, tile.y, tile.w, tile.h, x * TILE_WIDTH, y * TILE_WIDTH, TILE_WIDTH, TILE_WIDTH);
     }
 }

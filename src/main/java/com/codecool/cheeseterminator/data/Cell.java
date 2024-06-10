@@ -2,26 +2,27 @@ package com.codecool.cheeseterminator.data;
 
 import com.codecool.cheeseterminator.data.player.Player;
 import com.codecool.cheeseterminator.data.items.Item;
+import com.codecool.cheeseterminator.ui.TileType;
 
 public class Cell implements Drawable {
-    private CellType type;
+    private TileType type;
     private Player player;
     private Item item;
     private GameMap gameMap;
     private int x, y;
 
-    public Cell(GameMap gameMap, int x, int y, CellType type) {
+    public Cell(GameMap gameMap, int x, int y, TileType type) {
         this.gameMap = gameMap;
         this.x = x;
         this.y = y;
         this.type = type;
     }
 
-    public CellType getType() {
+    public TileType getType() {
         return type;
     }
 
-    public void setType(CellType type) {
+    public void setType(TileType type) {
         this.type = type;
     }
 
