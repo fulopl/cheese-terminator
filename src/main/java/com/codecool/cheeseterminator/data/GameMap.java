@@ -1,6 +1,6 @@
 package com.codecool.cheeseterminator.data;
 
-import com.codecool.cheeseterminator.data.player.Player;
+import com.codecool.cheeseterminator.data.player.Hero;
 import com.codecool.cheeseterminator.data.items.Cheese;
 import com.codecool.cheeseterminator.ui.TileType;
 
@@ -10,7 +10,7 @@ public class GameMap {
     private int width;
     private int height;
     private Cell[][] cells;
-    private Player player;
+    private Hero hero;
     private int cheeseNumber;
 
     public GameMap(int width, int height, TileType defaultTileType) {
@@ -28,12 +28,12 @@ public class GameMap {
         return cells[x][y];
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public void setPlayer(Hero hero) {
+        this.hero = hero;
     }
 
-    public Player getPlayer() {
-        return player;
+    public Hero getPlayer() {
+        return hero;
     }
 
     public int getWidth() {

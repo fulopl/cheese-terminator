@@ -3,7 +3,7 @@ package com.codecool.cheeseterminator.logic;
 import com.codecool.cheeseterminator.data.Cell;
 import com.codecool.cheeseterminator.ui.TileType;
 import com.codecool.cheeseterminator.data.GameMap;
-import com.codecool.cheeseterminator.data.player.Player;
+import com.codecool.cheeseterminator.data.player.Hero;
 import com.codecool.cheeseterminator.data.items.Cheese;
 
 import java.io.InputStream;
@@ -61,7 +61,7 @@ public class MapLoader {
                             break;
                         case '@':
                             cell.setType(TileType.FLOOR);
-                            map.setPlayer(new Player(cell, TileType.MOUSE));
+                            map.setPlayer(new Hero(cell, TileType.MOUSE));
                             break;
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");

@@ -6,12 +6,12 @@ import com.codecool.cheeseterminator.data.items.Cheese;
 import com.codecool.cheeseterminator.data.items.Item;
 import com.codecool.cheeseterminator.ui.TileType;
 
-public class Player implements Drawable {
+public class Hero implements Drawable {
     private Cell cell;
     private Direction direction;
     private TileType tileType;
 
-    public Player(Cell cell, TileType tileType) {
+    public Hero(Cell cell, TileType tileType) {
         this.cell = cell;
         this.tileType = tileType;
         this.cell.setPlayer(this);
