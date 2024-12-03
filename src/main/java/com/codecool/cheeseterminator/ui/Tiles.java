@@ -26,7 +26,7 @@ public class Tiles {
 
     static {
         for (TileType tileType : TileType.values()) {
-            tileMap.put(tileType.getTileName(), new Tile(tileType.getFileCoordinateX(), tileType.getFileCoordinateY()));
+            tileMap.put(tileType.getTileName(), new Tile(tileType.getImgCoordinateX(), tileType.getImgCoordinateY()));
             System.out.println(tileType.getTileName());
         }
 //        tileMap.put("empty", new Tile(0, 0));

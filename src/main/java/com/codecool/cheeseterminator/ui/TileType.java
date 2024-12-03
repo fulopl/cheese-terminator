@@ -11,15 +11,15 @@ public enum TileType {
 
     private final String tileName;
     private final boolean passable;
-    private final int fileCoordinateX;
-    private final int fileCoordinateY;
+    private final int imgCoordinateX;
+    private final int imgCoordinateY;
     private final char mapCharacter;
 
-    TileType(String tileName, boolean passable, int fileCoordinateX, int fileCoordinateY, char mapCharacter) {
+    TileType(String tileName, boolean passable, int imgCoordinateX, int imgCoordinateY, char mapCharacter) {
         this.tileName = tileName;
         this.passable = passable;
-        this.fileCoordinateX = fileCoordinateX;
-        this.fileCoordinateY = fileCoordinateY;
+        this.imgCoordinateX = imgCoordinateX;
+        this.imgCoordinateY = imgCoordinateY;
         this.mapCharacter = mapCharacter;
     }
 
@@ -31,12 +31,12 @@ public enum TileType {
         return passable;
     }
 
-    public int getFileCoordinateX() {
-        return fileCoordinateX;
+    public int getImgCoordinateX() {
+        return imgCoordinateX;
     }
 
-    public int getFileCoordinateY() {
-        return fileCoordinateY;
+    public int getImgCoordinateY() {
+        return imgCoordinateY;
     }
 
     public char getMapCharacter() {
