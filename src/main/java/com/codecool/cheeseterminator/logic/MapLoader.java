@@ -1,10 +1,10 @@
 package com.codecool.cheeseterminator.logic;
 
 import com.codecool.cheeseterminator.data.Cell;
-import com.codecool.cheeseterminator.ui.TileType;
 import com.codecool.cheeseterminator.data.GameMap;
-import com.codecool.cheeseterminator.data.player.Hero;
 import com.codecool.cheeseterminator.data.items.Cheese;
+import com.codecool.cheeseterminator.data.player.Hero;
+import com.codecool.cheeseterminator.ui.TileType;
 
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -41,19 +41,17 @@ public class MapLoader {
             for (int x = 0; x < width; x++) {
                 if (x < line.length()) {
                     Cell cell = map.getCell(x, y);
-                    switch (line.charAt(x)) {
-                        case ' ':
-                            cell.setType(TileType.EMPTY);
+                    char mapChar = line.charAt(x);
+                    boolean hasMatch = false;
+                    for (TileType tileType : TileType.values()) {
+                        if (tileType.getMapCharacter() == mapChar) {
+                            cell.setType(tileType);
+                            hasMatch = true;
                             break;
-                        case '#':
-                            cell.setType(TileType.WALL);
-                            break;
-                        case '.':
-                            cell.setType(TileType.FLOOR);
-                            break;
-                        case 'h':
-                            cell.setType(TileType.HOLE);
-                            break;
+                        }
+                    }
+                    if (!hasMatch) throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
+                    switch (mapChar) {
                         case 'c':
                             cell.setType(TileType.FLOOR);
                             new Cheese(cell);
@@ -63,8 +61,6 @@ public class MapLoader {
                             cell.setType(TileType.FLOOR);
                             map.setPlayer(new Hero(cell, TileType.MOUSE));
                             break;
-                        default:
-                            throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     }
                 }
             }
