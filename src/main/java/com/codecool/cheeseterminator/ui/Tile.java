@@ -5,15 +5,14 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public enum Tile {
-    EMPTY("empty", false, 0, 0, ' '),
-    FLOOR("floor", true, 2, 0, '.'),
-    HOLE("hole", true, 23, 25, 'h'),
-    WALL("wall", false, 10, 17, '#'),
-    CHEESE("cheese", false, 18, 28, 'c'),
-    MOUSE("mouse", false, 31, 8, '@'),
+    EMPTY(false, 0, 0, ' '),
+    FLOOR(true, 2, 0, '.'),
+    HOLE(true, 23, 25, 'h'),
+    WALL(false, 10, 17, '#'),
+    CHEESE(false, 18, 28, 'c'),
+    MOUSE(false, 31, 8, '@'),
     ;
 
-    private final String tileName;
     private final boolean passable;
     private final int columnIndex;
     private final int rowIndex;
@@ -24,8 +23,7 @@ public enum Tile {
     public static final int TILE_WIDTH = 32;
     private static final Image tileset = new Image("/tiles.png", 543 * 2, 543 * 2, true, false);
 
-    Tile(String tileName, boolean passable, int columnIndex, int rowIndex, char mapCharacter) {
-        this.tileName = tileName;
+    Tile(boolean passable, int columnIndex, int rowIndex, char mapCharacter) {
         this.passable = passable;
         this.columnIndex = columnIndex;
         this.rowIndex = rowIndex;
@@ -39,12 +37,8 @@ public enum Tile {
         context.drawImage(tileset
                 , tile.getX(), tile.getY()
                 , TILE_WIDTH, TILE_WIDTH
-                ,x * TILE_WIDTH, y * TILE_WIDTH
+                , x * TILE_WIDTH, y * TILE_WIDTH
                 , TILE_WIDTH, TILE_WIDTH);
-    }
-
-    public String getTileName() {
-        return tileName;
     }
 
     public boolean isPassable() {

@@ -7,7 +7,7 @@ import com.codecool.cheeseterminator.ui.Tile;
 public abstract class Item implements Drawable {
     protected Cell cell;
     protected Tile tile;
-    private final boolean passable;
+    private boolean passable;
     private boolean collectable;
 
     public Item(Cell cell, boolean passable, boolean collectable, Tile tile) {
