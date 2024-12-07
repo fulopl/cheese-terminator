@@ -2,7 +2,7 @@ package com.codecool.cheeseterminator.data;
 
 import com.codecool.cheeseterminator.data.player.Hero;
 import com.codecool.cheeseterminator.data.items.Cheese;
-import com.codecool.cheeseterminator.ui.TileType;
+import com.codecool.cheeseterminator.ui.Tile;
 
 import java.util.Arrays;
 
@@ -13,13 +13,13 @@ public class GameMap {
     private Hero hero;
     private int cheeseNumber;
 
-    public GameMap(int width, int height, TileType defaultTileType) {
+    public GameMap(int width, int height, Tile defaultTile) {
         this.width = width;
         this.height = height;
         cells = new Cell[width][height];
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                cells[x][y] = new Cell(this, x, y, defaultTileType);
+                cells[x][y] = new Cell(this, x, y, defaultTile);
             }
         }
     }

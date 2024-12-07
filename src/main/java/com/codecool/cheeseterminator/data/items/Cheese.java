@@ -1,11 +1,11 @@
 package com.codecool.cheeseterminator.data.items;
 
 import com.codecool.cheeseterminator.data.Cell;
-import com.codecool.cheeseterminator.ui.TileType;
+import com.codecool.cheeseterminator.ui.Tile;
 
 public class Cheese extends Item {
     public Cheese(Cell cell) {
-        super(cell, true, false, TileType.CHEESE);
+        super(cell, true, false, Tile.CHEESE);
     }
 
 
@@ -22,6 +22,6 @@ public class Cheese extends Item {
     }
 
     public boolean isOnHole() {
-        return cell.getType() == TileType.HOLE;
+        return cell.getType() == Tile.HOLE;
     }
 }

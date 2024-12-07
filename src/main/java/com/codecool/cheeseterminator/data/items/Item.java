@@ -2,20 +2,20 @@ package com.codecool.cheeseterminator.data.items;
 
 import com.codecool.cheeseterminator.data.Cell;
 import com.codecool.cheeseterminator.data.Drawable;
-import com.codecool.cheeseterminator.ui.TileType;
+import com.codecool.cheeseterminator.ui.Tile;
 
 public abstract class Item implements Drawable {
     protected Cell cell;
-    protected TileType tileType;
+    protected Tile tile;
     private final boolean passable;
     private boolean collectable;
 
-    public Item(Cell cell, boolean passable, boolean collectable, TileType tileType) {
+    public Item(Cell cell, boolean passable, boolean collectable, Tile tile) {
         this.cell = cell;
         this.passable = passable;
         this.collectable = collectable;
         this.cell.setItem(this);
-        this.tileType = tileType;
+        this.tile = tile;
     }
 
     public boolean isPassable() {
@@ -28,6 +28,6 @@ public abstract class Item implements Drawable {
 
     @Override
     public String getTileName() {
-        return tileType.getTileName();
+        return tile.getTileName();
     }
 }

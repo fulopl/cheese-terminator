@@ -4,7 +4,7 @@ import com.codecool.cheeseterminator.data.Drawable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public enum TileType {
+public enum Tile {
     EMPTY("empty", false, 0, 0, ' '),
     FLOOR("floor", true, 2, 0, '.'),
     HOLE("hole", true, 23, 25, 'h'),
@@ -24,7 +24,7 @@ public enum TileType {
     public static final int TILE_WIDTH = 32;
     private static final Image tileset = new Image("/tiles.png", 543 * 2, 543 * 2, true, false);
 
-    TileType(String tileName, boolean passable, int columnIndex, int rowIndex, char mapCharacter) {
+    Tile(String tileName, boolean passable, int columnIndex, int rowIndex, char mapCharacter) {
         this.tileName = tileName;
         this.passable = passable;
         this.columnIndex = columnIndex;
@@ -35,9 +35,9 @@ public enum TileType {
     }
 
     public static void drawTile(GraphicsContext context, Drawable drawable, int x, int y) {
-        TileType tileType = TileType.valueOf(drawable.getTileName().toUpperCase());
+        Tile tile = Tile.valueOf(drawable.getTileName().toUpperCase());
         context.drawImage(tileset
-                , tileType.getX(), tileType.getY()
+                , tile.getX(), tile.getY()
                 , TILE_WIDTH, TILE_WIDTH
                 ,x * TILE_WIDTH, y * TILE_WIDTH
                 , TILE_WIDTH, TILE_WIDTH);
