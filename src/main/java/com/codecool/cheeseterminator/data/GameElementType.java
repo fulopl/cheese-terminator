@@ -21,4 +21,20 @@ public enum GameElementType {
         this.mapCharacter = mapCharacter;
         this.initialTile = initialTile;
     }
+
+    public boolean isPassable() {
+        return passable;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public char getMapCharacter() {
+        return mapCharacter;
+    }
+
+    public Tile getInitialTile() {
+        return initialTile;
+    }
 }
