@@ -23,8 +23,8 @@ public class UI {
 
     public UI(GameLogic logic, Set<KeyHandler> keyHandlers) {
         this.canvas = new Canvas(
-                logic.getMapWidth() * Tiles.TILE_WIDTH,
-                logic.getMapHeight() * Tiles.TILE_WIDTH);
+                logic.getMapWidth() * TileType.TILE_WIDTH,
+                logic.getMapHeight() * TileType.TILE_WIDTH);
         this.logic = logic;
         this.context = canvas.getGraphicsContext2D();
         this.mainStage = new MainStage(canvas);
@@ -56,12 +56,12 @@ public class UI {
         for (int x = 0; x < logic.getMapWidth(); x++) {
             for (int y = 0; y < logic.getMapHeight(); y++) {
                 Cell cell = logic.getCell(x, y);
-                if (cell.getPlayer() != null) {
-                    Tiles.drawTile(context, cell.getPlayer(), x, y);
-                } else if (cell.getItem() != null) {
-                    Tiles.drawTile(context, cell.getItem(), x, y);
+                if (cell.getPlayer() != null) {     //TODO: get out
+                    TileType.drawTile(context, cell.getPlayer(), x, y);
+                } else if (cell.getItem() != null) {      //TODO: get out
+                    TileType.drawTile(context, cell.getItem(), x, y);
                 } else {
-                    Tiles.drawTile(context, cell, x, y);
+                    TileType.drawTile(context, cell, x, y);
                 }
             }
         }

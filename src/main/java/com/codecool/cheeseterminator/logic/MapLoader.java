@@ -22,7 +22,7 @@ public class MapLoader {
         List<String> lines = new ArrayList<>();
         scanner.nextLine(); // empty line
 
-        GameMap map = new GameMap(width, height, TileType.EMPTY);
+        GameMap map = new GameMap(width, height, TileType.FLOOR);
 
         for (int y = 0; y < height; y++) {
             String line = scanner.nextLine();

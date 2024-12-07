@@ -26,20 +26,19 @@ public class MainStage {
         return scene;
     }
 
-
     public void setGameMessage(String text) {
         statusPane.setGameMessage(text);
-    }
+    } //TODO: get out
 
     public void setLevelText(String text) {
         statusPane.setLevelText(text);
-    }
+    } //TODO: get out
 
     public void setNumberOfCheesesValue(String text) {
         statusPane.setNumberOfCheesesValue(text);
-    }
+    }//TODO: get out
 
     public void setNumberToPlaceValue(String text) {
         statusPane.setNumberToPlaceValue(text);
-    }
+    }//TODO: get out
 }
