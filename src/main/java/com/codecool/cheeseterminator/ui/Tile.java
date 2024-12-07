@@ -21,7 +21,7 @@ public enum Tile {
     private final int y;
 
     public static final int TILE_WIDTH = 32;
-    private static final Image tileset = new Image("/tiles.png", 543 * 2, 543 * 2, true, false);
+    private static final Image tileSet = new Image("/tiles.png", 543 * 2, 543 * 2, true, false);
 
     Tile(boolean passable, int columnIndex, int rowIndex, char mapCharacter) {
         this.passable = passable;
@@ -34,7 +34,7 @@ public enum Tile {
 
     public static void drawTile(GraphicsContext context, Drawable drawable, int x, int y) {
         Tile tile = drawable.getTile();
-        context.drawImage(tileset
+        context.drawImage(tileSet
                 , tile.getX(), tile.getY()
                 , TILE_WIDTH, TILE_WIDTH
                 , x * TILE_WIDTH, y * TILE_WIDTH

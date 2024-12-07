@@ -28,11 +28,11 @@ public class GameMap {
         return cells[x][y];
     }
 
-    public void setPlayer(Hero hero) {
+    public void setHero(Hero hero) {
         this.hero = hero;
     }
 
-    public Hero getPlayer() {
+    public Hero getHero() {
         return hero;
     }
 

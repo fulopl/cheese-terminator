@@ -2,26 +2,28 @@ package com.codecool.cheeseterminator.data.player;
 
 import com.codecool.cheeseterminator.data.Cell;
 import com.codecool.cheeseterminator.data.Drawable;
+import com.codecool.cheeseterminator.data.GameElement;
+import com.codecool.cheeseterminator.data.GameElementType;
 import com.codecool.cheeseterminator.data.items.Cheese;
 import com.codecool.cheeseterminator.data.items.Item;
 import com.codecool.cheeseterminator.ui.Tile;
 
-public class Hero implements Drawable {
+public class Hero extends GameElement{
     private Cell cell;
     private Direction direction;
-    private Tile tile;
 
-    public Hero(Cell cell, Tile tile) {
-        this.cell = cell;
-        this.tile = tile;
-        this.cell.setPlayer(this);
-        direction = Direction.EAST;
+    public Hero(GameElementType gameElementType) {
+        super(gameElementType);
+        this.direction = Direction.EAST;
     }
 
-    @Override
-    public Tile getTile() {
-        return tile;
-    }
+//    public Hero(Cell cell, Tile tile) {
+//        this.cell = cell;
+//        this.tile = tile;
+//        this.cell.setPlayer(this);
+//        direction = Direction.EAST;
+//    }
+
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
