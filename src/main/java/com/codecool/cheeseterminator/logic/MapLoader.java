@@ -45,7 +45,7 @@ public class MapLoader {
                     boolean hasMatch = false;
                     for (Tile tile : Tile.values()) {
                         if (tile.getMapCharacter() == mapChar) {
-                            cell.setType(tile);
+                            cell.setTile(tile);
                             hasMatch = true;
                             break;
                         }
@@ -53,12 +53,12 @@ public class MapLoader {
                     if (!hasMatch) throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
                     switch (mapChar) {
                         case 'c':
-                            cell.setType(Tile.FLOOR);
+                            cell.setTile(Tile.FLOOR);
                             new Cheese(cell);
                             map.incrementCheeseNumber();
                             break;
                         case '@':
-                            cell.setType(Tile.FLOOR);
+                            cell.setTile(Tile.FLOOR);
                             map.setPlayer(new Hero(cell, Tile.MOUSE));
                             break;
                     }

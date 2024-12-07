@@ -5,25 +5,26 @@ import com.codecool.cheeseterminator.data.items.Item;
 import com.codecool.cheeseterminator.ui.Tile;
 
 public class Cell implements Drawable {
-    private Tile type;
+    private Tile tile;
     private Hero hero;
     private Item item;
     private GameMap gameMap;
     private int x, y;
 
-    public Cell(GameMap gameMap, int x, int y, Tile type) {
+    public Cell(GameMap gameMap, int x, int y, Tile tile) {
         this.gameMap = gameMap;
         this.x = x;
         this.y = y;
-        this.type = type;
+        this.tile = tile;
     }
 
-    public Tile getType() {
-        return type;
+    @Override
+    public Tile getTile() {
+        return tile;
     }
 
-    public void setType(Tile type) {
-        this.type = type;
+    public void setTile(Tile tile) {
+        this.tile = tile;
     }
 
     public void setPlayer(Hero hero) {
@@ -38,11 +39,6 @@ public class Cell implements Drawable {
 
     public Cell getNeighbor(int dx, int dy) {
         return gameMap.getCell(x + dx, y + dy);
-    }
-
-    @Override
-    public String getTileName() {
-        return type.getTileName();
     }
 
     public int getX() {

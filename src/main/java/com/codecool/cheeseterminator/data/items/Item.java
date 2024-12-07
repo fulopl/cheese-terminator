@@ -27,7 +27,7 @@ public abstract class Item implements Drawable {
     }
 
     @Override
-    public String getTileName() {
-        return tile.getTileName();
+    public Tile getTile() {
+        return tile;
     }
 }

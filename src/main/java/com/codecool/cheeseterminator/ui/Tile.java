@@ -35,7 +35,7 @@ public enum Tile {
     }
 
     public static void drawTile(GraphicsContext context, Drawable drawable, int x, int y) {
-        Tile tile = Tile.valueOf(drawable.getTileName().toUpperCase());
+        Tile tile = drawable.getTile();
         context.drawImage(tileset
                 , tile.getX(), tile.getY()
                 , TILE_WIDTH, TILE_WIDTH

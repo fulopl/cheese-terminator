@@ -19,8 +19,8 @@ public class Hero implements Drawable {
     }
 
     @Override
-    public String getTileName() {
-        return tile.getTileName();
+    public Tile getTile() {
+        return tile;
     }
 
     public void move(int dx, int dy) {
@@ -31,7 +31,7 @@ public class Hero implements Drawable {
             allowToMove = handleItemEncounter(item, nextCell, dx, dy);
         }
         if (allowToMove) {
-            if (nextCell.getType().isPassable()) {
+            if (nextCell.getTile().isPassable()) {
                 cell.setPlayer(null);
                 nextCell.setPlayer(this);
                 cell = nextCell;

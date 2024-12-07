@@ -11,7 +11,7 @@ public class Cheese extends Item {
 
     public boolean move(Cell nextCell, int dx, int dy) {
         Cell nextCellToCheese = nextCell.getNeighbor(dx, dy);
-        if (nextCellToCheese.getType().isPassable()
+        if (nextCellToCheese.getTile().isPassable()
                 && nextCellToCheese.getItem() == null) {
             nextCellToCheese.setItem(this);
             nextCell.setItem(null);
@@ -22,6 +22,6 @@ public class Cheese extends Item {
     }
 
     public boolean isOnHole() {
-        return cell.getType() == Tile.HOLE;
+        return cell.getTile() == Tile.HOLE;
     }
 }
