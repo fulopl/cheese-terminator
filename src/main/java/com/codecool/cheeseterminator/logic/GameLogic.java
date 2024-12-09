@@ -2,14 +2,13 @@ package com.codecool.cheeseterminator.logic;
 
 import com.codecool.cheeseterminator.data.Cell;
 import com.codecool.cheeseterminator.data.GameMap;
+import com.codecool.cheeseterminator.data.items.Cheese;
 import javafx.scene.input.KeyCode; //TODO get out all javaFX
 import javafx.scene.input.KeyEvent; //TODO get out all javaFX
 
 public class GameLogic {
     private GameMap map;
     private int level;
-    private long numberOfCheese;
-    private long numberOfCheeseScored;
     private boolean levelUp = false;
 
     public GameLogic() {
@@ -34,13 +33,6 @@ public class GameLogic {
         return level;
     }
 
-    public long getNumberOfCheese() {
-        return numberOfCheese;
-    }
-
-    public long getNumberOfCheeseScored() {
-        return numberOfCheeseScored;
-    }
 
     public boolean isLevelUp() {
         return levelUp;
@@ -49,8 +41,6 @@ public class GameLogic {
     public void setupLevel() {
         String filename = "/level_" + level + ".txt";
         map = MapLoader.createGameMapFromFile(filename);
-        numberOfCheese = map.getCheeseNumber();
-        numberOfCheeseScored = 0;
     }
 
     private void winScreen() {
@@ -72,8 +62,7 @@ public class GameLogic {
 
 
     public void doChecksAfterKeypress(KeyEvent keyEvent) {
-        numberOfCheeseScored = map.getNumberOfCheeseScored();
-        if (numberOfCheeseScored == numberOfCheese) levelUp = true;
+        if (Cheese.getCheeseTotal() == Cheese.getCheeseInHole()) levelUp = true;
         if (keyEvent.getCode().equals(KeyCode.SPACE) && levelUp) nextLevel();
         else if (keyEvent.getCode().equals(KeyCode.R)) setupLevel();
         else if (keyEvent.getCode().equals(KeyCode.Q)) {

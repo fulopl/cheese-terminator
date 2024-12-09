@@ -65,4 +65,7 @@ public class Cell implements Drawable {
         return y;
     }
 
+    public boolean isPassable() {
+        return structure.isPassable();
+    }
 }

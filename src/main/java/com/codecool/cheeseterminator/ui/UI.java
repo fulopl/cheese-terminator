@@ -1,6 +1,7 @@
 package com.codecool.cheeseterminator.ui;
 
 import com.codecool.cheeseterminator.data.Cell;
+import com.codecool.cheeseterminator.data.items.Cheese;
 import com.codecool.cheeseterminator.logic.GameLogic;
 import com.codecool.cheeseterminator.ui.elements.MainStage;
 import com.codecool.cheeseterminator.ui.keyeventhandler.KeyHandler;
@@ -71,8 +72,8 @@ public class UI {
         else mainStage.setGameMessage("Push all the cheeses \nto the mouse holes!\n ");
         mainStage.setLevelText("LEVEL " + gameLogic.getLevel());
 
-        mainStage.setNumberOfCheesesValue(String.valueOf(gameLogic.getNumberOfCheese()));
-        mainStage.setNumberToPlaceValue(String.valueOf(gameLogic.getNumberOfCheese() - gameLogic.getNumberOfCheeseScored()));
+        mainStage.setNumberOfCheesesValue(String.valueOf(Cheese.getCheeseTotal()));
+        mainStage.setNumberToPlaceValue(String.valueOf(Cheese.getCheeseTotal() - Cheese.getCheeseInHole()));
 
         //      mainStage.setHealthLabelText(logic.getPlayerHealth());
         //     mainStage.setAttackValueText(logic.getPlayerDamage());

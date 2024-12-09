@@ -12,9 +12,8 @@ public class GameMap {
     private final int mapWidth;
     private final int mapHeight;
     private final Cell[][] cells;
-    private final List<GameElement> gameElements;
+    private final List<GameElement> gameElements; //TODO remove
     private Hero hero;
-    private int cheeseNumber;
 
     public GameMap(int mapWidth, int mapHeight, Tile defaultTile) {
         this.mapWidth = mapWidth;
@@ -46,22 +45,6 @@ public class GameMap {
 
     public int getMapHeight() {
         return mapHeight;
-    }
-
-    public void incrementCheeseNumber() {
-        cheeseNumber++;
-    }
-
-    public int getCheeseNumber() {
-        return cheeseNumber;
-    }
-
-    public long getNumberOfCheeseScored() {
-        return Arrays.stream(cells)
-                .flatMap(Arrays::stream)
-                .map(Cell::getItem)
-                .filter(item -> item instanceof Cheese && ((Cheese) item).isOnHole())
-                .count();
     }
 
     public void setCellTiles() {
