@@ -1,15 +1,17 @@
 package com.codecool.cheeseterminator.data;
 
-import com.codecool.cheeseterminator.data.player.Hero;
 import com.codecool.cheeseterminator.data.items.Item;
+import com.codecool.cheeseterminator.data.player.Hero;
 import com.codecool.cheeseterminator.ui.Tile;
 
 public class Cell implements Drawable {
     private Tile tile;
-    private Hero hero;
+    private GameElement structure;
     private Item item;
-    private GameMap gameMap;
-    private int x, y;
+    private Hero hero;
+    private GameMap gameMap; //TODO remove?
+    private final int x;
+    private final int y;
 
     public Cell(GameMap gameMap, int x, int y, Tile tile) {
         this.gameMap = gameMap;
@@ -27,15 +29,29 @@ public class Cell implements Drawable {
         this.tile = tile;
     }
 
-    public void setPlayer(Hero hero) {
-        this.hero = hero;
+    public GameElement getStructure() {
+        return structure;
     }
-    public void setItem(Item item) {this.item = item; }
 
-    public Hero getPlayer() {
+    public void setStructure(GameElement structure) {
+        this.structure = structure;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public Hero getHero() {
         return hero;
     }
-    public Item getItem() { return item; }
+
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
 
     public Cell getNeighbor(int dx, int dy) {
         return gameMap.getCell(x + dx, y + dy);
@@ -48,4 +64,5 @@ public class Cell implements Drawable {
     public int getY() {
         return y;
     }
+
 }

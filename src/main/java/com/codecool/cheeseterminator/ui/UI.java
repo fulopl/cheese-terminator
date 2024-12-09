@@ -17,15 +17,15 @@ public class UI {
     private Canvas canvas;
     private GraphicsContext context;
     private MainStage mainStage;
-    private GameLogic logic;
+    private GameLogic gameLogic;
     private Set<KeyHandler> keyHandlers;
 
 
-    public UI(GameLogic logic, Set<KeyHandler> keyHandlers) {
+    public UI(GameLogic gameLogic, Set<KeyHandler> keyHandlers) {
         this.canvas = new Canvas(
-                logic.getMapWidth() * Tile.TILE_WIDTH,
-                logic.getMapHeight() * Tile.TILE_WIDTH);
-        this.logic = logic;
+                gameLogic.getMapWidth() * Tile.TILE_WIDTH,
+                gameLogic.getMapHeight() * Tile.TILE_WIDTH);
+        this.gameLogic = gameLogic;
         this.context = canvas.getGraphicsContext2D();
         this.mainStage = new MainStage(canvas);
         this.keyHandlers = keyHandlers;
@@ -34,30 +34,30 @@ public class UI {
     public void setUpPane(Stage primaryStage) {
         Scene scene = mainStage.getScene();
         primaryStage.setScene(scene);
-        logic.setupLevel();
+        gameLogic.setupLevel();
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
         for (KeyHandler keyHandler : keyHandlers) {
-            keyHandler.perform(keyEvent, logic.getMap());
+            keyHandler.perform(keyEvent, gameLogic.getMap());
         }
 //        logic.checkForRestart();
 //        logic.getWin();
 //        logic.checkForLoadSave();
-        logic.doChecksAfterKeypress(keyEvent);
+        gameLogic.doChecksAfterKeypress(keyEvent);
         refresh();
     }
 
     public void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        for (int x = 0; x < logic.getMapWidth(); x++) {
-            for (int y = 0; y < logic.getMapHeight(); y++) {
-                Cell cell = logic.getCell(x, y);
-                if (cell.getPlayer() != null) {     //TODO: get out
-                    Tile.drawTile(context, cell.getPlayer(), x, y);
+        for (int x = 0; x < gameLogic.getMapWidth(); x++) {
+            for (int y = 0; y < gameLogic.getMapHeight(); y++) {
+                Cell cell = gameLogic.getCell(x, y);
+                if (cell.getHero() != null) {     //TODO: get out
+                    Tile.drawTile(context, cell.getHero(), x, y);
                 } else if (cell.getItem() != null) {      //TODO: get out
                     Tile.drawTile(context, cell.getItem(), x, y);
                 } else {
@@ -70,14 +70,14 @@ public class UI {
 //        }
 //        if (logic.isGameSaved()) mainStage.setVictorText("\nGAME SAVED");
 //        if (logic.isGameLoaded()) mainStage.setVictorText("\nGAME LOADED");
-        if (logic.isLevelUp())
-            mainStage.setGameMessage("Congratulations!\n\nYou have completed LEVEL " + logic.getLevel()
+        if (gameLogic.isLevelUp())
+            mainStage.setGameMessage("Congratulations!\n\nYou have completed LEVEL " + gameLogic.getLevel()
                     + "\n\nPress 'SPACE' to proceed!\n ");
         else mainStage.setGameMessage("Push all the cheeses \nto the mouse holes!\n ");
-        mainStage.setLevelText("LEVEL " + logic.getLevel());
+        mainStage.setLevelText("LEVEL " + gameLogic.getLevel());
 
-        mainStage.setNumberOfCheesesValue(String.valueOf(logic.getNumberOfCheese()));
-        mainStage.setNumberToPlaceValue(String.valueOf(logic.getNumberOfCheese() - logic.getNumberOfCheeseScored()));
+        mainStage.setNumberOfCheesesValue(String.valueOf(gameLogic.getNumberOfCheese()));
+        mainStage.setNumberToPlaceValue(String.valueOf(gameLogic.getNumberOfCheese() - gameLogic.getNumberOfCheeseScored()));
 
         //      mainStage.setHealthLabelText(logic.getPlayerHealth());
         //     mainStage.setAttackValueText(logic.getPlayerDamage());

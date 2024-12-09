@@ -1,15 +1,12 @@
 package com.codecool.cheeseterminator.data.player;
 
 import com.codecool.cheeseterminator.data.Cell;
-import com.codecool.cheeseterminator.data.Drawable;
 import com.codecool.cheeseterminator.data.GameElement;
 import com.codecool.cheeseterminator.data.GameElementType;
 import com.codecool.cheeseterminator.data.items.Cheese;
 import com.codecool.cheeseterminator.data.items.Item;
-import com.codecool.cheeseterminator.ui.Tile;
 
 public class Hero extends GameElement{
-    private Cell cell;
     private Direction direction;
 
     public Hero(GameElementType gameElementType) {
@@ -34,8 +31,8 @@ public class Hero extends GameElement{
         }
         if (allowToMove) {
             if (nextCell.getTile().isPassable()) {
-                cell.setPlayer(null);
-                nextCell.setPlayer(this);
+                cell.setHero(null);
+                nextCell.setHero(this);
                 cell = nextCell;
             }
         }

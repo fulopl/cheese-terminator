@@ -1,17 +1,20 @@
 package com.codecool.cheeseterminator.logic;
 
-import com.codecool.cheeseterminator.data.*;
+import com.codecool.cheeseterminator.data.Cell;
+import com.codecool.cheeseterminator.data.GameElement;
+import com.codecool.cheeseterminator.data.GameElementType;
+import com.codecool.cheeseterminator.data.GameMap;
 import com.codecool.cheeseterminator.data.items.Cheese;
 import com.codecool.cheeseterminator.data.player.Hero;
 import com.codecool.cheeseterminator.ui.Tile;
 
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class MapLoader {
+
+    public static final Tile DEFAULT_TILE = Tile.FLOOR;
+    public static final GameElementType DEFAULT_GAME_ELEMENT_TYPE = GameElementType.FLOOR;
 
     public static GameMap createGameMapFromFile(String fileName) {
         InputStream is = MapLoader.class.getResourceAsStream(fileName);
@@ -22,17 +25,17 @@ public class MapLoader {
         List<String> lines = new ArrayList<>();
         scanner.nextLine(); // empty line
 
-        GameMap map = new GameMap(width, height, Tile.FLOOR);
+        GameMap gameMap = new GameMap(width, height, DEFAULT_TILE);
 
         for (int y = 0; y < height; y++) {
             String line = scanner.nextLine();
             lines.add(line);
         }
-        buildMap(map, lines);
-        return map;
+        buildMap(gameMap, lines);
+        return gameMap;
     }
 
-    public static void buildMap(GameMap map, List<String> lines) {
+    public static void buildMap(GameMap gameMap, List<String> lines) {
 
         int height = lines.size();
         for (int y = 0; y < height; y++) {
@@ -40,41 +43,25 @@ public class MapLoader {
             int width = line.length();
             for (int x = 0; x < width; x++) {
                 char mapChar = line.charAt(x);
-                Cell cell = map.getCell(x, y);
+                Cell cell = gameMap.getCell(x, y);
 
                 GameElementType gameElementType = Arrays.stream(GameElementType.values())
                         .filter(gameElementType1 -> gameElementType1.getMapCharacter() == mapChar)
                         .findFirst()
-                        .orElseThrow();
-                if (gameElementType.getRole().equals(Role.HERO)) {
-                    GameElement hero = new Hero(gameElementType);
-                }
-                GameElement gameElement = new GameElement(gameElementType);
-
-
-
-                boolean hasMatch = false;
-                for (Tile tile : Tile.values()) {
-                    if (tile.getMapCharacter() == mapChar) {
-                        cell.setTile(tile);
-                        hasMatch = true;
-                        break;
+                        .orElseThrow(() -> new NoSuchElementException("Unrecognized character: '" + mapChar + "'"));
+                switch (gameElementType) {
+                    case MOUSE -> {
+                        cell.setHero(new Hero(gameElementType));
+                        cell.setStructure(new GameElement(DEFAULT_GAME_ELEMENT_TYPE));
                     }
+                    case CHEESE -> {
+                        cell.setItem(new Cheese(gameElementType));
+                        cell.setStructure(new GameElement(DEFAULT_GAME_ELEMENT_TYPE));
+                    }
+                    default -> cell.setStructure(new GameElement(gameElementType));
                 }
-                if (!hasMatch) throw new RuntimeException("Unrecognized character: '" + mapChar + "'");
-                switch (mapChar) {
-                    case 'c':
-                        cell.setTile(Tile.FLOOR);
-                        new Cheese(cell);
-                        map.incrementCheeseNumber();
-                        break;
-                    case '@':
-                        cell.setTile(Tile.FLOOR);
-                        //map.setHero(new Hero(cell, Tile.MOUSE));
-                        break;
-                }
-
             }
         }
+        gameMap.setCellTiles();
     }
 }

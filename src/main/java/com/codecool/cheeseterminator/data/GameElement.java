@@ -7,6 +7,7 @@ public class GameElement implements Drawable{
     private final Role role;
     private final char mapCharacter;
     private Tile tile;
+    protected Cell cell;
 
     public GameElement(GameElementType gameElementType) {
         this.passable = gameElementType.isPassable();

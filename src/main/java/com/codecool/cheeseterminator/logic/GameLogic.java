@@ -18,11 +18,11 @@ public class GameLogic {
     }
 
     public double getMapWidth() {
-        return map.getWidth();
+        return map.getMapWidth();
     }
 
     public double getMapHeight() {
-        return map.getHeight();
+        return map.getMapHeight();
     }
 
     public Cell getCell(int x, int y) {
