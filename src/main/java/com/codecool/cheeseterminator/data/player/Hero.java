@@ -23,8 +23,8 @@ public class Hero extends GameElement{
 //    }
 
 
-    public void move(int dx, int dy) {
-        Cell nextCell = cell.getNeighbor(dx, dy);
+    public void move(Direction direction) {
+        Cell nextCell = cell.getNeighbor(direction.dx, direction.dy);
         Item item = nextCell.getItem();
         boolean allowToMove = true;
         if (item != null) {
