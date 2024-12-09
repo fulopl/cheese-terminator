@@ -4,6 +4,7 @@ import com.codecool.cheeseterminator.data.Cell;
 import com.codecool.cheeseterminator.data.Drawable;
 import com.codecool.cheeseterminator.data.GameElement;
 import com.codecool.cheeseterminator.data.GameElementType;
+import com.codecool.cheeseterminator.data.player.Direction;
 import com.codecool.cheeseterminator.ui.Tile;
 
 public abstract class Item extends GameElement {
@@ -14,4 +15,6 @@ public abstract class Item extends GameElement {
         super(gameElementType);
         this.cell = cell;
     }
+
+    public abstract boolean handleItemEncounter(Direction direction);
 }

@@ -23,24 +23,19 @@ public class Hero extends GameElement{
 //    }
 
 
-    public void move(Direction direction) {
-        Cell nextCell = cell.getNeighbor(direction.dx, direction.dy);
+    public void move(Direction movingDirection) {
+        Cell nextCell = cell.getNeighbor(movingDirection.getDx(), movingDirection.getDy());
         Item item = nextCell.getItem();
         boolean allowToMove = true;
         if (item != null) {
-            allowToMove = handleItemEncounter(item, nextCell, dx, dy);
+            allowToMove = item.handleItemEncounter(movingDirection);
         }
         if (allowToMove) {
-            if (nextCell.getTile().isPassable()) {
+            if (nextCell.isPassable()) {
                 cell.setHero(null);
                 nextCell.setHero(this);
                 cell = nextCell;
             }
         }
-    }
-
-    public boolean handleItemEncounter(Item item, Cell nextCell, int dx, int dy) {
-        if (item instanceof Cheese) return ((Cheese) item).move(nextCell, dx, dy);
-        return false;
     }
 }
