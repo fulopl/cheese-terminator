@@ -8,14 +8,15 @@ import com.codecool.cheeseterminator.data.items.Item;
 
 public class Hero extends GameElement{
     private Direction direction;
+    private Cell cell;
 
-    public Hero(GameElementType gameElementType) {
+    public Hero(GameElementType gameElementType, Cell cell) {
         super(gameElementType);
+        this.cell = cell;
         this.direction = Direction.EAST;
     }
 
 //    public Hero(Cell cell, Tile tile) {
-//        this.cell = cell;
 //        this.tile = tile;
 //        this.cell.setPlayer(this);
 //        direction = Direction.EAST;

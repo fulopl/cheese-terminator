@@ -53,16 +53,11 @@ public class UI {
     public void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        gameLogic.getMap().setCellTiles();
         for (int x = 0; x < gameLogic.getMapWidth(); x++) {
             for (int y = 0; y < gameLogic.getMapHeight(); y++) {
                 Cell cell = gameLogic.getCell(x, y);
-                if (cell.getHero() != null) {     //TODO: get out
-                    Tile.drawTile(context, cell.getHero(), x, y);
-                } else if (cell.getItem() != null) {      //TODO: get out
-                    Tile.drawTile(context, cell.getItem(), x, y);
-                } else {
-                    Tile.drawTile(context, cell, x, y);
-                }
+                Tile.drawTile(context, cell, x, y);
             }
         }
 //        if (logic.checkMonsterKilled()) {

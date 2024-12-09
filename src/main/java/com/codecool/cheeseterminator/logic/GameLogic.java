@@ -2,8 +2,8 @@ package com.codecool.cheeseterminator.logic;
 
 import com.codecool.cheeseterminator.data.Cell;
 import com.codecool.cheeseterminator.data.GameMap;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.input.KeyCode; //TODO get out all javaFX
+import javafx.scene.input.KeyEvent; //TODO get out all javaFX
 
 public class GameLogic {
     private GameMap map;
@@ -13,8 +13,9 @@ public class GameLogic {
     private boolean levelUp = false;
 
     public GameLogic() {
-        this.map = MapLoader.createGameMapFromFile("/level_1.txt");
         level = 1;
+        String filename = "/level_" + level + ".txt";
+        this.map = MapLoader.createGameMapFromFile(filename);
     }
 
     public double getMapWidth() {

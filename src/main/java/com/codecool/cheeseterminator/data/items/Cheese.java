@@ -6,9 +6,8 @@ import com.codecool.cheeseterminator.ui.Tile;
 
 public class Cheese extends Item {
 
-
-    public Cheese(GameElementType gameElementType) {
-        super(gameElementType);
+    public Cheese(GameElementType gameElementType, Cell cell) {
+        super(gameElementType, cell);
     }
 
     public boolean move(Cell nextCell, int dx, int dy) {

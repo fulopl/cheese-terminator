@@ -8,8 +8,10 @@ import com.codecool.cheeseterminator.ui.Tile;
 
 public abstract class Item extends GameElement {
     protected boolean collectable;
+    protected Cell cell;
 
-    public Item(GameElementType gameElementType) {
+    public Item(GameElementType gameElementType, Cell cell) {
         super(gameElementType);
+        this.cell = cell;
     }
 }

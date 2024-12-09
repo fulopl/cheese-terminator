@@ -23,8 +23,7 @@ public class MapLoader {
         int height = scanner.nextInt();
 
         List<String> lines = new ArrayList<>();
-        scanner.nextLine(); // empty line
-
+        scanner.nextLine();
         GameMap gameMap = new GameMap(width, height, DEFAULT_TILE);
 
         for (int y = 0; y < height; y++) {
@@ -51,11 +50,14 @@ public class MapLoader {
                         .orElseThrow(() -> new NoSuchElementException("Unrecognized character: '" + mapChar + "'"));
                 switch (gameElementType) {
                     case MOUSE -> {
-                        cell.setHero(new Hero(gameElementType));
+                        Hero hero = new Hero(gameElementType, cell);
+                        cell.setHero(hero);
+                        gameMap.setHero(hero);
                         cell.setStructure(new GameElement(DEFAULT_GAME_ELEMENT_TYPE));
                     }
                     case CHEESE -> {
-                        cell.setItem(new Cheese(gameElementType));
+                        Cheese cheese = new Cheese(gameElementType, cell);
+                        cell.setItem(cheese);
                         cell.setStructure(new GameElement(DEFAULT_GAME_ELEMENT_TYPE));
                     }
                     default -> cell.setStructure(new GameElement(gameElementType));
