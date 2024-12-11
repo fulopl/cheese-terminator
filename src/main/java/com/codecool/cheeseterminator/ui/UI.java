@@ -20,22 +20,26 @@ public class UI {
     private MainStage mainStage;
     private GameLogic gameLogic;
     private Set<KeyHandler> keyHandlers;
+    private Stage primaryStage;
 
 
-    public UI(GameLogic gameLogic, Set<KeyHandler> keyHandlers) {
+    public UI(GameLogic gameLogic, Set<KeyHandler> keyHandlers, Stage primaryStage) {
+        this.gameLogic = gameLogic;
+        this.keyHandlers = keyHandlers;
+        this.primaryStage = primaryStage;
+        primaryStage.setTitle("Cheese Terminator");
+        primaryStage.show();
+    }
+
+    public void setUpPane() {
         this.canvas = new Canvas(
                 gameLogic.getMapWidth() * Tile.TILE_WIDTH,
                 gameLogic.getMapHeight() * Tile.TILE_WIDTH);
-        this.gameLogic = gameLogic;
         this.context = canvas.getGraphicsContext2D();
         this.mainStage = new MainStage(canvas);
-        this.keyHandlers = keyHandlers;
-    }
-
-    public void setUpPane(Stage primaryStage) {
         Scene scene = mainStage.getScene();
         primaryStage.setScene(scene);
-        gameLogic.setupLevel();
+
         refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
     }

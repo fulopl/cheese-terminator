@@ -20,9 +20,8 @@ public class Game extends Application {
     public void start(Stage primaryStage) throws Exception {
         this.keyHandlers = Set.of(new Up(), new Down(), new Left(), new Right());
         this.logic = new GameLogic();
-        this.ui = new UI(logic, keyHandlers);
-        ui.setUpPane(primaryStage);
-        primaryStage.setTitle("Cheese Terminator");
-        primaryStage.show();
+        this.ui = new UI(logic, keyHandlers, primaryStage);
+        logic.setUi(ui);
+        logic.startGame();
     }
 }

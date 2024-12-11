@@ -3,18 +3,32 @@ package com.codecool.cheeseterminator.logic;
 import com.codecool.cheeseterminator.data.Cell;
 import com.codecool.cheeseterminator.data.GameMap;
 import com.codecool.cheeseterminator.data.items.Cheese;
-import javafx.scene.input.KeyCode; //TODO get out all javaFX
-import javafx.scene.input.KeyEvent; //TODO get out all javaFX
+import com.codecool.cheeseterminator.ui.UI;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 
 public class GameLogic {
-    private GameMap map;
     private int level;
     private boolean levelUp = false;
+    private GameMap map;
+    private UI ui;
+
 
     public GameLogic() {
         level = 1;
-        String filename = "/level_" + level + ".txt";
-        this.map = MapLoader.createGameMapFromFile(filename);
+    }
+
+    public void startGame() {
+        //setupWelcomeScreen();
+        setupLevel();
+    }
+
+    public UI getUi() {
+        return ui;
+    }
+
+    public void setUi(UI ui) {
+        this.ui = ui;
     }
 
     public double getMapWidth() {
@@ -33,7 +47,6 @@ public class GameLogic {
         return level;
     }
 
-
     public boolean isLevelUp() {
         return levelUp;
     }
@@ -41,6 +54,12 @@ public class GameLogic {
     public void setupLevel() {
         String filename = "/level_" + level + ".txt";
         map = MapLoader.createGameMapFromFile(filename);
+        ui.setUpPane();
+    }
+
+    public void setupWelcomeScreen() {
+        map = MapLoader.createGameMapFromFile("/welcome.txt");
+        ui.setUpPane();
     }
 
     private void winScreen() {
