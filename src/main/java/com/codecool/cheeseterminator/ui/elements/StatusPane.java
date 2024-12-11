@@ -8,7 +8,7 @@ import javafx.scene.layout.GridPane;
 public class StatusPane {
     public static final int RIGHT_PANEL_WIDTH = 200;
     public static final int RIGHT_PANEL_PADDING = 10;
-    private GridPane ui;
+    private GridPane gridPane;
 
     private Label gameMessage;
     private Label levelText;
@@ -20,7 +20,7 @@ public class StatusPane {
 
 
     public StatusPane() {
-        ui = new GridPane();
+        gridPane = new GridPane();
         gameMessage = new Label();
         levelText = new Label();
         numberOfCheesesLabel = new Label("Number of cheeses: ");
@@ -31,19 +31,19 @@ public class StatusPane {
     }
 
     public BorderPane build() {
-        ui.setPrefWidth(RIGHT_PANEL_WIDTH);
-        ui.setPadding(new Insets(RIGHT_PANEL_PADDING));
+        gridPane.setPrefWidth(RIGHT_PANEL_WIDTH);
+        gridPane.setPadding(new Insets(RIGHT_PANEL_PADDING));
 
-        ui.add(gameMessage, 0, 0);
-        ui.add(levelText, 0, 1);
-        ui.add(numberOfCheesesLabel, 0, 2);
-        ui.add(numberOfCheesesValue, 1, 2);
-        ui.add(numberToPlaceLabel, 0, 3);
-        ui.add(numberToPlaceValue, 1, 3);
-        ui.add(keyMapText, 0, 4);
+        gridPane.add(gameMessage, 0, 0);
+        gridPane.add(levelText, 0, 1);
+        gridPane.add(numberOfCheesesLabel, 0, 2);
+        gridPane.add(numberOfCheesesValue, 1, 2);
+        gridPane.add(numberToPlaceLabel, 0, 3);
+        gridPane.add(numberToPlaceValue, 1, 3);
+        gridPane.add(keyMapText, 0, 4);
 
         BorderPane borderPane = new BorderPane();
-        borderPane.setRight(ui);
+        borderPane.setRight(gridPane);
         return borderPane;
     }
 
