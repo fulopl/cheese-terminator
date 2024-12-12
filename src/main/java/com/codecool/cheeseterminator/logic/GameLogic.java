@@ -14,13 +14,16 @@ public class GameLogic {
     private UI ui;
 
 
-    public GameLogic() {
+    public GameLogic(UI ui) {
         level = 1;
+        this.ui = ui;
     }
 
-    public void startGame() {
-        //setupWelcomeScreen();
-        setupLevel();
+    public void initiate() {
+        map = MapLoader.createGameMapFromFile("/welcome.txt");
+        ui.initiateMainStage(map.getMapWidth(), map.getMapHeight());
+        ui.displayMessage("Welcome to Cheese Terminator!\n\n" +
+                "Press SPACE to start the game!\n ");
     }
 
     public UI getUi() {

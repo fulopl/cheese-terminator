@@ -18,10 +18,9 @@ public class Game extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        this.keyHandlers = Set.of(new Up(), new Down(), new Left(), new Right());
-        this.logic = new GameLogic();
-        this.ui = new UI(logic, keyHandlers, primaryStage);
-        logic.setUi(ui);
-        logic.startGame();
+        this.ui = new UI(primaryStage);
+        this.logic = new GameLogic(ui);
+        ui.setGameLogic(logic); // TODO: will be taken out
+        logic.initiate();
     }
 }

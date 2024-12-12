@@ -30,7 +30,7 @@ public class StatusPane {
         keyMapText = new Label("\nUse ARROW KEYS to move,\npush 'R' to retry level,\npush 'Q' to quit game");
     }
 
-    public BorderPane build() {
+    public void build() {
         gridPane.setPrefWidth(RIGHT_PANEL_WIDTH);
         gridPane.setPadding(new Insets(RIGHT_PANEL_PADDING));
 
@@ -42,9 +42,6 @@ public class StatusPane {
         gridPane.add(numberToPlaceValue, 1, 3);
         gridPane.add(keyMapText, 0, 4);
 
-        BorderPane borderPane = new BorderPane();
-        borderPane.setRight(gridPane);
-        return borderPane;
     }
 
     public void setGameMessage(String text) {
