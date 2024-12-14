@@ -45,6 +45,13 @@ public class GameLogic {
         ui.refreshGameBoard();
         inputManager.setMap(map);
         ui.setOnKeyPressed(inputManager.getKeyHandlers());
+        ui.displayMessage("Push all the cheeses \nto the mouse holes!\n ");
+        ui.displayLevel("LEVEL " + level);
+        refreshGameStatus();
+    }
+
+    private void refreshGameStatus() {
+        ui.displayLevelStatus(Cheese.getCheeseTotal(), Cheese.getCheeseTotal() - Cheese.getCheeseInHole());
     }
 
     public UI getUi() {

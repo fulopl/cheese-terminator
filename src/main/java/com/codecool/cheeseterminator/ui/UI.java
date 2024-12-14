@@ -2,11 +2,9 @@ package com.codecool.cheeseterminator.ui;
 
 import com.codecool.cheeseterminator.data.Cell;
 import com.codecool.cheeseterminator.logic.GameLogic;
-import com.codecool.cheeseterminator.logic.InputManager;
 import com.codecool.cheeseterminator.ui.elements.MainStage;
 import com.codecool.cheeseterminator.ui.elements.StatusPane;
 import com.codecool.cheeseterminator.ui.keyeventhandler.*;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -42,6 +40,7 @@ public class UI {
         setUpScreen(mapWidth, mapHeight);
 
     }
+
     public void setUpScreen(int mapWidth, int mapHeight) {
         mainStage.setUpMainScreen(mapWidth, mapHeight);
         statusPane.setUpStatusPane();
@@ -87,23 +86,20 @@ public class UI {
 //        if (logic.isGameLoaded()) mainStage.setVictorText("\nGAME LOADED");
 
         /**********************************
-        if (gameLogic.isLevelUp())
-            mainStage.setGameMessage("Congratulations!\n\nYou have completed LEVEL " + gameLogic.getLevel()
-                    + "\n\nPress 'SPACE' to proceed!\n ");
-        else mainStage.setGameMessage("Push all the cheeses \nto the mouse holes!\n ");
-        mainStage.setLevelText("LEVEL " + gameLogic.getLevel());
+         if (gameLogic.isLevelUp())
+         mainStage.setGameMessage("Congratulations!\n\nYou have completed LEVEL " + gameLogic.getLevel()
+         + "\n\nPress 'SPACE' to proceed!\n ");
+         else mainStage.setGameMessage("Push all the cheeses \nto the mouse holes!\n ");
+         mainStage.setLevelText("LEVEL " + gameLogic.getLevel());
 
-        mainStage.setNumberOfCheesesValue(String.valueOf(Cheese.getCheeseTotal()));
-        mainStage.setNumberToPlaceValue(String.valueOf(Cheese.getCheeseTotal() - Cheese.getCheeseInHole()));
+         mainStage.setNumberOfCheesesValue(String.valueOf(Cheese.getCheeseTotal()));
+         mainStage.setNumberToPlaceValue(String.valueOf(Cheese.getCheeseTotal() - Cheese.getCheeseInHole()));
 
-        //     mainStage.setHealthLabelText(logic.getPlayerHealth());
-        //     mainStage.setAttackValueText(logic.getPlayerDamage());
-*///////////////////////////////////////////////////////
+         //     mainStage.setHealthLabelText(logic.getPlayerHealth());
+         //     mainStage.setAttackValueText(logic.getPlayerDamage());
+         *///////////////////////////////////////////////////////
     }
 
-    public void displayMessage(String message) {
-        statusPane.setGameMessage(message);
-    }
 
     public void setOnKeyPressed(Map<KeyCode, Runnable> keyHandlers) {
         scene.setOnKeyPressed(event -> onKeyPressed(event, keyHandlers));
@@ -118,5 +114,18 @@ public class UI {
     public void setUpStatusDisplay() {
         statusPane.setupForLevels();
 
+    }
+
+    public void displayMessage(String message) {
+        statusPane.setGameMessage(message);
+    }
+
+    public void displayLevel(String message) {
+        statusPane.setLevelText(message);
+    }
+
+    public void displayLevelStatus(int cheeseTotal, int cheeseToScore) {
+        statusPane.setNumberOfCheesesValue(String.valueOf(cheeseTotal));
+        statusPane.setNumberToPlaceValue(String.valueOf(cheeseToScore));
     }
 }

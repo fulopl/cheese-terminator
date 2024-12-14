@@ -58,8 +58,6 @@ public class StatusPane {
         gridPane.add(keyMapText, 0, 4);
     }
 
-
-
     public GridPane getGridPane() {
         return gridPane;
     }
