@@ -13,7 +13,7 @@ public class MainStage {
     private BorderPane borderPane;
     private StatusPane statusPane;
 
-    public MainStage(int mapWidth, int mapHeight) {
+    public void setUpMainScreen(int mapWidth, int mapHeight) {
         canvas = new Canvas(
                 mapWidth * Tile.TILE_WIDTH,
                 mapHeight * Tile.TILE_WIDTH);
@@ -55,4 +55,12 @@ public class MainStage {
     public void setNumberToPlaceValue(String text) {
         statusPane.setNumberToPlaceValue(text);
     }//TODO: get out
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
+
+    public GraphicsContext getContext() {
+        return context;
+    }
 }

@@ -8,23 +8,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class InputManager {
-    private final Map<KeyCode, Runnable> keyHandlers;
+    private final Map<KeyCode, Runnable> keyHandlers = new HashMap<>();
     private GameMap map;
     private GameLogic gameLogic;
-
-    public InputManager() {
-        this.keyHandlers = new HashMap<>();
-    }
 
     public void addKeyHandler(KeyCode keyCode, Runnable runnable) {
         keyHandlers.put(keyCode, runnable);
     }
 
     {
-        addKeyHandler(KeyCode.DOWN, () -> map.getHero().move(Direction.SOUTH));
-        addKeyHandler(KeyCode.LEFT, () -> map.getHero().move(Direction.WEST));
-        addKeyHandler(KeyCode.UP, () -> map.getHero().move(Direction.NORTH));
-        addKeyHandler(KeyCode.RIGHT, () -> map.getHero().move(Direction.EAST));
+        addKeyHandler(KeyCode.DOWN, () -> {
+            if (map.getHero() != null) map.getHero().move(Direction.SOUTH);
+            gameLogic.doChecksAfterKeypress();
+        });
+        addKeyHandler(KeyCode.LEFT, () -> {
+            if (map.getHero() != null) map.getHero().move(Direction.WEST);
+            gameLogic.doChecksAfterKeypress();
+        });
+        addKeyHandler(KeyCode.UP, () -> {
+            if (map.getHero() != null) map.getHero().move(Direction.NORTH);
+            gameLogic.doChecksAfterKeypress();
+        });
+        addKeyHandler(KeyCode.RIGHT, () -> {
+            if (map.getHero() != null) map.getHero().move(Direction.EAST);
+            gameLogic.doChecksAfterKeypress();
+        });
         addKeyHandler(KeyCode.SPACE, () -> gameLogic.nextPhase());
         addKeyHandler(KeyCode.R, () -> gameLogic.setupLevel());
         addKeyHandler(KeyCode.Q, () -> gameLogic.quit());
@@ -36,5 +44,9 @@ public class InputManager {
 
     public void setGameLogic(GameLogic gameLogic) {
         this.gameLogic = gameLogic;
+    }
+
+    public  Map<KeyCode, Runnable> getKeyHandlers() {
+        return keyHandlers;
     }
 }

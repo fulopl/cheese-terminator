@@ -11,6 +11,7 @@ public class Game extends Application {
     private UI ui;
     private GameLogic logic;
     private Set<KeyHandler> keyHandlers;
+    private InputManager inputManager;
 
     public static void main(String[] args) {
         launch(args);
@@ -18,8 +19,10 @@ public class Game extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        this.ui = new UI(primaryStage);
-        this.logic = new GameLogic(ui);
+        ui = new UI(primaryStage);
+        inputManager = new InputManager();
+        this.logic = new GameLogic(ui, inputManager);
+        inputManager.setGameLogic(logic);
         ui.setGameLogic(logic); // TODO: will be taken out
         logic.initiate();
     }
