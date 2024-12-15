@@ -23,7 +23,6 @@ public class Game extends Application {
         inputManager = new InputManager();
         this.logic = new GameLogic(ui, inputManager);
         inputManager.setGameLogic(logic);
-        ui.setGameLogic(logic); // TODO: will be taken out
         logic.initiate();
     }
 }

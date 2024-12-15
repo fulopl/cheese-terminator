@@ -19,19 +19,19 @@ public class InputManager {
     {
         addKeyHandler(KeyCode.DOWN, () -> {
             if (map.getHero() != null) map.getHero().move(Direction.SOUTH);
-            gameLogic.doChecksAfterKeypress();
+            gameLogic.refreshAfterKeyPress();
         });
         addKeyHandler(KeyCode.LEFT, () -> {
             if (map.getHero() != null) map.getHero().move(Direction.WEST);
-            gameLogic.doChecksAfterKeypress();
+            gameLogic.refreshAfterKeyPress();
         });
         addKeyHandler(KeyCode.UP, () -> {
             if (map.getHero() != null) map.getHero().move(Direction.NORTH);
-            gameLogic.doChecksAfterKeypress();
+            gameLogic.refreshAfterKeyPress();
         });
         addKeyHandler(KeyCode.RIGHT, () -> {
             if (map.getHero() != null) map.getHero().move(Direction.EAST);
-            gameLogic.doChecksAfterKeypress();
+            gameLogic.refreshAfterKeyPress();
         });
         addKeyHandler(KeyCode.SPACE, () -> gameLogic.nextPhase());
         addKeyHandler(KeyCode.R, () -> gameLogic.setupLevel());

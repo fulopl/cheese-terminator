@@ -31,6 +31,10 @@ public class GameMap {
         return cells[x][y];
     }
 
+    public Cell[][] getCells() {
+        return cells;
+    }
+
     public void setHero(Hero hero) {
         this.hero = hero;
     }
