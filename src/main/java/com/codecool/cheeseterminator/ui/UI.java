@@ -1,10 +1,8 @@
 package com.codecool.cheeseterminator.ui;
 
 import com.codecool.cheeseterminator.data.Cell;
-import com.codecool.cheeseterminator.logic.GameLogic;
 import com.codecool.cheeseterminator.ui.elements.MainStage;
 import com.codecool.cheeseterminator.ui.elements.StatusPane;
-import com.codecool.cheeseterminator.ui.keyeventhandler.*;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -14,7 +12,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.util.Map;
-import java.util.Set;
 
 public class UI {
     private Canvas canvas;
@@ -23,11 +20,9 @@ public class UI {
     private Scene scene;
     private MainStage mainStage;
     private StatusPane statusPane;
-    private Set<KeyHandler> keyHandlers;
 
 
     public UI(Stage primaryStage) {
-        this.keyHandlers = Set.of(new Up(), new Down(), new Left(), new Right());
         this.primaryStage = primaryStage;
     }
 
