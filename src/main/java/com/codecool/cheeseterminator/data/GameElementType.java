@@ -8,6 +8,7 @@ public enum GameElementType {
     HOLE(true, Role.STRUCTURE, 'h', Tile.HOLE),
     WALL(false, Role.STRUCTURE, '#', Tile.WALL),
     CHEESE(false, Role.ITEM, 'c', Tile.CHEESE),
+    CHEESE_ON_HOLE(true, Role.ITEM, 'x', Tile.CHEESE),
     MOUSE(false, Role.HERO, '@', Tile.MOUSE),
     N0(false, Role.STRUCTURE, '0', Tile.N0),
     N1(false, Role.STRUCTURE, '1', Tile.N1),

@@ -62,6 +62,11 @@ public class MapLoader {
                         cell.setItem(cheese);
                         cell.setStructure(new GameElement(DEFAULT_GAME_ELEMENT_TYPE));
                     }
+                    case CHEESE_ON_HOLE -> {
+                        Cheese cheese = new Cheese(GameElementType.CHEESE, cell);
+                        cell.setItem(cheese);
+                        cell.setStructure(new GameElement(GameElementType.HOLE));
+                    }
                     default -> cell.setStructure(new GameElement(gameElementType));
                 }
             }
