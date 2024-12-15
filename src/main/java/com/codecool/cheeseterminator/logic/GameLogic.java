@@ -29,7 +29,8 @@ public class GameLogic {
         ui.refreshGameBoard(map.getCells());
         inputManager.setMap(map);
         ui.setOnKeyPressed(inputManager.getKeyHandlers());
-        ui.displayMessage("Welcome to Cheese Terminator!\n\n" +
+        ui.displayMessage("Welcome to Cheese Terminator\n" +
+                "In The Dungeon!\n\n" +
                 "Press SPACE to start the game!\n ");
     }
 
@@ -58,27 +59,6 @@ public class GameLogic {
         this.ui = ui;
     }
 
-    public double getMapWidth() {
-        return map.getMapWidth();
-    }
-
-    public double getMapHeight() {
-        return map.getMapHeight();
-    }
-
-    public Cell getCell(int x, int y) {
-        return map.getCell(x, y);
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public boolean isLevelUp() {
-        return levelUp;
-    }
-
-
     private void winScreen() {
         try {
             Thread.sleep(1000);
@@ -86,14 +66,6 @@ public class GameLogic {
             e.printStackTrace();
         }
         map = MapLoader.createGameMapFromFile("/win.txt");
-    }
-
-    public GameMap getMap() {
-        return map;
-    }
-
-    public void setMap(GameMap map) {
-        this.map = map;
     }
 
     public void refreshAfterKeyPress() {
@@ -106,7 +78,6 @@ public class GameLogic {
         ui.refreshGameBoard(map.getCells());
         refreshGameStatus();
     }
-
 
     private void nextLevel() {
         level++;
