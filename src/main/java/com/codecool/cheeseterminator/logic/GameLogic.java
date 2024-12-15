@@ -2,27 +2,68 @@ package com.codecool.cheeseterminator.logic;
 
 import com.codecool.cheeseterminator.data.Cell;
 import com.codecool.cheeseterminator.data.GameMap;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import com.codecool.cheeseterminator.data.items.Cheese;
+import com.codecool.cheeseterminator.ui.UI;
 
 public class GameLogic {
-    private GameMap map;
+    public static final int START_LEVEL = 1;
+    public static final int LAST_LEVEL = 3;
     private int level;
-    private long numberOfCheese;
-    private long numberOfCheeseScored;
     private boolean levelUp = false;
+    private String gamePhase;
+    private GameMap map;
+    private UI ui;
+    private InputManager inputManager;
 
-    public GameLogic() {
-        this.map = MapLoader.createGameMapFromFile("/level_1.txt");
-        level = 1;
+
+    public GameLogic(UI ui, InputManager inputManager) {
+        level = START_LEVEL;
+        gamePhase = "welcome";
+        this.ui = ui;
+        this.inputManager = inputManager;
+    }
+
+    public void initiate() {
+        map = MapLoader.createGameMapFromFile("/welcome.txt");
+        ui.initiateMainStage(map.getMapWidth(), map.getMapHeight());
+        ui.refreshGameBoard(map.getCells());
+        inputManager.setMap(map);
+        ui.setOnKeyPressed(inputManager.getKeyHandlers());
+        ui.displayMessage("Welcome to Cheese Terminator!\n\n" +
+                "Press SPACE to start the game!\n ");
+    }
+
+    public void setupLevel() {
+        String filename = "/level_" + level + ".txt";
+        map = MapLoader.createGameMapFromFile(filename);
+        ui.setUpScreen(map.getMapWidth(), map.getMapHeight());
+        ui.setUpStatusDisplay();
+        ui.refreshGameBoard(map.getCells());
+        inputManager.setMap(map);
+        ui.setOnKeyPressed(inputManager.getKeyHandlers());
+        ui.displayMessage("Push all the cheeses \nto the mouse holes!\n ");
+        ui.displayLevel("LEVEL " + level);
+        refreshGameStatus();
+    }
+
+    private void refreshGameStatus() {
+        ui.displayLevelStatus(Cheese.getCheeseTotal(), Cheese.getCheeseTotal() - Cheese.getCheeseInHole());
+    }
+
+    public UI getUi() {
+        return ui;
+    }
+
+    public void setUi(UI ui) {
+        this.ui = ui;
     }
 
     public double getMapWidth() {
-        return map.getWidth();
+        return map.getMapWidth();
     }
 
     public double getMapHeight() {
-        return map.getHeight();
+        return map.getMapHeight();
     }
 
     public Cell getCell(int x, int y) {
@@ -33,24 +74,10 @@ public class GameLogic {
         return level;
     }
 
-    public long getNumberOfCheese() {
-        return numberOfCheese;
-    }
-
-    public long getNumberOfCheeseScored() {
-        return numberOfCheeseScored;
-    }
-
     public boolean isLevelUp() {
         return levelUp;
     }
 
-    public void setupLevel() {
-        String filename = "/level_" + level + ".txt";
-        map = MapLoader.createGameMapFromFile(filename);
-        numberOfCheese = map.getCheeseNumber();
-        numberOfCheeseScored = 0;
-    }
 
     private void winScreen() {
         try {
@@ -69,23 +96,35 @@ public class GameLogic {
         this.map = map;
     }
 
-
-    public void doChecksAfterKeypress(KeyEvent keyEvent) {
-        numberOfCheeseScored = map.getNumberOfCheeseScored();
-        if (numberOfCheeseScored == numberOfCheese) levelUp = true;
-        if (keyEvent.getCode().equals(KeyCode.SPACE) && levelUp) nextLevel();
-        else if (keyEvent.getCode().equals(KeyCode.R)) setupLevel();
-        else if (keyEvent.getCode().equals(KeyCode.Q)) {
-            System.out.println("See ya soon!");
-            System.exit(0);
+    public void refreshAfterKeyPress() {
+        if (Cheese.getCheeseTotal() == Cheese.getCheeseInHole()) {
+            gamePhase = "levelUp";
+            ui.displayMessage("Congratulations!\n\nYou have completed LEVEL " + level
+                    + "\n\nPress 'SPACE' to proceed!\n ");
         }
+        map.setCellTiles();
+        ui.refreshGameBoard(map.getCells());
+        refreshGameStatus();
     }
+
 
     private void nextLevel() {
         level++;
-        levelUp = false;
         setupLevel();
     }
 
+    public void nextPhase() {
+        if (gamePhase.equals("welcome")) {
+            gamePhase = "level";
+            setupLevel();
+        } else if (gamePhase.equals("levelUp")) {
+            gamePhase = "level";
+            nextLevel();
+        }
+    }
 
+    public void quit() {
+        System.out.println("See ya soon!");
+        System.exit(0);
+    }
 }

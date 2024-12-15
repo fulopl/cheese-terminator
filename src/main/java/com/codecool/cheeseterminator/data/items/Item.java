@@ -2,32 +2,19 @@ package com.codecool.cheeseterminator.data.items;
 
 import com.codecool.cheeseterminator.data.Cell;
 import com.codecool.cheeseterminator.data.Drawable;
-import com.codecool.cheeseterminator.ui.TileType;
+import com.codecool.cheeseterminator.data.GameElement;
+import com.codecool.cheeseterminator.data.GameElementType;
+import com.codecool.cheeseterminator.data.player.Direction;
+import com.codecool.cheeseterminator.ui.Tile;
 
-public abstract class Item implements Drawable {
+public abstract class Item extends GameElement {
+    protected boolean collectable;
     protected Cell cell;
-    protected TileType tileType;
-    private final boolean passable;
-    private boolean collectable;
 
-    public Item(Cell cell, boolean passable, boolean collectable, TileType tileType) {
+    public Item(GameElementType gameElementType, Cell cell) {
+        super(gameElementType);
         this.cell = cell;
-        this.passable = passable;
-        this.collectable = collectable;
-        this.cell.setItem(this);
-        this.tileType = tileType;
     }
 
-    public boolean isPassable() {
-        return passable;
-    }
-
-    public boolean getCollectable() {
-        return collectable;
-    }
-
-    @Override
-    public String getTileName() {
-        return tileType.getTileName();
-    }
+    public abstract boolean handleItemEncounter(Direction direction);
 }

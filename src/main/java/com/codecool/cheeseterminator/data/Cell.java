@@ -1,48 +1,60 @@
 package com.codecool.cheeseterminator.data;
 
-import com.codecool.cheeseterminator.data.player.Player;
 import com.codecool.cheeseterminator.data.items.Item;
-import com.codecool.cheeseterminator.ui.TileType;
+import com.codecool.cheeseterminator.data.player.Hero;
+import com.codecool.cheeseterminator.ui.Tile;
 
 public class Cell implements Drawable {
-    private TileType type;
-    private Player player;
+    private Tile tile;
+    private GameElement structure;
     private Item item;
-    private GameMap gameMap;
-    private int x, y;
+    private Hero hero;
+    private GameMap gameMap; //TODO remove?
+    private final int x;
+    private final int y;
 
-    public Cell(GameMap gameMap, int x, int y, TileType type) {
+    public Cell(GameMap gameMap, int x, int y, Tile tile) {
         this.gameMap = gameMap;
         this.x = x;
         this.y = y;
-        this.type = type;
-    }
-
-    public TileType getType() {
-        return type;
-    }
-
-    public void setType(TileType type) {
-        this.type = type;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-    public void setItem(Item item) {this.item = item; }
-
-    public Player getPlayer() {
-        return player;
-    }
-    public Item getItem() { return item; }
-
-    public Cell getNeighbor(int dx, int dy) {
-        return gameMap.getCell(x + dx, y + dy);
+        this.tile = tile;
     }
 
     @Override
-    public String getTileName() {
-        return type.getTileName();
+    public Tile getTile() {
+        return tile;
+    }
+
+    public void setTile(Tile tile) {
+        this.tile = tile;
+    }
+
+    public GameElement getStructure() {
+        return structure;
+    }
+
+    public void setStructure(GameElement structure) {
+        this.structure = structure;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
+    }
+
+    public Hero getHero() {
+        return hero;
+    }
+
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
+
+    public Cell getNeighbor(int dx, int dy) {
+        return gameMap.getCell(x + dx, y + dy);
     }
 
     public int getX() {
@@ -51,5 +63,9 @@ public class Cell implements Drawable {
 
     public int getY() {
         return y;
+    }
+
+    public boolean isPassable() {
+        return structure.isPassable();
     }
 }

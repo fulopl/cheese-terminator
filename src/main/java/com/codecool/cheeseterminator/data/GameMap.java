@@ -1,25 +1,28 @@
 package com.codecool.cheeseterminator.data;
 
-import com.codecool.cheeseterminator.data.player.Player;
+import com.codecool.cheeseterminator.data.player.Hero;
 import com.codecool.cheeseterminator.data.items.Cheese;
-import com.codecool.cheeseterminator.ui.TileType;
+import com.codecool.cheeseterminator.ui.Tile;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class GameMap {
-    private int width;
-    private int height;
-    private Cell[][] cells;
-    private Player player;
-    private int cheeseNumber;
+    private final int mapWidth;
+    private final int mapHeight;
+    private final Cell[][] cells;
+    private final List<GameElement> gameElements; //TODO remove
+    private Hero hero;
 
-    public GameMap(int width, int height, TileType defaultTileType) {
-        this.width = width;
-        this.height = height;
-        cells = new Cell[width][height];
-        for (int x = 0; x < width; x++) {
-            for (int y = 0; y < height; y++) {
-                cells[x][y] = new Cell(this, x, y, defaultTileType);
+    public GameMap(int mapWidth, int mapHeight, Tile defaultTile) {
+        this.mapWidth = mapWidth;
+        this.mapHeight = mapHeight;
+        this.gameElements = new ArrayList<>();
+        cells = new Cell[mapWidth][mapHeight];
+        for (int x = 0; x < mapWidth; x++) {
+            for (int y = 0; y < mapHeight; y++) {
+                cells[x][y] = new Cell(this, x, y, defaultTile);
             }
         }
     }
@@ -28,35 +31,35 @@ public class GameMap {
         return cells[x][y];
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
+    public Cell[][] getCells() {
+        return cells;
     }
 
-    public Player getPlayer() {
-        return player;
+    public void setHero(Hero hero) {
+        this.hero = hero;
     }
 
-    public int getWidth() {
-        return width;
+    public Hero getHero() {
+        return hero;
     }
 
-    public int getHeight() {
-        return height;
+    public int getMapWidth() {
+        return mapWidth;
     }
 
-    public void incrementCheeseNumber() {
-        cheeseNumber++;
+    public int getMapHeight() {
+        return mapHeight;
     }
 
-    public int getCheeseNumber() {
-        return cheeseNumber;
-    }
-
-    public long getNumberOfCheeseScored() {
-        return Arrays.stream(cells)
-                .flatMap(Arrays::stream)
-                .map(Cell::getItem)
-                .filter(item -> item instanceof Cheese && ((Cheese) item).isOnHole())
-                .count();
+    public void setCellTiles() {
+        for (int x = 0; x < mapWidth; x++) {
+            for (int y = 0; y < mapHeight; y++) {
+                if (cells[x][y].getHero() != null) {
+                    cells[x][y].setTile(cells[x][y].getHero().getTile());
+                } else if (cells[x][y].getItem() != null) {
+                    cells[x][y].setTile(cells[x][y].getItem().getTile());
+                } else cells[x][y].setTile(cells[x][y].getStructure().getTile());
+            }
+        }
     }
 }
