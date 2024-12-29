@@ -1,7 +1,7 @@
-package com.codecool.cheeseterminator.data;
+package com.codecool.cheeseterminator.model;
 
-import com.codecool.cheeseterminator.data.items.Item;
-import com.codecool.cheeseterminator.data.player.Hero;
+import com.codecool.cheeseterminator.model.items.Item;
+import com.codecool.cheeseterminator.model.player.Hero;
 import com.codecool.cheeseterminator.ui.Tile;
 
 public class Cell implements Drawable {

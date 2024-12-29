@@ -1,11 +1,9 @@
-package com.codecool.cheeseterminator.data;
+package com.codecool.cheeseterminator.model;
 
-import com.codecool.cheeseterminator.data.player.Hero;
-import com.codecool.cheeseterminator.data.items.Cheese;
+import com.codecool.cheeseterminator.model.player.Hero;
 import com.codecool.cheeseterminator.ui.Tile;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class GameMap {

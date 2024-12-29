@@ -1,4 +1,4 @@
-package com.codecool.cheeseterminator.data;
+package com.codecool.cheeseterminator.model;
 
 import com.codecool.cheeseterminator.ui.Tile;
 

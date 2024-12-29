@@ -1,6 +1,6 @@
 package com.codecool.cheeseterminator.ui;
 
-import com.codecool.cheeseterminator.data.Cell;
+import com.codecool.cheeseterminator.model.Cell;
 import com.codecool.cheeseterminator.ui.elements.MainStage;
 import com.codecool.cheeseterminator.ui.elements.StatusPane;
 import javafx.scene.Scene;
@@ -26,12 +26,11 @@ public class UI {
         this.primaryStage = primaryStage;
     }
 
-    public void initiateMainStage(int mapWidth, int mapHeight) {
+    public void initiateMainStage() {
         primaryStage.setTitle("Cheese Terminator");
         primaryStage.show();
         mainStage = new MainStage();
         statusPane = new StatusPane();
-        setUpScreen(mapWidth, mapHeight);
     }
 
     public void setUpScreen(int mapWidth, int mapHeight) {
@@ -70,7 +69,6 @@ public class UI {
 
     public void setUpStatusDisplay() {
         statusPane.setupForLevels();
-
     }
 
     public void displayMessage(String message) {

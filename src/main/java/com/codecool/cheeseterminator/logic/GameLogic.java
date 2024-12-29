@@ -1,19 +1,17 @@
 package com.codecool.cheeseterminator.logic;
 
-import com.codecool.cheeseterminator.data.Cell;
-import com.codecool.cheeseterminator.data.GameMap;
-import com.codecool.cheeseterminator.data.items.Cheese;
+import com.codecool.cheeseterminator.model.GameMap;
+import com.codecool.cheeseterminator.model.items.Cheese;
 import com.codecool.cheeseterminator.ui.UI;
 
 public class GameLogic {
-    public static final int START_LEVEL = 1;
-    public static final int LAST_LEVEL = 3;
+    public static final int START_LEVEL = 4;
+    public static final int LAST_LEVEL = 5;
     private int level;
-    private boolean levelUp = false;
     private String gamePhase;
     private GameMap map;
     private UI ui;
-    private InputManager inputManager;
+    private final InputManager inputManager;
 
 
     public GameLogic(UI ui, InputManager inputManager) {
@@ -21,28 +19,32 @@ public class GameLogic {
         gamePhase = "welcome";
         this.ui = ui;
         this.inputManager = inputManager;
+        inputManager.setGameLogic(this);
     }
 
-    public void initiate() {
-        map = MapLoader.createGameMapFromFile("/welcome.txt");
-        ui.initiateMainStage(map.getMapWidth(), map.getMapHeight());
+    public void init() {
+        ui.initiateMainStage();
+        setupScreen("/welcome.txt", "Welcome to Cheese Terminator\n" +
+                "In The Dungeon!\n\n" +
+                "Press SPACE to start the game!\n ");
+    }
+
+    public void setupScreen(String fileName, String message) {
+        map = MapLoader.createGameMapFromFile(fileName);
+        ui.setUpScreen(map.getMapWidth(), map.getMapHeight());
         ui.refreshGameBoard(map.getCells());
         inputManager.setMap(map);
         ui.setOnKeyPressed(inputManager.getKeyHandlers());
-        ui.displayMessage("Welcome to Cheese Terminator!\n\n" +
-                "Press SPACE to start the game!\n ");
+        ui.displayMessage(message);
     }
 
     public void setupLevel() {
         String filename = "/level_" + level + ".txt";
-        map = MapLoader.createGameMapFromFile(filename);
-        ui.setUpScreen(map.getMapWidth(), map.getMapHeight());
+        setupScreen(filename, "Push all the cheeses \nto the mouse holes!\n ");
+
         ui.setUpStatusDisplay();
-        ui.refreshGameBoard(map.getCells());
-        inputManager.setMap(map);
-        ui.setOnKeyPressed(inputManager.getKeyHandlers());
-        ui.displayMessage("Push all the cheeses \nto the mouse holes!\n ");
         ui.displayLevel("LEVEL " + level);
+
         refreshGameStatus();
     }
 
@@ -58,44 +60,6 @@ public class GameLogic {
         this.ui = ui;
     }
 
-    public double getMapWidth() {
-        return map.getMapWidth();
-    }
-
-    public double getMapHeight() {
-        return map.getMapHeight();
-    }
-
-    public Cell getCell(int x, int y) {
-        return map.getCell(x, y);
-    }
-
-    public int getLevel() {
-        return level;
-    }
-
-    public boolean isLevelUp() {
-        return levelUp;
-    }
-
-
-    private void winScreen() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        map = MapLoader.createGameMapFromFile("/win.txt");
-    }
-
-    public GameMap getMap() {
-        return map;
-    }
-
-    public void setMap(GameMap map) {
-        this.map = map;
-    }
-
     public void refreshAfterKeyPress() {
         if (Cheese.getCheeseTotal() == Cheese.getCheeseInHole()) {
             gamePhase = "levelUp";
@@ -107,7 +71,6 @@ public class GameLogic {
         refreshGameStatus();
     }
 
-
     private void nextLevel() {
         level++;
         setupLevel();
@@ -118,8 +81,16 @@ public class GameLogic {
             gamePhase = "level";
             setupLevel();
         } else if (gamePhase.equals("levelUp")) {
-            gamePhase = "level";
-            nextLevel();
+            if (level == LAST_LEVEL) {
+                gamePhase = "victory";
+                setupScreen("/victory.txt", "You have won the game!\n\n" +
+                        "Press SPACE to exit!\n ");
+            } else {
+                gamePhase = "level";
+                nextLevel();
+            }
+        } else if (gamePhase.equals("victory")) {
+            quit();
         }
     }
 
@@ -127,4 +98,6 @@ public class GameLogic {
         System.out.println("See ya soon!");
         System.exit(0);
     }
+
+
 }

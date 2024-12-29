@@ -1,6 +1,6 @@
 package com.codecool.cheeseterminator;
 
-import com.codecool.cheeseterminator.data.DAO.DbManager;
+import com.codecool.cheeseterminator.model.DAO.DbManager;
 import com.codecool.cheeseterminator.logic.Game;
 
 public class App {

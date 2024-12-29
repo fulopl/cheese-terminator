@@ -2,11 +2,11 @@
 #########################
 #c @ c @ c @ c @ c @ c @#
 #                       #
-#@  CHEESE TERMINATOR  c#
-#    IN THE DUNGEON     #
-#c                     @#
-#   TRIBUTE TO CHEESE   #
-#@   TERMINATOR 1992   c#
+#@   CONGRATULATIONS!  c#
+#   YOU COMPLETED ALL   #
+#c     THE LEVELS      @#
+#                       #
+#@  YOU WON THE GAME!  c#
 #                       #
 #c @ c @ c @ c @ c @ c @#
 #########################

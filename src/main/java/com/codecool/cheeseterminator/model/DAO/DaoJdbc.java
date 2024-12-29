@@ -1,4 +1,4 @@
-package com.codecool.cheeseterminator.data.DAO;
+package com.codecool.cheeseterminator.model.DAO;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
