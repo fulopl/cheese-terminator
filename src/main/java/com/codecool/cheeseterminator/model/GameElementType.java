@@ -1,4 +1,4 @@
-package com.codecool.cheeseterminator.data;
+package com.codecool.cheeseterminator.model;
 
 import com.codecool.cheeseterminator.ui.Tile;
 
@@ -46,6 +46,7 @@ public enum GameElementType {
     X(false, Role.STRUCTURE, 'X', Tile.X),
     Y(false, Role.STRUCTURE, 'Y', Tile.Y),
     Z(false, Role.STRUCTURE, 'Z', Tile.Z),
+    EXCLAMATION(false, Role.STRUCTURE, '!', Tile.EXCLAMATION),
     ;
     private final boolean passable;
     private final Role role;

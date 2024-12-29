@@ -1,6 +1,6 @@
 package com.codecool.cheeseterminator.ui;
 
-import com.codecool.cheeseterminator.data.Drawable;
+import com.codecool.cheeseterminator.model.Drawable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -47,6 +47,7 @@ public enum Tile {
     X(29,31),
     Y(30,31),
     Z(31,31),
+    EXCLAMATION(19, 25)
     ;
 
     private final int columnIndex;
