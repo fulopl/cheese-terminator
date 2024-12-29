@@ -18,7 +18,6 @@ public class Game extends Application {
         ui = new UI(primaryStage);
         inputManager = new InputManager();
         this.logic = new GameLogic(ui, inputManager);
-        inputManager.setGameLogic(logic);
-        logic.initiate();
+        logic.init();
     }
 }

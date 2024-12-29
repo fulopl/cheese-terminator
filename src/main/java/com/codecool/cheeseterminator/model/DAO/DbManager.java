@@ -1,6 +1,6 @@
-package com.codecool.cheeseterminator.data.DAO;
+package com.codecool.cheeseterminator.model.DAO;
 
-import com.codecool.cheeseterminator.data.GameMap;
+import com.codecool.cheeseterminator.model.GameMap;
 import credentials.Credentials;
 import org.postgresql.ds.PGSimpleDataSource;
 
