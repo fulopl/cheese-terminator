@@ -10,13 +10,11 @@ public class GameMap {
     private final int mapWidth;
     private final int mapHeight;
     private final Cell[][] cells;
-    private final List<GameElement> gameElements; //TODO remove
     private Hero hero;
 
     public GameMap(int mapWidth, int mapHeight, Tile defaultTile) {
         this.mapWidth = mapWidth;
         this.mapHeight = mapHeight;
-        this.gameElements = new ArrayList<>();
         cells = new Cell[mapWidth][mapHeight];
         for (int x = 0; x < mapWidth; x++) {
             for (int y = 0; y < mapHeight; y++) {
