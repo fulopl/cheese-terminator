@@ -16,7 +16,7 @@ import java.util.Map;
 public class UI {
     private Canvas canvas;
     private GraphicsContext context;
-    private Stage primaryStage;
+    private final Stage primaryStage;
     private Scene scene;
     private MainStage mainStage;
     private StatusPane statusPane;

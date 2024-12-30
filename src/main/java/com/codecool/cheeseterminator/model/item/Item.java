@@ -1,4 +1,4 @@
-package com.codecool.cheeseterminator.model.items;
+package com.codecool.cheeseterminator.model.item;
 
 import com.codecool.cheeseterminator.model.Cell;
 import com.codecool.cheeseterminator.model.GameElement;

@@ -19,17 +19,7 @@ public class StatusPane {
 
 
     public StatusPane() {
-
-//        gameMessage = new Label();
-//        levelText = new Label();
-//        numberOfCheesesLabel = new Label("Number of cheeses: ");
-//        numberOfCheesesValue = new Label();
-//        numberToPlaceLabel = new Label("Number to place: ");
-//        numberToPlaceValue = new Label();
-//        keyMapText = new Label("\nUse ARROW KEYS to move,\npush 'R' to retry level,\npush 'Q' to quit game");
-
         setUpStatusPane();
-
     }
 
     public void setUpStatusPane() {
@@ -39,8 +29,6 @@ public class StatusPane {
 
         gameMessage = new Label();
         gridPane.add(gameMessage, 0, 0);
-
-
     }
 
     public void setupForLevels() {

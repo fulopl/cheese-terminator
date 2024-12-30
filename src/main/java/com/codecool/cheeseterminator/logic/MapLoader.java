@@ -4,7 +4,7 @@ import com.codecool.cheeseterminator.model.Cell;
 import com.codecool.cheeseterminator.model.GameElement;
 import com.codecool.cheeseterminator.model.GameElementType;
 import com.codecool.cheeseterminator.model.GameMap;
-import com.codecool.cheeseterminator.model.items.Cheese;
+import com.codecool.cheeseterminator.model.item.Cheese;
 import com.codecool.cheeseterminator.model.player.Hero;
 import com.codecool.cheeseterminator.ui.Tile;
 

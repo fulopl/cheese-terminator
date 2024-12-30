@@ -1,6 +1,6 @@
 package com.codecool.cheeseterminator.model;
 
-import com.codecool.cheeseterminator.model.items.Item;
+import com.codecool.cheeseterminator.model.item.Item;
 import com.codecool.cheeseterminator.model.player.Hero;
 import com.codecool.cheeseterminator.ui.Tile;
 
@@ -9,7 +9,7 @@ public class Cell implements Drawable {
     private GameElement structure;
     private Item item;
     private Hero hero;
-    private GameMap gameMap; //TODO remove?
+    private final GameMap gameMap;
     private final int x;
     private final int y;
 
@@ -55,14 +55,6 @@ public class Cell implements Drawable {
 
     public Cell getNeighbor(int dx, int dy) {
         return gameMap.getCell(x + dx, y + dy);
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
     }
 
     public boolean isPassable() {

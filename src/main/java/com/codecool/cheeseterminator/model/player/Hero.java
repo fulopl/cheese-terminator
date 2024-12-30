@@ -3,7 +3,7 @@ package com.codecool.cheeseterminator.model.player;
 import com.codecool.cheeseterminator.model.Cell;
 import com.codecool.cheeseterminator.model.GameElement;
 import com.codecool.cheeseterminator.model.GameElementType;
-import com.codecool.cheeseterminator.model.items.Item;
+import com.codecool.cheeseterminator.model.item.Item;
 
 public class Hero extends GameElement{
     private Direction direction;
@@ -14,13 +14,6 @@ public class Hero extends GameElement{
         this.cell = cell;
         this.direction = Direction.EAST;
     }
-
-//    public Hero(Cell cell, Tile tile) {
-//        this.tile = tile;
-//        this.cell.setPlayer(this);
-//        direction = Direction.EAST;
-//    }
-
 
     public void move(Direction movingDirection) {
         Cell nextCell = cell.getNeighbor(movingDirection.getDx(), movingDirection.getDy());
