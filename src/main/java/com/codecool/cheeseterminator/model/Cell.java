@@ -1,6 +1,6 @@
 package com.codecool.cheeseterminator.model;
 
-import com.codecool.cheeseterminator.model.items.Item;
+import com.codecool.cheeseterminator.model.item.Item;
 import com.codecool.cheeseterminator.model.player.Hero;
 import com.codecool.cheeseterminator.ui.Tile;
 

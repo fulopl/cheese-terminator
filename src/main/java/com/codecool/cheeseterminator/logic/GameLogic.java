@@ -1,7 +1,7 @@
 package com.codecool.cheeseterminator.logic;
 
 import com.codecool.cheeseterminator.model.GameMap;
-import com.codecool.cheeseterminator.model.items.Cheese;
+import com.codecool.cheeseterminator.model.item.Cheese;
 import com.codecool.cheeseterminator.ui.UI;
 
 public class GameLogic {
@@ -77,20 +77,22 @@ public class GameLogic {
     }
 
     public void nextPhase() {
-        if (gamePhase.equals("welcome")) {
-            gamePhase = "level";
-            setupLevel();
-        } else if (gamePhase.equals("levelUp")) {
-            if (level == LAST_LEVEL) {
-                gamePhase = "victory";
-                setupScreen("/victory.txt", "You have won the game!\n\n" +
-                        "Press SPACE to exit!\n ");
-            } else {
+        switch (gamePhase) {
+            case "welcome" -> {
                 gamePhase = "level";
-                nextLevel();
+                setupLevel();
             }
-        } else if (gamePhase.equals("victory")) {
-            quit();
+            case "levelUp" -> {
+                if (level == LAST_LEVEL) {
+                    gamePhase = "victory";
+                    setupScreen("/victory.txt", "You have won the game!\n\n" +
+                            "Press SPACE to exit!\n ");
+                } else {
+                    gamePhase = "level";
+                    nextLevel();
+                }
+            }
+            case "victory" -> quit();
         }
     }
 
@@ -98,6 +100,4 @@ public class GameLogic {
         System.out.println("See ya soon!");
         System.exit(0);
     }
-
-
 }
