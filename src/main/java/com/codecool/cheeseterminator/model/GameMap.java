@@ -3,9 +3,6 @@ package com.codecool.cheeseterminator.model;
 import com.codecool.cheeseterminator.model.player.Hero;
 import com.codecool.cheeseterminator.ui.Tile;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class GameMap {
     private final int mapWidth;
     private final int mapHeight;
