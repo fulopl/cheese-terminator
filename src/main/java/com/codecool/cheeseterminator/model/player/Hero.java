@@ -15,13 +15,6 @@ public class Hero extends GameElement{
         this.direction = Direction.EAST;
     }
 
-//    public Hero(Cell cell, Tile tile) {
-//        this.tile = tile;
-//        this.cell.setPlayer(this);
-//        direction = Direction.EAST;
-//    }
-
-
     public void move(Direction movingDirection) {
         Cell nextCell = cell.getNeighbor(movingDirection.getDx(), movingDirection.getDy());
         Item item = nextCell.getItem();
