@@ -1,12 +1,12 @@
-package com.codecool.cheeseterminator.logic;
+package com.fulopl.cheeseterminator.logic;
 
-import com.codecool.cheeseterminator.model.Cell;
-import com.codecool.cheeseterminator.model.GameElement;
-import com.codecool.cheeseterminator.model.GameElementType;
-import com.codecool.cheeseterminator.model.GameMap;
-import com.codecool.cheeseterminator.model.item.Cheese;
-import com.codecool.cheeseterminator.model.player.Hero;
-import com.codecool.cheeseterminator.ui.Tile;
+import com.fulopl.cheeseterminator.model.Cell;
+import com.fulopl.cheeseterminator.model.GameElement;
+import com.fulopl.cheeseterminator.model.GameElementType;
+import com.fulopl.cheeseterminator.model.GameMap;
+import com.fulopl.cheeseterminator.model.item.Cheese;
+import com.fulopl.cheeseterminator.model.player.Hero;
+import com.fulopl.cheeseterminator.ui.Tile;
 
 import java.io.InputStream;
 import java.util.*;

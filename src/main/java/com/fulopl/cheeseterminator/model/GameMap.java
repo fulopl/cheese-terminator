@@ -1,7 +1,7 @@
-package com.codecool.cheeseterminator.model;
+package com.fulopl.cheeseterminator.model;
 
-import com.codecool.cheeseterminator.model.player.Hero;
-import com.codecool.cheeseterminator.ui.Tile;
+import com.fulopl.cheeseterminator.model.player.Hero;
+import com.fulopl.cheeseterminator.ui.Tile;
 
 public class GameMap {
     private final int mapWidth;

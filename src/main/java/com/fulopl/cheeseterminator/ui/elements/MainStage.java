@@ -1,6 +1,6 @@
-package com.codecool.cheeseterminator.ui.elements;
+package com.fulopl.cheeseterminator.ui.elements;
 
-import com.codecool.cheeseterminator.ui.Tile;
+import com.fulopl.cheeseterminator.ui.Tile;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.BorderPane;

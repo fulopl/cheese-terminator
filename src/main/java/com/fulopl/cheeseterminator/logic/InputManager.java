@@ -1,7 +1,7 @@
-package com.codecool.cheeseterminator.logic;
+package com.fulopl.cheeseterminator.logic;
 
-import com.codecool.cheeseterminator.model.GameMap;
-import com.codecool.cheeseterminator.model.player.Direction;
+import com.fulopl.cheeseterminator.model.GameMap;
+import com.fulopl.cheeseterminator.model.player.Direction;
 import javafx.scene.input.KeyCode;
 
 import java.util.HashMap;

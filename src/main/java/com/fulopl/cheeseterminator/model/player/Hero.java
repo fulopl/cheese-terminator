@@ -1,9 +1,9 @@
-package com.codecool.cheeseterminator.model.player;
+package com.fulopl.cheeseterminator.model.player;
 
-import com.codecool.cheeseterminator.model.Cell;
-import com.codecool.cheeseterminator.model.GameElement;
-import com.codecool.cheeseterminator.model.GameElementType;
-import com.codecool.cheeseterminator.model.item.Item;
+import com.fulopl.cheeseterminator.model.Cell;
+import com.fulopl.cheeseterminator.model.GameElement;
+import com.fulopl.cheeseterminator.model.GameElementType;
+import com.fulopl.cheeseterminator.model.item.Item;
 
 public class Hero extends GameElement{
     private Direction direction;

@@ -1,6 +1,6 @@
-package com.codecool.cheeseterminator;
+package com.fulopl.cheeseterminator;
 
-import com.codecool.cheeseterminator.logic.Game;
+import com.fulopl.cheeseterminator.logic.Game;
 
 public class App {
     public static void main(String[] args) {

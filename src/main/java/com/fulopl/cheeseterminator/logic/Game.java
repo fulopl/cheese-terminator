@@ -1,6 +1,6 @@
-package com.codecool.cheeseterminator.logic;
+package com.fulopl.cheeseterminator.logic;
 
-import com.codecool.cheeseterminator.ui.UI;
+import com.fulopl.cheeseterminator.ui.UI;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
