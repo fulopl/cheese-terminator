@@ -1,6 +1,6 @@
-package com.codecool.cheeseterminator.model;
+package com.fulopl.cheeseterminator.model;
 
-import com.codecool.cheeseterminator.ui.Tile;
+import com.fulopl.cheeseterminator.ui.Tile;
 
 public class GameElement implements Drawable{
     private boolean passable;

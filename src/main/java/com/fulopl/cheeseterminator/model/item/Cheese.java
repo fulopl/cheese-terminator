@@ -1,8 +1,8 @@
-package com.codecool.cheeseterminator.model.item;
+package com.fulopl.cheeseterminator.model.item;
 
-import com.codecool.cheeseterminator.model.Cell;
-import com.codecool.cheeseterminator.model.GameElementType;
-import com.codecool.cheeseterminator.model.player.Direction;
+import com.fulopl.cheeseterminator.model.Cell;
+import com.fulopl.cheeseterminator.model.GameElementType;
+import com.fulopl.cheeseterminator.model.player.Direction;
 
 public class Cheese extends Item {
     private static int cheeseTotal = 0;

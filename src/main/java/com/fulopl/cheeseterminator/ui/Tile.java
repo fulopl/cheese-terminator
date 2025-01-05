@@ -1,6 +1,6 @@
-package com.codecool.cheeseterminator.ui;
+package com.fulopl.cheeseterminator.ui;
 
-import com.codecool.cheeseterminator.model.Drawable;
+import com.fulopl.cheeseterminator.model.Drawable;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 

@@ -1,4 +1,4 @@
-package com.codecool.cheeseterminator.ui.elements;
+package com.fulopl.cheeseterminator.ui.elements;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;

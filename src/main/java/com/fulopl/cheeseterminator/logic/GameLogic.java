@@ -1,8 +1,8 @@
-package com.codecool.cheeseterminator.logic;
+package com.fulopl.cheeseterminator.logic;
 
-import com.codecool.cheeseterminator.model.GameMap;
-import com.codecool.cheeseterminator.model.item.Cheese;
-import com.codecool.cheeseterminator.ui.UI;
+import com.fulopl.cheeseterminator.model.GameMap;
+import com.fulopl.cheeseterminator.model.item.Cheese;
+import com.fulopl.cheeseterminator.ui.UI;
 
 public class GameLogic {
     public static final int START_LEVEL = 1;

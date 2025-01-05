@@ -1,8 +1,8 @@
-package com.codecool.cheeseterminator.ui;
+package com.fulopl.cheeseterminator.ui;
 
-import com.codecool.cheeseterminator.model.Cell;
-import com.codecool.cheeseterminator.ui.elements.MainStage;
-import com.codecool.cheeseterminator.ui.elements.StatusPane;
+import com.fulopl.cheeseterminator.model.Cell;
+import com.fulopl.cheeseterminator.ui.elements.MainStage;
+import com.fulopl.cheeseterminator.ui.elements.StatusPane;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
