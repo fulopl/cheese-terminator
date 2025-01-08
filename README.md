@@ -1,4 +1,4 @@
-# Cheese Terminator in the Dungeon - a Java/JavaFX sokoban-type offline game
+# Cheese Terminator in the Dungeon - a Java/JavaFX sokoban type offline game
 
 <!-- TABLE OF CONTENTS -->
 <details>
@@ -6,18 +6,19 @@
   <ul>
     <li><a href="#what-is-cheese-terminator-in-the-dungeon">What is Cheese Terminator in the Dungeon?</a></li>
     <li><a href="#built-with">Built With</a></li>
+    <li><a href="#description">Description</a></li>
     <li><a href="#main-features">Main features</a></li>
     <li><a href="#developer">Developer</a></li>
     <li><a href="#how-to-run-this-app">How to run this app?</a></li>
     <ol>
         <li><a href="#prerequisites">Prerequisites</a></li>
         <li><a href="#installation-and-run">Installation and run</a></li>
-        <li><a href="#stopping-the-application">Stopping the application</a></li>
     </ol>
     <li><a href="#how-to-use">How to use?</a></li>
   </ul>
 </details>
 
+![welcome.png](./images/welcome.png)
 
 ## What is Cheese Terminator in the Dungeon?
 
@@ -25,7 +26,7 @@ CTD is a sokoban-type offline game, developed in Java using JavaFX for graphics.
 
 The Game uses classic Dungeon Crawl tile for visual experience. 
 
-I also intended this Game to be a foundation for more complex dungeon games.
+I also intended this game to be a basis for more complex dungeon games.
 
 
 ## Built with
@@ -35,14 +36,13 @@ I also intended this Game to be a foundation for more complex dungeon games.
 [![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=fff)](#)
 [![Spring Boot](https://img.shields.io/badge/IntelliJ_IDEA-darkblue?logo=intellijidea&logoColor=fff)](#)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff)](#)
-
 <br />
 
 ## Description
 
 In this sokoban-like game players are to push every cheese to the mouse holes avoiding deadlocks. Once all cheeses are in the holes players proceed to the next level. The aim of the game is to complete all the levels.
 
-![main2_70pc.png](./images/main2_70pc.png)
+![lvl_1.png](./images/lvl_1.png)
 
 ## Main features
 
@@ -52,17 +52,17 @@ In this sokoban-like game players are to push every cheese to the mouse holes av
 - Retry level and quit
 - Game status display on status pane
 - Welcome and victory screens
-- Undo function (TODO)
-- Postgres Database connection for saving game data (TODO)
+- Undo function (last move) (TODO)
+- Postgres Database and Spring Data JPA introduction for saving game data (TODO)
 - Users handling - Hall of fame (TODO) 
-- Save game (TODO)
+- Saving game state (TODO)
 - New tiles, direction sensitive heading of the mouse (TODO)
 
-
-![SstQuery2_70pc.png](./images/SstQuery2_70pc.png)
+![lvl_2.png](./images/lvl_2.png)
 
 ## Developer
 - [Levente Fülöp](https://github.com/fulopl)
+
 
 ## How to run this app?
 
@@ -78,40 +78,22 @@ To set up the project locally:
    git clone https://github.com/fulopl/cheese-terminator 
    ```
 2. Make sure Docker Desktop is running.
-4. Build the application container and run the app by typing the command below (the build process may take some minutes):
+3. Build the application container and run the app by typing the command below (the build process may take some minutes):
 ```sh
    docker compose up
    ```
 
-### Stopping the application
-1. Stop the app by pressing Ctrl+C in the command shell
-2. Remove the docker containers by entering "docker compose down" in the shell
-```sh
-   docker compose down
-   ```
 
 ## How to use?
-- You can use the app in a web browser at this URL: http://localhost:3000/
-- You can use the "Sunrise & Sunset Times" feature after signing in.
-- You can sign in with one of the existing users by selecting the "Sign in" tab:
-    - Choose username "user0" to "user4" or log in with the user with admin rights: "admin"
-    - The password is always the same as the username (ie. "user0" for user0, "admin" for admin etc.)
-
-![SolarWatch_signin.png](./images/SolarWatch_signin_60pc.png)
-
-- You can also register a new user:
-    - Select the "Sign in" tab, and choosing "Register".
-    - Then login with the username / password combination given by you in the previous step.
+- Push the cheeses to the mouse holes (circles) to complete each level.
+- You can control the mouse with the keyboard arrow keys.
+- Push 'R' any time to restart a level.
+- To quit the game press 'Q'.
+- After quit remove the docker containers by entering "docker compose down" in the shell
 
 
-- Users can only use the "Sunrise & Sunset Times" feature after signing in.
-  Here you can give a city name and a date to get sunrise and sunset times.
-  By leaving the fields empty you will get the sunrise and sunset times for Budapest on the actual day in UTC time.
-
-![SstResult_70pc.png](./images/SstResult_70pc.png)
+![lvl_5.png](./images/lvl_5.png)
 
 
-- With admin rights you can access the "Edit users" tab, where you are able to give roles to users or delete them.
 
-![Solarwatch_edit_users_67pc.png](./images/Solarwatch_edit_users_67pc.png)
 
