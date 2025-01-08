@@ -37,7 +37,7 @@ I also intended this game to be a basis for more complex dungeon games.
 [![Spring Boot](https://img.shields.io/badge/IntelliJ_IDEA-darkblue?logo=intellijidea&logoColor=fff)](#)
 [![Docker](https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=fff)](#)
 <br />
-
+  
 ## Description
 
 In this sokoban-like game players are to push every cheese to the mouse holes avoiding deadlocks. Once all cheeses are in the holes players proceed to the next level. The aim of the game is to complete all the levels.
