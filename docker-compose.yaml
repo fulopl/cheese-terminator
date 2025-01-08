@@ -1,0 +1,12 @@
+services:
+  backend:
+    image: 'cheese_terminator:latest'
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: app
+
+
+
+
+
