@@ -46,23 +46,21 @@ public class MapLoader {
                 char mapChar = line.charAt(x);
                 Cell cell = gameMap.getCell(x, y);
 
-                GameElementType gameElementType = Arrays.stream(GameElementType.values())
-                        .filter(gameElementType1 -> gameElementType1.getMapCharacter() == mapChar)
-                        .findFirst()
-                        .orElseThrow(() -> new NoSuchElementException("Unrecognized character: '" + mapChar + "'"));
-                switch (gameElementType) {
-                    case MOUSE -> {
+                GameElementType gameElementType = GameElementType.CHARACTER_MAP.get(mapChar);
+                if (gameElementType == null) throw new NoSuchElementException("Unrecognized character: '" + mapChar + "'");
+                switch (gameElementType.getName()) {
+                    case "MOUSE" -> {
                         Hero hero = new Hero(gameElementType, cell);
                         cell.setHero(hero);
                         gameMap.setHero(hero);
                         cell.setStructure(new GameElement(DEFAULT_GAME_ELEMENT_TYPE));
                     }
-                    case CHEESE -> {
+                    case "CHEESE" -> {
                         Cheese cheese = new Cheese(gameElementType, cell);
                         cell.setItem(cheese);
                         cell.setStructure(new GameElement(DEFAULT_GAME_ELEMENT_TYPE));
                     }
-                    case CHEESE_ON_HOLE -> {
+                    case "CHEESE_ON_HOLE" -> {
                         Cheese cheese = new Cheese(GameElementType.CHEESE, cell);
                         cell.setItem(cheese);
                         cell.setStructure(new GameElement(GameElementType.HOLE));

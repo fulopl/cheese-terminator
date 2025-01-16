@@ -5,8 +5,8 @@ import com.fulopl.cheeseterminator.model.GameElementType;
 import com.fulopl.cheeseterminator.model.player.Direction;
 
 public class Cheese extends Item {
-    private static int cheeseTotal = 0;
-    private static int cheeseInHole = 0;
+    protected static int cheeseTotal = 0;
+    protected static int cheeseInHole = 0;
 
     private boolean inHole = false;
 
@@ -14,6 +14,8 @@ public class Cheese extends Item {
         super(gameElementType, cell);
         cheeseTotal++;
     }
+
+    public Cheese(){};
 
     public static void reset() {
         cheeseTotal = 0;

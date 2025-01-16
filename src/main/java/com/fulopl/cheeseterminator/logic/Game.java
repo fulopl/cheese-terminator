@@ -1,5 +1,6 @@
 package com.fulopl.cheeseterminator.logic;
 
+import com.fulopl.cheeseterminator.model.GameElementType;
 import com.fulopl.cheeseterminator.ui.UI;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -12,6 +13,7 @@ public class Game extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        GameElementType.init();
         UI ui = new UI(primaryStage);
         InputManager inputManager = new InputManager();
         GameLogic logic = new GameLogic(ui, inputManager);
