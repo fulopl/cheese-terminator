@@ -15,8 +15,6 @@ public class Cheese extends Item {
         cheeseTotal++;
     }
 
-    public Cheese(){};
-
     public static void reset() {
         cheeseTotal = 0;
         cheeseInHole = 0;
