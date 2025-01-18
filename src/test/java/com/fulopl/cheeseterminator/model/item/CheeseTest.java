@@ -131,7 +131,7 @@ class CheeseTest {
     }
 
     @Test
-    void testIsInHole_WhenCellStructureIsHole_ShouldReturnTrue() {
+    void testIsInHole_WhenCellIsHole_shouldReturnTrue() {
         //arrange
         when(mockCell.getStructure()).thenReturn(mockGameElement);
         when(mockGameElement.getGameElementType()).thenReturn(GameElementType.HOLE);
@@ -144,11 +144,10 @@ class CheeseTest {
     }
 
     @Test
-    void testIsInHole_WhenCellStructureIsNotHole_ShouldReturnFalse() {
+    void testIsInHole_WhenCellIsNotHole_shouldReturnTrue() {
         //arrange
         when(mockCell.getStructure()).thenReturn(mockGameElement);
-        when(mockGameElement.getGameElementType()).thenReturn(new GameElementType("FLOOR", true
-                , Role.STRUCTURE, ' ', null));
+        when(mockGameElement.getGameElementType()).thenReturn(GameElementType.FLOOR);
 
         //act
         boolean result = cheese.isInHole();
@@ -156,4 +155,6 @@ class CheeseTest {
         //assert
         assertFalse(result);
     }
+
+
 }
