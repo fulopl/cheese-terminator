@@ -7,7 +7,7 @@ import com.fulopl.cheeseterminator.model.item.Item;
 
 public class Hero extends GameElement{
     private Direction direction;
-    private Cell cell;
+    protected Cell cell;
 
     public Hero(GameElementType gameElementType, Cell cell) {
         super(gameElementType);
