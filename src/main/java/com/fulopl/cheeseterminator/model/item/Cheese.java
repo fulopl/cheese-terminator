@@ -8,7 +8,7 @@ public class Cheese extends Item {
     protected static int cheeseTotal = 0;
     protected static int cheeseInHole = 0;
 
-    private boolean inHole = false;
+    protected boolean inHole = false;
 
     public Cheese(GameElementType gameElementType, Cell cell) {
         super(gameElementType, cell);
@@ -40,7 +40,7 @@ public class Cheese extends Item {
     }
 
     public boolean isInHole() {
-        return cell.getStructure().getGameElementType() == GameElementType.HOLE;
+            return cell.getStructure().getGameElementType() == GameElementType.HOLE;
     }
 
     public static int getCheeseTotal() {
