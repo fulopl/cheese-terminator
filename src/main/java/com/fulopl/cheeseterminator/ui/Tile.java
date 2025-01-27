@@ -6,11 +6,21 @@ import javafx.scene.image.Image;
 
 public enum Tile {
     EMPTY( 0, 0),
-    FLOOR(2, 0),
-    HOLE( 23, 25),
-    WALL( 10, 17),
-    CHEESE( 18, 28),
-    MOUSE( 31, 8),
+    FLOOR(8, 32),
+    HOLE( 5, 32),
+    WALL( 7, 32),
+    CHEESE( 0, 32),
+    MOUSE( 1, 32),
+    MOUSE_SOUTH( 2, 32),
+    MOUSE_EAST( 3, 32),
+    MOUSE_NORTH( 4, 32),
+    CHEESE_ON_HOLE(6, 32),
+//    EMPTY( 0, 0),
+//    FLOOR(2, 0),
+//    HOLE( 23, 25),
+//    WALL( 10, 17),
+//    CHEESE( 18, 28),
+//    MOUSE( 31, 8),
     N0(19,29),
     N1(20,29),
     N2(21,29),
@@ -56,7 +66,7 @@ public enum Tile {
     private final int y;
 
     public static final int TILE_WIDTH = 32;
-    private static final Image tileSet = new Image("/tiles.png", 543 * 2, 543 * 2, true, false);
+    private static final Image tileSet = new Image("/tiles_ext.png", 1086, 1120, true, false);
 
     Tile(int columnIndex, int rowIndex) {
         this.columnIndex = columnIndex;
@@ -68,7 +78,7 @@ public enum Tile {
     public static void drawTile(GraphicsContext context, Drawable drawable, int x, int y) {
         Tile tile = drawable.getTile();
         context.drawImage(tileSet
-                , tile.getX(), tile.getY()
+                , tile.x, tile.y
                 , TILE_WIDTH, TILE_WIDTH
                 , x * TILE_WIDTH, y * TILE_WIDTH
                 , TILE_WIDTH, TILE_WIDTH);
