@@ -25,7 +25,7 @@ public class GameLogic {
     public void init() {
         ui.initiateMainStage();
         setupScreen("/welcome.txt", "Welcome to Cheese Terminator\n" +
-                "In The Dungeon!\n\n" +
+                "Reborn!\n\n" +
                 "Press SPACE to start the game!\n ");
     }
 
