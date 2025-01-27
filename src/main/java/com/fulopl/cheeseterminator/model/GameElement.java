@@ -18,6 +18,10 @@ public class GameElement implements Drawable{
         return tile;
     }
 
+    public void setTile(Tile tile) {
+        this.tile = tile;
+    }
+
     public boolean isPassable() {
         return passable;
     }
