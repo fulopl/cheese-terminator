@@ -1,10 +1,10 @@
-# Cheese Terminator in the Dungeon - a Java/JavaFX sokoban type offline game
+# Cheese Terminator Reborn - a Java/JavaFX sokoban type logical game
 
 <!-- TABLE OF CONTENTS -->
 <details>
   <summary>Table of Contents</summary>
   <ul>
-    <li><a href="#what-is-cheese-terminator-in-the-dungeon">What is Cheese Terminator in the Dungeon?</a></li>
+    <li><a href="#what-is-cheese-terminator-reborn">What is Cheese Terminator Reborn?</a></li>
     <li><a href="#built-with">Built With</a></li>
     <li><a href="#description">Description</a></li>
     <li><a href="#main-features">Main features</a></li>
@@ -18,14 +18,12 @@
   </ul>
 </details>
 
-![welcome.png](./images/welcome.png)
+![welcome.png](./images/welcome_2.png)
 
-## What is Cheese Terminator in the Dungeon?
+## What is Cheese Terminator Reborn?
 
-CTD is a sokoban-type offline game, developed in Java using JavaFX for graphics. It's tribute remake of an old windows game 'Cheese Terminator' developed by Zsolt Krajcsik.
-
-The Game uses classic Dungeon Crawl tile for visual experience. 
-
+CTR is a sokoban-type logical game, developed in Java using JavaFX for graphics.<br/>
+It's tribute remake of an old windows game 'Cheese Terminator' developed by Zsolt Krajcsik.<br/>
 I also intended this game to be a basis for more complex dungeon games.
 
 
@@ -40,9 +38,9 @@ I also intended this game to be a basis for more complex dungeon games.
   
 ## Description
 
-In this sokoban-like game players are to push every cheese to the mouse holes avoiding deadlocks. Once all cheeses are in the holes players proceed to the next level. The aim of the game is to complete all the levels.
+In this sokoban-like game players are to push every cheese to the mouse holes avoiding deadlocks.<br/> Once all cheeses are in the holes players proceed to the next level. The aim of the game is to complete all the levels.
 
-![lvl_1.png](./images/lvl_1.png)
+![lvl_1.png](./images/level3_2.png)
 
 ## Main features
 
@@ -52,13 +50,13 @@ In this sokoban-like game players are to push every cheese to the mouse holes av
 - Retry level and quit
 - Game status display on status pane
 - Welcome and victory screens
-- Undo function (last move) (TODO)
+- New 32*32 px tiles, direction sensitive heading of the mouse
+- Undo last move (TODO)
 - Postgres Database and Spring Data JPA introduction for saving game data (TODO)
 - Users handling - Hall of fame (TODO) 
 - Saving game state (TODO)
-- New tiles, direction sensitive heading of the mouse (TODO)
 
-![lvl_2.png](./images/lvl_2.png)
+![lvl_2.png](./images/level2_2.png)
 
 ## Developer
 - [Levente Fülöp](https://github.com/fulopl)
@@ -92,7 +90,7 @@ To set up the project locally:
 - After quit remove the docker containers by entering "docker compose down" in the shell
 
 
-![lvl_5.png](./images/lvl_5.png)
+![lvl_5.png](./images/level5_2.png)
 
 
 
