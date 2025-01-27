@@ -27,7 +27,7 @@ public class UI {
     }
 
     public void initiateMainStage() {
-        primaryStage.setTitle("Cheese Terminator");
+        primaryStage.setTitle("Cheese Terminator Reborn");
         primaryStage.show();
         mainStage = new MainStage();
         statusPane = new StatusPane();
