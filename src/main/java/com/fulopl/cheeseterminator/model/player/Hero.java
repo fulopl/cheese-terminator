@@ -4,19 +4,19 @@ import com.fulopl.cheeseterminator.model.Cell;
 import com.fulopl.cheeseterminator.model.GameElement;
 import com.fulopl.cheeseterminator.model.GameElementType;
 import com.fulopl.cheeseterminator.model.item.Item;
+import com.fulopl.cheeseterminator.ui.Tile;
 
 public class Hero extends GameElement{
-    private Direction direction;
     private Cell cell;
 
     public Hero(GameElementType gameElementType, Cell cell) {
         super(gameElementType);
         this.cell = cell;
-        this.direction = Direction.EAST;
     }
 
     public void move(Direction movingDirection) {
         Cell nextCell = cell.getNeighbor(movingDirection.getDx(), movingDirection.getDy());
+        setDirection(movingDirection);
         Item item = nextCell.getItem();
         boolean allowToMove = true;
         if (item != null) {
@@ -28,6 +28,15 @@ public class Hero extends GameElement{
                 nextCell.setHero(this);
                 cell = nextCell;
             }
+        }
+    }
+
+    private void setDirection(Direction movingDirection) {
+        switch (movingDirection) {
+            case WEST -> setTile(Tile.MOUSE_WEST);
+            case SOUTH -> setTile(Tile.MOUSE_SOUTH);
+            case EAST -> setTile(Tile.MOUSE_EAST);
+            case NORTH -> setTile(Tile.MOUSE_NORTH);
         }
     }
 }
