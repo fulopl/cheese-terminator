@@ -5,7 +5,7 @@ import com.fulopl.cheeseterminator.model.item.Cheese;
 import com.fulopl.cheeseterminator.ui.UI;
 
 public class GameLogic {
-    public static final int START_LEVEL = 1;
+    public static final int START_LEVEL = 4;
     public static final int LAST_LEVEL = 5;
     private int level;
     private String gamePhase;
