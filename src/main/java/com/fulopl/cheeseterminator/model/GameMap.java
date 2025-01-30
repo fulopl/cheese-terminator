@@ -9,13 +9,13 @@ public class GameMap {
     private final Cell[][] cells;
     private Hero hero;
 
-    public GameMap(int mapWidth, int mapHeight, Tile defaultTile) {
+    public GameMap(int mapWidth, int mapHeight) {
         this.mapWidth = mapWidth;
         this.mapHeight = mapHeight;
         cells = new Cell[mapWidth][mapHeight];
         for (int x = 0; x < mapWidth; x++) {
             for (int y = 0; y < mapHeight; y++) {
-                cells[x][y] = new Cell(this, x, y, defaultTile);
+                cells[x][y] = new Cell(this, x, y);
             }
         }
     }
@@ -45,13 +45,9 @@ public class GameMap {
     }
 
     public void setCellTiles() {
-        for (int x = 0; x < mapWidth; x++) {
-            for (int y = 0; y < mapHeight; y++) {
-                if (cells[x][y].getHero() != null) {
-                    cells[x][y].setTile(cells[x][y].getHero().getTile());
-                } else if (cells[x][y].getItem() != null) {
-                    cells[x][y].setTile(cells[x][y].getItem().getTile());
-                } else cells[x][y].setTile(cells[x][y].getStructure().getTile());
+        for (Cell[] columns : cells) {
+            for (Cell cell :  columns) {
+               cell.setTile();
             }
         }
     }

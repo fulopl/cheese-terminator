@@ -13,11 +13,10 @@ public class Cell implements Drawable {
     private final int x;
     private final int y;
 
-    public Cell(GameMap gameMap, int x, int y, Tile tile) {
+    public Cell(GameMap gameMap, int x, int y) {
         this.gameMap = gameMap;
         this.x = x;
         this.y = y;
-        this.tile = tile;
     }
 
     @Override
@@ -25,8 +24,12 @@ public class Cell implements Drawable {
         return tile;
     }
 
-    public void setTile(Tile tile) {
-        this.tile = tile;
+    public void setTile() {
+        if (hero != null) {
+            tile = hero.getTile();
+        } else if (item != null) {
+            tile = item.getTile();
+        } else tile = structure.getTile();
     }
 
     public GameElement getStructure() {
