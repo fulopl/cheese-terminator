@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 
 import java.util.Map;
 
-public class UserInterfaceImp implements UI {
+public class JavaFxUI implements UI {
     private Canvas canvas;
     private GraphicsContext context;
     private final Stage primaryStage;
@@ -21,7 +21,7 @@ public class UserInterfaceImp implements UI {
     private MainStage mainStage;
     private StatusPane statusPane;
 
-    public UserInterfaceImp(Stage primaryStage) {
+    public JavaFxUI(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
