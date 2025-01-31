@@ -9,33 +9,33 @@ import java.util.Map;
 
 public class InputManager {
     private final Map<KeyCode, Runnable> keyHandlers = new HashMap<>();
-    private GameMap map;
+    private GameMap map;   //TODO get Player from gameLogic
     private GameLogic gameLogic;
 
-    public void addKeyHandler(KeyCode keyCode, Runnable runnable) {
-        keyHandlers.put(keyCode, runnable);
-    }
-
-    {
-        addKeyHandler(KeyCode.DOWN, () -> {
+    public InputManager() {
+        keyHandlers.put(KeyCode.DOWN, () -> {
             if (map.getHero() != null) map.getHero().move(Direction.SOUTH);
             gameLogic.refreshAfterKeyPress();
         });
-        addKeyHandler(KeyCode.LEFT, () -> {
+
+        keyHandlers.put(KeyCode.LEFT, () -> {
             if (map.getHero() != null) map.getHero().move(Direction.WEST);
             gameLogic.refreshAfterKeyPress();
         });
-        addKeyHandler(KeyCode.UP, () -> {
+
+        keyHandlers.put(KeyCode.UP, () -> {
             if (map.getHero() != null) map.getHero().move(Direction.NORTH);
             gameLogic.refreshAfterKeyPress();
         });
-        addKeyHandler(KeyCode.RIGHT, () -> {
+
+        keyHandlers.put(KeyCode.RIGHT, () -> {
             if (map.getHero() != null) map.getHero().move(Direction.EAST);
             gameLogic.refreshAfterKeyPress();
         });
-        addKeyHandler(KeyCode.SPACE, () -> gameLogic.nextPhase());
-        addKeyHandler(KeyCode.R, () -> gameLogic.setupLevel());
-        addKeyHandler(KeyCode.Q, () -> gameLogic.quit());
+
+        keyHandlers.put(KeyCode.SPACE, () -> gameLogic.nextPhase());  //TODO GameLogic interface
+        keyHandlers.put(KeyCode.R, () -> gameLogic.setupLevel());
+        keyHandlers.put(KeyCode.Q, () -> gameLogic.quit());
     }
 
     public void setMap(GameMap map) {
@@ -46,7 +46,7 @@ public class InputManager {
         this.gameLogic = gameLogic;
     }
 
-    public  Map<KeyCode, Runnable> getKeyHandlers() {
+    public Map<KeyCode, Runnable> getKeyHandlers() {
         return keyHandlers;
     }
 }
