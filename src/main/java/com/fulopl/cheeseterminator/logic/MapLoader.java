@@ -21,8 +21,6 @@ public class MapLoader {
         int width = scanner.nextInt();
         int height = scanner.nextInt();
 
-        Cheese.reset();   // TODO --> gameLogic.cheeseTotal...
-
         List<String> lines = new ArrayList<>();
         scanner.nextLine();
         GameMap gameMap = new GameMap(width, height);

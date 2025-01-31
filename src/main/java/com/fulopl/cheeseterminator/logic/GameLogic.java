@@ -1,8 +1,11 @@
 package com.fulopl.cheeseterminator.logic;
 
+import com.fulopl.cheeseterminator.model.GameElementType;
 import com.fulopl.cheeseterminator.model.GameMap;
 import com.fulopl.cheeseterminator.model.item.Cheese;
 import com.fulopl.cheeseterminator.ui.UI;
+
+import java.util.Arrays;
 
 public class GameLogic {
     public static final int START_LEVEL = 1;
@@ -12,6 +15,8 @@ public class GameLogic {
     private GameMap map;
     private UI ui;
     private final InputManager inputManager;
+    private int cheeseTotal = 0;  // TODO move to GLogic or GMap?
+    private int cheeseInHole = 0;  // TODO move
 
 
     public GameLogic(UI ui, InputManager inputManager) {
@@ -45,11 +50,24 @@ public class GameLogic {
         ui.setUpStatusDisplay();
         ui.displayLevel("LEVEL " + level);
 
+        countCheeses();
         refreshGameStatus();
     }
 
+    private void countCheeses() {
+        cheeseTotal = 0;
+        cheeseInHole = 0;
+        Arrays.stream(map.getCells())
+                .flatMap(cells -> Arrays.stream(cells)
+                        .filter(cell -> cell.getItem() != null && cell.getItem().getGameElementType() == GameElementType.CHEESE))
+                .forEach(cell -> {
+                    cheeseTotal++;
+                    if (((Cheese) cell.getItem()).isInHole()) cheeseInHole++;
+                });
+    }
+
     private void refreshGameStatus() {
-        ui.displayLevelStatus(Cheese.getCheeseTotal(), Cheese.getCheeseTotal() - Cheese.getCheeseInHole());
+        ui.displayLevelStatus(cheeseTotal, cheeseTotal - cheeseInHole);
     }
 
     public UI getUi() {
@@ -61,12 +79,13 @@ public class GameLogic {
     }
 
     public void refreshAfterKeyPress() {
-        if (Cheese.getCheeseTotal() == Cheese.getCheeseInHole()) {
+        countCheeses();
+        if (cheeseTotal == cheeseInHole) {
             gamePhase = "levelUp";
             ui.displayMessage("Congratulations!\n\nYou have completed LEVEL " + level
                     + "\n\nPress 'SPACE' to proceed!\n ");
         }
-        map.setCellTiles();
+        map.setCellTiles();  //TODO
         ui.refreshGameBoard(map.getCells());
         refreshGameStatus();
     }

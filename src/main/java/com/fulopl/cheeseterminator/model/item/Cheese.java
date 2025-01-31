@@ -6,24 +6,15 @@ import com.fulopl.cheeseterminator.model.player.Direction;
 import com.fulopl.cheeseterminator.ui.Tile;
 
 public class Cheese extends Item {
-    private static int cheeseTotal = 0;
-    private static int cheeseInHole = 0;
 
     private boolean inHole;
 
     public Cheese(GameElementType gameElementType, Cell cell, boolean inHole) {
         super(gameElementType, cell);
-        cheeseTotal++;
         this.inHole = inHole;
         if (inHole) {
-            cheeseInHole++;
-            setTile(Tile.CHEESE_ON_HOLE);
+            tile = Tile.CHEESE_ON_HOLE;
         }
-    }
-
-    public static void reset() {
-        cheeseTotal = 0;
-        cheeseInHole = 0;
     }
 
     public boolean move(Direction direction) {
@@ -33,12 +24,10 @@ public class Cheese extends Item {
             nextCell.setItem(this);
             cell = nextCell;
             if (!inHole && isStructureHole()) {
-                cheeseInHole++;
                 inHole = true;
                 setTile(Tile.CHEESE_ON_HOLE);
             }
             else if (inHole && !isStructureHole()) {
-                cheeseInHole--;
                 inHole = false;
                 setTile(Tile.CHEESE);
             }
@@ -51,12 +40,8 @@ public class Cheese extends Item {
         return cell.getStructure().getGameElementType() == GameElementType.HOLE;
     }
 
-    public static int getCheeseTotal() {
-        return cheeseTotal;
-    }
-
-    public static int getCheeseInHole() {
-        return cheeseInHole;
+    public boolean isInHole() {
+        return inHole;
     }
 
     @Override
