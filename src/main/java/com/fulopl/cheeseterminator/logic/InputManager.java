@@ -34,7 +34,7 @@ public class InputManager {
             gameControl.refreshAfterKeyPress();
         });
 
-        keyHandlers.put(KeyCode.SPACE, () -> gameControl.nextPhase());  //TODO GameControl interface
+        keyHandlers.put(KeyCode.SPACE, () -> gameControl.nextPhase());
         keyHandlers.put(KeyCode.R, () -> gameControl.setupLevel());
         keyHandlers.put(KeyCode.Q, () -> gameControl.quit());
     }
