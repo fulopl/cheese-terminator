@@ -2,6 +2,7 @@ package com.fulopl.cheeseterminator.logic;
 
 import com.fulopl.cheeseterminator.model.GameMap;
 import com.fulopl.cheeseterminator.model.player.Direction;
+import com.fulopl.cheeseterminator.model.player.Hero;
 import javafx.scene.input.KeyCode;
 
 import java.util.HashMap;
@@ -9,27 +10,27 @@ import java.util.Map;
 
 public class InputManager {
     private final Map<KeyCode, Runnable> keyHandlers = new HashMap<>();
-    private GameMap map;   //TODO get Player from gameLogic
+    private Hero hero;   //TODO get Player from gameLogic
     private GameLogic gameLogic;
 
     public InputManager() {
         keyHandlers.put(KeyCode.DOWN, () -> {
-            if (map.getHero() != null) map.getHero().move(Direction.SOUTH);
+            if (hero != null) hero.move(Direction.SOUTH);
             gameLogic.refreshAfterKeyPress();
         });
 
         keyHandlers.put(KeyCode.LEFT, () -> {
-            if (map.getHero() != null) map.getHero().move(Direction.WEST);
+            if (hero != null) hero.move(Direction.WEST);
             gameLogic.refreshAfterKeyPress();
         });
 
         keyHandlers.put(KeyCode.UP, () -> {
-            if (map.getHero() != null) map.getHero().move(Direction.NORTH);
+            if (hero != null) hero.move(Direction.NORTH);
             gameLogic.refreshAfterKeyPress();
         });
 
         keyHandlers.put(KeyCode.RIGHT, () -> {
-            if (map.getHero() != null) map.getHero().move(Direction.EAST);
+            if (hero != null) hero.move(Direction.EAST);
             gameLogic.refreshAfterKeyPress();
         });
 
@@ -38,8 +39,8 @@ public class InputManager {
         keyHandlers.put(KeyCode.Q, () -> gameLogic.quit());
     }
 
-    public void setMap(GameMap map) {
-        this.map = map;
+    public void setHero(Hero hero) {
+        this.hero = hero;
     }
 
     public void setGameLogic(GameLogic gameLogic) {

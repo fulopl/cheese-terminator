@@ -9,6 +9,7 @@ import com.fulopl.cheeseterminator.ui.Tile;
 public class Hero extends GameElement{
     private Cell cell;
 
+
     public Hero(GameElementType gameElementType, Cell cell) {
         super(gameElementType);
         this.cell = cell;
@@ -33,8 +34,8 @@ public class Hero extends GameElement{
 
     private void setDirection(Direction movingDirection) {
         switch (movingDirection) {
-            case WEST -> setTile(Tile.MOUSE_WEST);
-            case SOUTH -> setTile(Tile.MOUSE_SOUTH);
+            case WEST -> tile = Tile.MOUSE_WEST;
+            case SOUTH -> setTile(Tile.MOUSE_SOUTH);  // TODO and so on...
             case EAST -> setTile(Tile.MOUSE_EAST);
             case NORTH -> setTile(Tile.MOUSE_NORTH);
         }
