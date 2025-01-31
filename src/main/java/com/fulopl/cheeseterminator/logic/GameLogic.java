@@ -29,7 +29,7 @@ public class GameLogic implements GameControl {
 
     public void init() {
         ui.initiateMainStage();
-        initMap("/welcome_screen.txt");
+        initMap("/maps/welcome_screen.txt");
         setupScreen("Welcome to Cheese Terminator\n" +
                 "Reborn!\n\n" +
                 "Press SPACE to start the game!\n ");
@@ -49,7 +49,7 @@ public class GameLogic implements GameControl {
 
     @Override
     public void setupLevel() {
-        String filename = "/level_" + level + ".txt";
+        String filename = "/maps/level_" + level + ".txt";
         initMap(filename);
         setupScreen("Push all the cheeses \nto the mouse holes!\n ");
 
@@ -112,7 +112,7 @@ public class GameLogic implements GameControl {
             case "levelUp" -> {
                 if (level == LAST_LEVEL) {
                     gamePhase = "victory";
-                    initMap("/victory.txt");
+                    initMap("/maps/victory.txt");
                     setupScreen("You have won the game!\n\n" +
                             "Press SPACE to exit!\n ");
                 } else {
