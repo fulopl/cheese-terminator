@@ -29,23 +29,28 @@ public class GameLogic {
 
     public void init() {
         ui.initiateMainStage();
-        setupScreen("/welcome.txt", "Welcome to Cheese Terminator\n" +
+        initMap("/welcome_screen.txt");
+        setupScreen("Welcome to Cheese Terminator\n" +
                 "Reborn!\n\n" +
                 "Press SPACE to start the game!\n ");
     }
 
-    public void setupScreen(String fileName, String message) {
+    public void initMap(String fileName) {
         map = MapLoader.createGameMapFromFile(fileName);
+        inputManager.setHero(map.getHero());
+    }
+
+    public void setupScreen(String message) {
         ui.setUpScreen(map.getMapWidth(), map.getMapHeight());
         ui.refreshGameBoard(map.getCells());
-        inputManager.setMap(map);
         ui.setOnKeyPressed(inputManager.getKeyHandlers());
         ui.displayMessage(message);
     }
 
     public void setupLevel() {
         String filename = "/level_" + level + ".txt";
-        setupScreen(filename, "Push all the cheeses \nto the mouse holes!\n ");
+        initMap(filename);
+        setupScreen("Push all the cheeses \nto the mouse holes!\n ");
 
         ui.setUpStatusDisplay();
         ui.displayLevel("LEVEL " + level);
@@ -104,7 +109,8 @@ public class GameLogic {
             case "levelUp" -> {
                 if (level == LAST_LEVEL) {
                     gamePhase = "victory";
-                    setupScreen("/victory.txt", "You have won the game!\n\n" +
+                    initMap("/victory.txt");
+                    setupScreen("You have won the game!\n\n" +
                             "Press SPACE to exit!\n ");
                 } else {
                     gamePhase = "level";
