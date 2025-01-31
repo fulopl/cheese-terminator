@@ -10,41 +10,41 @@ import java.util.Map;
 
 public class InputManager {
     private final Map<KeyCode, Runnable> keyHandlers = new HashMap<>();
-    private Hero hero;   //TODO get Player from gameLogic
-    private GameLogic gameLogic;
+    private Hero hero;
+    private GameControl gameControl;
 
     public InputManager() {
         keyHandlers.put(KeyCode.DOWN, () -> {
             if (hero != null) hero.move(Direction.SOUTH);
-            gameLogic.refreshAfterKeyPress();
+            gameControl.refreshAfterKeyPress();
         });
 
         keyHandlers.put(KeyCode.LEFT, () -> {
             if (hero != null) hero.move(Direction.WEST);
-            gameLogic.refreshAfterKeyPress();
+            gameControl.refreshAfterKeyPress();
         });
 
         keyHandlers.put(KeyCode.UP, () -> {
             if (hero != null) hero.move(Direction.NORTH);
-            gameLogic.refreshAfterKeyPress();
+            gameControl.refreshAfterKeyPress();
         });
 
         keyHandlers.put(KeyCode.RIGHT, () -> {
             if (hero != null) hero.move(Direction.EAST);
-            gameLogic.refreshAfterKeyPress();
+            gameControl.refreshAfterKeyPress();
         });
 
-        keyHandlers.put(KeyCode.SPACE, () -> gameLogic.nextPhase());  //TODO GameLogic interface
-        keyHandlers.put(KeyCode.R, () -> gameLogic.setupLevel());
-        keyHandlers.put(KeyCode.Q, () -> gameLogic.quit());
+        keyHandlers.put(KeyCode.SPACE, () -> gameControl.nextPhase());  //TODO GameControl interface
+        keyHandlers.put(KeyCode.R, () -> gameControl.setupLevel());
+        keyHandlers.put(KeyCode.Q, () -> gameControl.quit());
     }
 
     public void setHero(Hero hero) {
         this.hero = hero;
     }
 
-    public void setGameLogic(GameLogic gameLogic) {
-        this.gameLogic = gameLogic;
+    public void setGameControl(GameControl gameControl) {
+        this.gameControl = gameControl;
     }
 
     public Map<KeyCode, Runnable> getKeyHandlers() {

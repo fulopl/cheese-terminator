@@ -7,7 +7,7 @@ import com.fulopl.cheeseterminator.ui.UI;
 
 import java.util.Arrays;
 
-public class GameLogic {
+public class GameLogic implements GameControl {
     public static final int START_LEVEL = 1;
     public static final int LAST_LEVEL = 5;
     private int level;
@@ -15,8 +15,8 @@ public class GameLogic {
     private GameMap map;
     private UI ui;
     private final InputManager inputManager;
-    private int cheeseTotal = 0;  // TODO move to GLogic or GMap?
-    private int cheeseInHole = 0;  // TODO move
+    private int cheeseTotal = 0;
+    private int cheeseInHole = 0;
 
 
     public GameLogic(UI ui, InputManager inputManager) {
@@ -24,7 +24,7 @@ public class GameLogic {
         gamePhase = "welcome";
         this.ui = ui;
         this.inputManager = inputManager;
-        inputManager.setGameLogic(this);
+        inputManager.setGameControl(this);
     }
 
     public void init() {
@@ -47,6 +47,7 @@ public class GameLogic {
         ui.displayMessage(message);
     }
 
+    @Override
     public void setupLevel() {
         String filename = "/level_" + level + ".txt";
         initMap(filename);
@@ -83,6 +84,7 @@ public class GameLogic {
         this.ui = ui;
     }
 
+    @Override
     public void refreshAfterKeyPress() {
         countCheeses();
         if (cheeseTotal == cheeseInHole) {
@@ -90,7 +92,7 @@ public class GameLogic {
             ui.displayMessage("Congratulations!\n\nYou have completed LEVEL " + level
                     + "\n\nPress 'SPACE' to proceed!\n ");
         }
-        map.setCellTiles();  //TODO
+        map.setCellTiles();
         ui.refreshGameBoard(map.getCells());
         refreshGameStatus();
     }
@@ -100,6 +102,7 @@ public class GameLogic {
         setupLevel();
     }
 
+    @Override
     public void nextPhase() {
         switch (gamePhase) {
             case "welcome" -> {
@@ -121,6 +124,7 @@ public class GameLogic {
         }
     }
 
+    @Override
     public void quit() {
         System.out.println("See ya soon!");
         System.exit(0);
