@@ -6,7 +6,7 @@ import com.fulopl.cheeseterminator.model.GameElementType;
 import com.fulopl.cheeseterminator.model.item.Item;
 import com.fulopl.cheeseterminator.ui.Tile;
 
-public class Hero extends GameElement{
+public class Hero extends GameElement {
     private Cell cell;
 
     public Hero(GameElementType gameElementType, Cell cell) {
@@ -33,10 +33,10 @@ public class Hero extends GameElement{
 
     private void setDirection(Direction movingDirection) {
         switch (movingDirection) {
-            case WEST -> setTile(Tile.MOUSE_WEST);
-            case SOUTH -> setTile(Tile.MOUSE_SOUTH);
-            case EAST -> setTile(Tile.MOUSE_EAST);
-            case NORTH -> setTile(Tile.MOUSE_NORTH);
+            case WEST -> tile = Tile.MOUSE_WEST;
+            case SOUTH -> tile = Tile.MOUSE_SOUTH;
+            case EAST -> tile = Tile.MOUSE_EAST;
+            case NORTH -> tile = Tile.MOUSE_NORTH;
         }
     }
 }

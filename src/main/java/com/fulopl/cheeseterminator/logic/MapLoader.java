@@ -6,14 +6,12 @@ import com.fulopl.cheeseterminator.model.GameElementType;
 import com.fulopl.cheeseterminator.model.GameMap;
 import com.fulopl.cheeseterminator.model.item.Cheese;
 import com.fulopl.cheeseterminator.model.player.Hero;
-import com.fulopl.cheeseterminator.ui.Tile;
 
 import java.io.InputStream;
 import java.util.*;
 
 public class MapLoader {
 
-    public static final Tile DEFAULT_TILE = Tile.FLOOR;
     public static final GameElementType DEFAULT_GAME_ELEMENT_TYPE = GameElementType.FLOOR;
 
     public static GameMap createGameMapFromFile(String fileName) {
@@ -22,11 +20,9 @@ public class MapLoader {
         int width = scanner.nextInt();
         int height = scanner.nextInt();
 
-        Cheese.reset();
-
         List<String> lines = new ArrayList<>();
         scanner.nextLine();
-        GameMap gameMap = new GameMap(width, height, DEFAULT_TILE);
+        GameMap gameMap = new GameMap(width, height);
 
         for (int y = 0; y < height; y++) {
             String line = scanner.nextLine();

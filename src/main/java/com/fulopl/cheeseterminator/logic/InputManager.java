@@ -1,7 +1,7 @@
 package com.fulopl.cheeseterminator.logic;
 
-import com.fulopl.cheeseterminator.model.GameMap;
 import com.fulopl.cheeseterminator.model.player.Direction;
+import com.fulopl.cheeseterminator.model.player.Hero;
 import javafx.scene.input.KeyCode;
 
 import java.util.HashMap;
@@ -9,44 +9,44 @@ import java.util.Map;
 
 public class InputManager {
     private final Map<KeyCode, Runnable> keyHandlers = new HashMap<>();
-    private GameMap map;
-    private GameLogic gameLogic;
+    private Hero hero;
+    private GameControl gameControl;
 
-    public void addKeyHandler(KeyCode keyCode, Runnable runnable) {
-        keyHandlers.put(keyCode, runnable);
+    public InputManager() {
+        keyHandlers.put(KeyCode.DOWN, () -> {
+            if (hero != null) hero.move(Direction.SOUTH);
+            gameControl.refreshAfterKeyPress();
+        });
+
+        keyHandlers.put(KeyCode.LEFT, () -> {
+            if (hero != null) hero.move(Direction.WEST);
+            gameControl.refreshAfterKeyPress();
+        });
+
+        keyHandlers.put(KeyCode.UP, () -> {
+            if (hero != null) hero.move(Direction.NORTH);
+            gameControl.refreshAfterKeyPress();
+        });
+
+        keyHandlers.put(KeyCode.RIGHT, () -> {
+            if (hero != null) hero.move(Direction.EAST);
+            gameControl.refreshAfterKeyPress();
+        });
+
+        keyHandlers.put(KeyCode.SPACE, () -> gameControl.nextPhase());
+        keyHandlers.put(KeyCode.R, () -> gameControl.setupLevel());
+        keyHandlers.put(KeyCode.Q, () -> gameControl.quit());
     }
 
-    {
-        addKeyHandler(KeyCode.DOWN, () -> {
-            if (map.getHero() != null) map.getHero().move(Direction.SOUTH);
-            gameLogic.refreshAfterKeyPress();
-        });
-        addKeyHandler(KeyCode.LEFT, () -> {
-            if (map.getHero() != null) map.getHero().move(Direction.WEST);
-            gameLogic.refreshAfterKeyPress();
-        });
-        addKeyHandler(KeyCode.UP, () -> {
-            if (map.getHero() != null) map.getHero().move(Direction.NORTH);
-            gameLogic.refreshAfterKeyPress();
-        });
-        addKeyHandler(KeyCode.RIGHT, () -> {
-            if (map.getHero() != null) map.getHero().move(Direction.EAST);
-            gameLogic.refreshAfterKeyPress();
-        });
-        addKeyHandler(KeyCode.SPACE, () -> gameLogic.nextPhase());
-        addKeyHandler(KeyCode.R, () -> gameLogic.setupLevel());
-        addKeyHandler(KeyCode.Q, () -> gameLogic.quit());
+    public void setHero(Hero hero) {
+        this.hero = hero;
     }
 
-    public void setMap(GameMap map) {
-        this.map = map;
+    public void setGameControl(GameControl gameControl) {
+        this.gameControl = gameControl;
     }
 
-    public void setGameLogic(GameLogic gameLogic) {
-        this.gameLogic = gameLogic;
-    }
-
-    public  Map<KeyCode, Runnable> getKeyHandlers() {
+    public Map<KeyCode, Runnable> getKeyHandlers() {
         return keyHandlers;
     }
 }
