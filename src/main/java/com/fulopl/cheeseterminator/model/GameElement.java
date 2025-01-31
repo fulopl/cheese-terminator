@@ -4,7 +4,7 @@ import com.fulopl.cheeseterminator.ui.Tile;
 
 public class GameElement implements Drawable{
     private boolean passable;
-    private Tile tile;
+    protected Tile tile;
     private final GameElementType gameElementType;
 
     public GameElement(GameElementType gameElementType) {
