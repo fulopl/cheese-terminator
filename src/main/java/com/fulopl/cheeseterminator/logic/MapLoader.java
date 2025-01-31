@@ -6,7 +6,6 @@ import com.fulopl.cheeseterminator.model.GameElementType;
 import com.fulopl.cheeseterminator.model.GameMap;
 import com.fulopl.cheeseterminator.model.item.Cheese;
 import com.fulopl.cheeseterminator.model.player.Hero;
-import com.fulopl.cheeseterminator.ui.Tile;
 
 import java.io.InputStream;
 import java.util.*;

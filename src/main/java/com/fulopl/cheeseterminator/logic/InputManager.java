@@ -1,6 +1,5 @@
 package com.fulopl.cheeseterminator.logic;
 
-import com.fulopl.cheeseterminator.model.GameMap;
 import com.fulopl.cheeseterminator.model.player.Direction;
 import com.fulopl.cheeseterminator.model.player.Hero;
 import javafx.scene.input.KeyCode;

@@ -9,7 +9,6 @@ import com.fulopl.cheeseterminator.ui.Tile;
 public class Hero extends GameElement {
     private Cell cell;
 
-
     public Hero(GameElementType gameElementType, Cell cell) {
         super(gameElementType);
         this.cell = cell;
