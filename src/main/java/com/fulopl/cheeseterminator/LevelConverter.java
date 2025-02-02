@@ -1,23 +1,37 @@
-package com.fulopl.cheeseterminator.logic;
+package com.fulopl.cheeseterminator;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-public class LevelDecoder {
-    public static void main(String[] args) {
+public class LevelConverter {
+    public static void main(String[] args) throws IOException {
         System.out.println(Arrays.stream(CODE_OF_LEVELS).map(row -> (Arrays.stream(row).count())).collect(Collectors.toList()));
-        createLevelTxtFile(1);
+        createLevelTxtFile(1, 50);
     }
 
-    private static void createLevelTxtFile(int level) {
-        String mapString = createMapString(level);
-        System.out.println(mapString);
+    private static void createLevelTxtFile(int levelStart, int levelEnd) throws IOException {
+        for (int level = levelStart; level <= levelEnd; level++) {
+            String mapString = createMapString(level);
+            System.out.println(mapString);
+            writeToFile(mapString, level);
+        }
+    }
+
+    private static void writeToFile(String mapString, int level) throws IOException {
+        String file = "level_" + level + ".txt";
+        BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+        writer.write(mapString);
+        writer.close();
     }
 
     private static String createMapString(int level) {
-        String mapString = "";
         int width = CODE_OF_LEVELS[level - 1][0];
         int[] levelArray = Arrays.copyOfRange(CODE_OF_LEVELS[level - 1], 1, CODE_OF_LEVELS[level - 1].length);
+        int height = levelArray.length / width;
+        String mapString = String.format("%d %d %n", width, height);
         for (int i = 0; i < levelArray.length; i++) {
             switch (levelArray[i]) {
                 case 0 -> mapString += "#";
