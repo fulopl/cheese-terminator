@@ -22,9 +22,13 @@
 
 ## What is Cheese Terminator Reborn?
 
-CTR is a sokoban-type logical game, developed in Java using JavaFX for graphics.<br/>
-It's tribute remake of an old windows game 'Cheese Terminator' developed by Zsolt Krajcsik.<br/>
-I also intended this game to be a basis for more complex dungeon games.
+Cheese Terminator Reborn is a remake of an old Windows 3.1 game 'Cheese Terminator' developed by Zsolt Krajcsik in 1992.<br/>
+The original game was distributed for free in Hungary and Poland to Win 3.1 users who completed a Microsoft survey.</br>
+</br>
+It is a sokoban-type logical game, developed in Java using JavaFX for graphics.<br/>
+I used sprites from the original game, and was lucky to find the code for all the original 50 levels.<br/>
+
+During development, I tried to create an architecture that makes it suitable to be the basis for more complex logic or dungeon-like games.
 
 
 ## Built with
@@ -38,23 +42,25 @@ I also intended this game to be a basis for more complex dungeon games.
   
 ## Description
 
-In this sokoban-like game players are to push every cheese to the mouse holes avoiding deadlocks.<br/> Once all cheeses are in the holes players proceed to the next level. The aim of the game is to complete all the levels.
+In this sokoban-like game players are to push every cheese to the mouse holes avoiding deadlocks.<br/> Once all cheeses are in the holes players proceed to the next level. The aim of the game is to complete all the 50 levels.
 
 ![lvl_1.png](./images/level3_2.png)
 
 ## Main features
 
 - JavaFX UI
-- Classic dungeon crawl tiles (32*32)
 - Mouse movement control by keyboard
-- Retry level and quit
+- Level retry and quit option
 - Game status display on status pane
 - Welcome and victory screens
-- New 32*32 px tiles, direction sensitive heading of the mouse
+- Original 32*32 px tiles, direction sensitive heading of the mouse
+- Tail movement animation (TODO)
 - Undo last move (TODO)
+- Steps/time counter (TODO)
 - Postgres Database and Spring Data JPA introduction for saving game data (TODO)
-- Users handling - Hall of fame (TODO) 
+- Users handling - Hall of fame, level records (TODO) 
 - Saving game state (TODO)
+- Level training (TODO)
 
 ![lvl_2.png](./images/level2_2.png)
 
