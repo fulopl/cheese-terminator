@@ -1,0 +1,13 @@
+10 12 
+##########
+#hhc.c.xh#
+#hx.c.chh#
+##hc.c.x##
+##x.c.ch##
+##hc.c.h##
+##h.c.ch##
+##hc@c.x##
+##x.c.ch##
+#hhc.c.xh#
+#hx.c.chh#
+##########
