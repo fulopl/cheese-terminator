@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class GameLogic implements GameControl {
     public final int START_LEVEL = 1;
-    public final int LAST_LEVEL = 5;
+    public final int LAST_LEVEL = 50;
     private int level;
     private String gamePhase;
     private GameMap map;
