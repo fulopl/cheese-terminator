@@ -8,15 +8,16 @@ import com.fulopl.cheeseterminator.ui.Tile;
 
 public class Hero extends GameElement {
     private Cell cell;
+    private int tailPosition;
 
     public Hero(GameElementType gameElementType, Cell cell) {
         super(gameElementType);
         this.cell = cell;
+        tailPosition = 0;
     }
 
     public void move(Direction movingDirection) {
         Cell nextCell = cell.getNeighbor(movingDirection.getDx(), movingDirection.getDy());
-        setDirection(movingDirection);
         Item item = nextCell.getItem();
         boolean allowToMove = true;
         if (item != null) {
@@ -24,6 +25,8 @@ public class Hero extends GameElement {
         }
         if (allowToMove) {
             if (nextCell.isPassable()) {
+                setNextTailPosition();
+                setTile(movingDirection);
                 cell.setHero(null);
                 nextCell.setHero(this);
                 cell = nextCell;
@@ -31,12 +34,17 @@ public class Hero extends GameElement {
         }
     }
 
-    private void setDirection(Direction movingDirection) {
+    private void setTile(Direction movingDirection) {
         switch (movingDirection) {
-            case WEST -> tile = Tile.MOUSE_WEST;
-            case SOUTH -> tile = Tile.MOUSE_SOUTH;
-            case EAST -> tile = Tile.MOUSE_EAST;
-            case NORTH -> tile = Tile.MOUSE_NORTH;
+            case WEST -> tile = tailPosition == 1 ? Tile.MOUSE_WEST_TL : Tile.MOUSE_WEST_TR;
+            case SOUTH -> tile = tailPosition == 1 ? Tile.MOUSE_SOUTH_TL : Tile.MOUSE_SOUTH_TR;
+            case EAST -> tile = tailPosition == 1 ? Tile.MOUSE_EAST_TL : Tile.MOUSE_EAST_TR;
+            case NORTH -> tile = tailPosition == 1 ? Tile.MOUSE_NORTH_TL : Tile.MOUSE_NORTH_TR;
         }
+    }
+
+    private void setNextTailPosition() {
+        if (tailPosition == 1) tailPosition = 0;
+        else tailPosition = 1;
     }
 }
