@@ -23,12 +23,6 @@ public enum Tile {
     MOUSE_WEST( 14, 32),
     MOUSE_WEST_TL( 15, 32),
     MOUSE_WEST_TR( 16, 32),
-//    EMPTY( 0, 0),
-//    FLOOR(2, 0),
-//    HOLE( 23, 25),
-//    WALL( 10, 17),
-//    CHEESE( 18, 28),
-//    MOUSE( 31, 8),
     N0(19,29),
     N1(20,29),
     N2(21,29),
@@ -74,7 +68,7 @@ public enum Tile {
     private final int y;
 
     public static final int TILE_WIDTH = 32;
-    private static final Image tileSet = new Image("/tiles_ext2.png", 1086, 1120, true, false);
+    private static final Image tileSet = new Image("/tiles.png", 1086, 1120, true, false);
 
     Tile(int columnIndex, int rowIndex) {
         this.columnIndex = columnIndex;

@@ -9,7 +9,7 @@ import java.util.Arrays;
 
 public class GameLogic implements GameControl {
     public final int START_LEVEL = 1;
-    public final int LAST_LEVEL = 50;
+    public final int LAST_LEVEL = 2;
     private int level;
     private String gamePhase;
     private GameMap map;
@@ -89,17 +89,13 @@ public class GameLogic implements GameControl {
         countCheeses();
         if (cheeseTotal == cheeseInHole) {
             gamePhase = "levelUp";
-            ui.displayMessage("Congratulations!\n\nYou have completed LEVEL " + level
+            initMap("/maps/levelup.txt");
+            setupScreen("Congratulations!\n\nYou have completed LEVEL " + level
                     + "\n\nPress 'SPACE' to proceed!\n ");
         }
         map.setCellTiles();
         ui.refreshGameBoard(map.getCells());
         refreshGameStatus();
-    }
-
-    private void nextLevel() {
-        level++;
-        setupLevel();
     }
 
     @Override
@@ -117,7 +113,8 @@ public class GameLogic implements GameControl {
                             "Press SPACE to exit!\n ");
                 } else {
                     gamePhase = "level";
-                    nextLevel();
+                    level++;
+                    setupLevel();
                 }
             }
             case "victory" -> quit();

@@ -1,0 +1,12 @@
+25 11
+x...x...x...x...x...x...x
+.                       .
+.                       .
+x    LEVEL COMPLETE!    x
+.                       .
+.      PRESS SPACE      .
+.      TO PROCEED!      .
+x                       x
+.                       .
+.                       .
+x...x...x...x...x...x...x
