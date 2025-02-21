@@ -1,12 +1,12 @@
 25 11
-#########################
-#                       #
-#                       #
-#    LEVEL COMPLETE!    #
-#                       #
-#      PRESS SPACE      #
-#      TO PROCEED!      #
-#                       #
-#         c x c         #
-#                       #
-#########################
+x...x...x...x...x...x...x
+.                       .
+.                       .
+x    LEVEL COMPLETE!    x
+.                       .
+.      PRESS SPACE      .
+.      TO PROCEED!      .
+x                       x
+.                       .
+.                       .
+x...x...x...x...x...x...x
