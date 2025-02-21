@@ -74,7 +74,7 @@ public enum Tile {
     private final int y;
 
     public static final int TILE_WIDTH = 32;
-    private static final Image tileSet = new Image("/tiles_ext2.png", 1086, 1120, true, false);
+    private static final Image tileSet = new Image("/tiles.png", 1086, 1120, true, false);
 
     Tile(int columnIndex, int rowIndex) {
         this.columnIndex = columnIndex;
