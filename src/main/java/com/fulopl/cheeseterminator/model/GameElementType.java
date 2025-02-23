@@ -9,6 +9,7 @@ public enum GameElementType {
     WALL(false, Role.STRUCTURE, '#', Tile.WALL),
     CHEESE(false, Role.ITEM, 'c', Tile.CHEESE),
     CHEESE_ON_HOLE(false, null, 'x', Tile.CHEESE_ON_HOLE),
+    HEART(false,Role.STRUCTURE,'d', Tile.HEART),   // 'd' as dummy
     MOUSE(false, Role.HERO, '@', Tile.MOUSE_WEST),
     N0(false, null, '0', Tile.N0),
     N1(false, null, '1', Tile.N1),
