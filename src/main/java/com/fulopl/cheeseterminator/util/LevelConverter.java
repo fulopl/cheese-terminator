@@ -1,4 +1,4 @@
-package com.fulopl.cheeseterminator;
+package com.fulopl.cheeseterminator.util;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
