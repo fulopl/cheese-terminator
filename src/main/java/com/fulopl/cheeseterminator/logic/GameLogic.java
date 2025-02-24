@@ -1,5 +1,6 @@
 package com.fulopl.cheeseterminator.logic;
 
+import com.fulopl.cheeseterminator.model.GameElement;
 import com.fulopl.cheeseterminator.model.GameElementType;
 import com.fulopl.cheeseterminator.model.GameMap;
 import com.fulopl.cheeseterminator.model.item.Cheese;
@@ -8,19 +9,20 @@ import com.fulopl.cheeseterminator.ui.UI;
 import java.util.Arrays;
 
 public class GameLogic implements GameControl {
+    private static final int STARTING_NUMBER_OF_LIVES = 3;
     public final int START_LEVEL = 1;
-    public final int LAST_LEVEL = 2;
+    public final int LAST_LEVEL = 50;
     private int level;
+    private int lives;
     private String gamePhase;
     private GameMap map;
     private UI ui;
     private final InputManager inputManager;
-    private int cheeseTotal = 0;
+    private int cheeseTotal = 1;
     private int cheeseInHole = 0;
 
 
     public GameLogic(UI ui, InputManager inputManager) {
-        level = START_LEVEL;
         gamePhase = "welcome";
         this.ui = ui;
         this.inputManager = inputManager;
@@ -51,6 +53,7 @@ public class GameLogic implements GameControl {
     public void setupLevel() {
         String filename = "/maps/level_" + level + ".txt";
         initMap(filename);
+        setHearts();
         setupScreen("Push all the cheeses \nto the mouse holes!\n ");
 
         ui.setUpStatusDisplay();
@@ -58,6 +61,17 @@ public class GameLogic implements GameControl {
 
         countCheeses();
         refreshGameStatus();
+    }
+
+    private void setHearts() {
+        for (int i = 1; i <= 3; i++) {
+            if (lives >= i) {
+                map.getCell(i - 1, 0).setStructure(new GameElement(GameElementType.HEART));
+            } else {
+                map.getCell(i - 1, 0).setStructure(new GameElement(GameElementType.WALL));
+            }
+        }
+        map.setCellTiles();
     }
 
     private void countCheeses() {
@@ -85,14 +99,23 @@ public class GameLogic implements GameControl {
     }
 
     @Override
-    public void refreshAfterKeyPress() {
-        countCheeses();
+    public void checkLevelWin() {
         if (cheeseTotal == cheeseInHole) {
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
             gamePhase = "levelUp";
             initMap("/maps/levelup.txt");
             setupScreen("Congratulations!\n\nYou have completed LEVEL " + level
                     + "\n\nPress 'SPACE' to proceed!\n ");
         }
+    }
+
+    @Override
+    public void refreshAfterKeyPress() {
+        countCheeses();
         map.setCellTiles();
         ui.refreshGameBoard(map.getCells());
         refreshGameStatus();
@@ -103,6 +126,7 @@ public class GameLogic implements GameControl {
         switch (gamePhase) {
             case "welcome" -> {
                 gamePhase = "level";
+                startNewGame();
                 setupLevel();
             }
             case "levelUp" -> {
@@ -119,6 +143,11 @@ public class GameLogic implements GameControl {
             }
             case "victory" -> quit();
         }
+    }
+
+    private void startNewGame() {
+        level = START_LEVEL;
+        lives = STARTING_NUMBER_OF_LIVES;
     }
 
     @Override
