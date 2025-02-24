@@ -8,4 +8,6 @@ public interface GameControl {
     void setupLevel();
 
     void quit();
+
+    void checkLevelVictory();
 }

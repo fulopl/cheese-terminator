@@ -99,7 +99,7 @@ public class GameLogic implements GameControl {
     }
 
     @Override
-    public void checkLevelWin() {
+    public void checkLevelVictory() {
         if (cheeseTotal == cheeseInHole) {
 //            try {
 //                Thread.sleep(1000);
