@@ -5,9 +5,9 @@ public interface GameControl {
 
     void nextPhase();
 
-    void setupLevel();
-
     void quit();
 
     void checkLevelVictory();
+
+    void retryLevel();
 }

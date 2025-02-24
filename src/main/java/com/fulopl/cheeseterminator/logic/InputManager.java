@@ -38,7 +38,7 @@ public class InputManager {
         });
 
         keyHandlers.put(KeyCode.SPACE, () -> gameControl.nextPhase());
-        keyHandlers.put(KeyCode.R, () -> gameControl.setupLevel());
+        keyHandlers.put(KeyCode.R, () -> gameControl.retryLevel());
         keyHandlers.put(KeyCode.Q, () -> gameControl.quit());
     }
 

@@ -49,7 +49,6 @@ public class GameLogic implements GameControl {
         ui.displayMessage(message);
     }
 
-    @Override
     public void setupLevel() {
         String filename = "/maps/level_" + level + ".txt";
         initMap(filename);
@@ -96,6 +95,16 @@ public class GameLogic implements GameControl {
 
     public void setUi(UI ui) {
         this.ui = ui;
+    }
+
+    @Override
+    public void retryLevel() {
+        if (--lives < 0) gameOver();
+        else setupLevel();
+    }
+
+    private void gameOver() {
+        quit();
     }
 
     @Override
