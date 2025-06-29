@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class GameLogic implements GameControl {
     private static final int STARTING_NUMBER_OF_LIVES = 3;
-    public final int START_LEVEL = 1;
+    public final int START_LEVEL = 33;
     public final int LAST_LEVEL = 50;
     private int level;
     private int lives;
@@ -99,17 +99,24 @@ public class GameLogic implements GameControl {
 
     @Override
     public void retryLevel() {
-        if (--lives < 0) gameOver();
-        else setupLevel();
+        if (gamePhase.equals("level")) {
+            if (--lives < 0) gameOver();
+            else setupLevel();
+        }
     }
 
     private void gameOver() {
-        quit();
+        gamePhase = "gameover";
+        initMap("/maps/gameover.txt");
+        setupScreen("You have no more lives!\n\n" +
+                "Game over!\n\n" +
+                "Press 'SPACE' to start\n" +
+                " a new game!\n ");
     }
 
     @Override
     public void checkLevelVictory() {
-        if (cheeseTotal == cheeseInHole) {
+        if (gamePhase.equals("level") && cheeseTotal == cheeseInHole) {
 //            try {
 //                Thread.sleep(1000);
 //            } catch (InterruptedException e) {
@@ -133,10 +140,9 @@ public class GameLogic implements GameControl {
     @Override
     public void nextPhase() {
         switch (gamePhase) {
-            case "welcome" -> {
+            case "welcome", "gameover" -> {
                 gamePhase = "level";
                 startNewGame();
-                setupLevel();
             }
             case "levelUp" -> {
                 if (level == LAST_LEVEL) {
@@ -157,6 +163,7 @@ public class GameLogic implements GameControl {
     private void startNewGame() {
         level = START_LEVEL;
         lives = STARTING_NUMBER_OF_LIVES;
+        setupLevel();
     }
 
     @Override
