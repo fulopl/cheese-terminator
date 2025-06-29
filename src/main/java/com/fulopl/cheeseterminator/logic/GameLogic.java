@@ -1,5 +1,6 @@
 package com.fulopl.cheeseterminator.logic;
 
+import com.fulopl.cheeseterminator.model.GameElement;
 import com.fulopl.cheeseterminator.model.GameElementType;
 import com.fulopl.cheeseterminator.model.GameMap;
 import com.fulopl.cheeseterminator.model.item.Cheese;
@@ -8,19 +9,20 @@ import com.fulopl.cheeseterminator.ui.UI;
 import java.util.Arrays;
 
 public class GameLogic implements GameControl {
-    public final int START_LEVEL = 1;
-    public final int LAST_LEVEL = 2;
+    private static final int STARTING_NUMBER_OF_LIVES = 3;
+    public final int START_LEVEL = 33;
+    public final int LAST_LEVEL = 50;
     private int level;
+    private int lives;
     private String gamePhase;
     private GameMap map;
     private UI ui;
     private final InputManager inputManager;
-    private int cheeseTotal = 0;
+    private int cheeseTotal = 1;
     private int cheeseInHole = 0;
 
 
     public GameLogic(UI ui, InputManager inputManager) {
-        level = START_LEVEL;
         gamePhase = "welcome";
         this.ui = ui;
         this.inputManager = inputManager;
@@ -47,10 +49,10 @@ public class GameLogic implements GameControl {
         ui.displayMessage(message);
     }
 
-    @Override
     public void setupLevel() {
         String filename = "/maps/level_" + level + ".txt";
         initMap(filename);
+        setHearts();
         setupScreen("Push all the cheeses \nto the mouse holes!\n ");
 
         ui.setUpStatusDisplay();
@@ -58,6 +60,17 @@ public class GameLogic implements GameControl {
 
         countCheeses();
         refreshGameStatus();
+    }
+
+    private void setHearts() {
+        for (int i = 1; i <= 3; i++) {
+            if (lives >= i) {
+                map.getCell(i - 1, 0).setStructure(new GameElement(GameElementType.HEART));
+            } else {
+                map.getCell(i - 1, 0).setStructure(new GameElement(GameElementType.WALL));
+            }
+        }
+        map.setCellTiles();
     }
 
     private void countCheeses() {
@@ -85,14 +98,40 @@ public class GameLogic implements GameControl {
     }
 
     @Override
-    public void refreshAfterKeyPress() {
-        countCheeses();
-        if (cheeseTotal == cheeseInHole) {
+    public void retryLevel() {
+        if (gamePhase.equals("level")) {
+            if (--lives < 0) gameOver();
+            else setupLevel();
+        }
+    }
+
+    private void gameOver() {
+        gamePhase = "gameover";
+        initMap("/maps/gameover.txt");
+        setupScreen("You have no more lives!\n\n" +
+                "Game over!\n\n" +
+                "Press 'SPACE' to start\n" +
+                " a new game!\n ");
+    }
+
+    @Override
+    public void checkLevelVictory() {
+        if (gamePhase.equals("level") && cheeseTotal == cheeseInHole) {
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
             gamePhase = "levelUp";
             initMap("/maps/levelup.txt");
             setupScreen("Congratulations!\n\nYou have completed LEVEL " + level
                     + "\n\nPress 'SPACE' to proceed!\n ");
         }
+    }
+
+    @Override
+    public void refreshAfterKeyPress() {
+        countCheeses();
         map.setCellTiles();
         ui.refreshGameBoard(map.getCells());
         refreshGameStatus();
@@ -101,9 +140,9 @@ public class GameLogic implements GameControl {
     @Override
     public void nextPhase() {
         switch (gamePhase) {
-            case "welcome" -> {
+            case "welcome", "gameover" -> {
                 gamePhase = "level";
-                setupLevel();
+                startNewGame();
             }
             case "levelUp" -> {
                 if (level == LAST_LEVEL) {
@@ -119,6 +158,12 @@ public class GameLogic implements GameControl {
             }
             case "victory" -> quit();
         }
+    }
+
+    private void startNewGame() {
+        level = START_LEVEL;
+        lives = STARTING_NUMBER_OF_LIVES;
+        setupLevel();
     }
 
     @Override

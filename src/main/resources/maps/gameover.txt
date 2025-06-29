@@ -1,0 +1,12 @@
+25 11
+x...x...x...x...x...x...x
+.                       .
+.     NO MORE LIVES!    .
+x                       x
+.       GAME OVER       .
+.                       .
+.      PRESS SPACE      .
+x      TO START A       x
+.       NEW GAME!       .
+.                       .
+x...x...x...x...x...x...x

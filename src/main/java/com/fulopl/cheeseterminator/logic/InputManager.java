@@ -14,27 +14,31 @@ public class InputManager {
 
     public InputManager() {
         keyHandlers.put(KeyCode.DOWN, () -> {
+            gameControl.checkLevelVictory();
             if (hero != null) hero.move(Direction.SOUTH);
             gameControl.refreshAfterKeyPress();
         });
 
         keyHandlers.put(KeyCode.LEFT, () -> {
+            gameControl.checkLevelVictory();
             if (hero != null) hero.move(Direction.WEST);
             gameControl.refreshAfterKeyPress();
         });
 
         keyHandlers.put(KeyCode.UP, () -> {
+            gameControl.checkLevelVictory();
             if (hero != null) hero.move(Direction.NORTH);
             gameControl.refreshAfterKeyPress();
         });
 
         keyHandlers.put(KeyCode.RIGHT, () -> {
+            gameControl.checkLevelVictory();
             if (hero != null) hero.move(Direction.EAST);
             gameControl.refreshAfterKeyPress();
         });
 
         keyHandlers.put(KeyCode.SPACE, () -> gameControl.nextPhase());
-        keyHandlers.put(KeyCode.R, () -> gameControl.setupLevel());
+        keyHandlers.put(KeyCode.R, () -> gameControl.retryLevel());
         keyHandlers.put(KeyCode.Q, () -> gameControl.quit());
     }
 
