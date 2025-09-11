@@ -9,6 +9,8 @@ import com.fulopl.cheeseterminator.ui.Tile;
 public class Hero extends GameElement {
     private Cell cell;
     private int tailPosition;
+    private Direction lastDirection;
+    private Item itemMovedInLastStep;
 
     public Hero(GameElementType gameElementType, Cell cell) {
         super(gameElementType);
@@ -25,13 +27,19 @@ public class Hero extends GameElement {
         }
         if (allowToMove) {
             if (nextCell.isPassable()) {
-                setNextTailPosition();
-                setTile(movingDirection);
-                cell.setHero(null);
-                nextCell.setHero(this);
-                cell = nextCell;
+                executeMove(movingDirection, nextCell, item);
             }
         }
+    }
+
+    private void executeMove(Direction movingDirection, Cell nextCell, Item item) {
+        setNextTailPosition();
+        setTile(movingDirection);
+        cell.setHero(null);
+        nextCell.setHero(this);
+        cell = nextCell;
+        lastDirection = movingDirection;
+        itemMovedInLastStep = item;
     }
 
     private void setTile(Direction movingDirection) {
@@ -46,5 +54,22 @@ public class Hero extends GameElement {
     private void setNextTailPosition() {
         if (tailPosition == 1) tailPosition = 0;
         else tailPosition = 1;
+    }
+
+    public void undo() {
+        if (lastDirection != null) {
+            Direction movingDirection = null;
+            switch (lastDirection) {
+                case WEST -> movingDirection = Direction.EAST;
+                case SOUTH -> movingDirection = Direction.NORTH;
+                case EAST -> movingDirection = Direction.WEST;
+                case NORTH -> movingDirection = Direction.SOUTH;
+            }
+            Cell nextCell = cell.getNeighbor(movingDirection.getDx(), movingDirection.getDy());
+            executeMove(movingDirection, nextCell, itemMovedInLastStep);
+            if (itemMovedInLastStep != null) {
+                itemMovedInLastStep.handleItemEncounter(movingDirection);
+            }
+        }
     }
 }

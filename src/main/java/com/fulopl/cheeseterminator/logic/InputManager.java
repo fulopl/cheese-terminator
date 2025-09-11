@@ -37,6 +37,12 @@ public class InputManager {
             gameControl.refreshAfterKeyPress();
         });
 
+        keyHandlers.put(KeyCode.U, () -> {
+            gameControl.checkLevelVictory();
+            if (hero != null) hero.undo();
+            gameControl.refreshAfterKeyPress();
+        });
+
         keyHandlers.put(KeyCode.SPACE, () -> gameControl.nextPhase());
         keyHandlers.put(KeyCode.R, () -> gameControl.retryLevel());
         keyHandlers.put(KeyCode.Q, () -> gameControl.quit());
