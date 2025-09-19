@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 public class GameLogic implements GameControl {
     private static final int STARTING_NUMBER_OF_LIVES = 3;
-    public final int START_LEVEL = 34;
+    public final int START_LEVEL = 40;
     public final int LAST_LEVEL = 50;
     private int level;
     private int lives;
