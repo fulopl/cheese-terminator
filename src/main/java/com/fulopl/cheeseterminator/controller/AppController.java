@@ -65,5 +65,12 @@ public class AppController extends Application {
     }
 
 
+    public GameLogic getGameLogic() {
+        return gameLogic;
+    }
+
+    public void setGameLogic(GameLogic gameLogic) {
+        this.gameLogic = gameLogic;
+    }
 
 }

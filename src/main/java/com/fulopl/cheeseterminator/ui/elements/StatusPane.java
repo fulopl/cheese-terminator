@@ -19,10 +19,6 @@ public class StatusPane {
 
 
     public StatusPane() {
-        setUpStatusPane();
-    }
-
-    public void setUpStatusPane() {
         gridPane = new GridPane();
         gridPane.setPrefWidth(RIGHT_PANEL_WIDTH);
         gridPane.setPadding(new Insets(RIGHT_PANEL_PADDING));
@@ -31,7 +27,7 @@ public class StatusPane {
         gridPane.add(gameMessage, 0, 0);
     }
 
-    public void setupForLevels() {
+    public void setupGameStatus() {
         levelText = new Label();
         numberOfCheesesLabel = new Label("Number of cheeses: ");
         numberOfCheesesValue = new Label();
@@ -46,7 +42,7 @@ public class StatusPane {
         gridPane.add(keyMapText, 0, 4);
     }
 
-    public GridPane getGridPane() {
+    public GridPane getPane() {
         return gridPane;
     }
 

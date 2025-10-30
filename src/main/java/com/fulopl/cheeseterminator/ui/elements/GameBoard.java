@@ -5,16 +5,20 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.BorderPane;
 
-public class MainStage {
+public class GameBoard {
     private GraphicsContext context;
     private Canvas canvas;
     private BorderPane borderPane;
 
-    public void setUpMainScreen(int mapWidth, int mapHeight) {
+    public GameBoard(int mapWidth, int mapHeight) {
         canvas = new Canvas(
                 mapWidth * Tile.TILE_WIDTH,
                 mapHeight * Tile.TILE_WIDTH);
         context = canvas.getGraphicsContext2D();
+    }
+
+    public void setUpGameBoard(int mapWidth, int mapHeight) {
+
         borderPane = new BorderPane();
         borderPane.setCenter(canvas);
 

@@ -10,63 +10,50 @@ import java.util.Map;
 public class InputManager {
     private final Map<KeyCode, Runnable> keyHandlers = new HashMap<>();
     private Hero hero;
-    private GameControl gameControl;
+    private GameLogic gameLogic;
     private AppController appController;
     private Map<KeyCode, Runnable> keyMap;
 
     public InputManager(AppController appController) {
         this.appController = appController;
         keyHandlers.put(KeyCode.DOWN, () -> {
-            gameControl.checkLevelVictory();
+            gameLogic.checkLevelVictory();
             if (hero != null) hero.move(Direction.SOUTH);
-            gameControl.refreshAfterKeyPress();
+            gameLogic.refreshAfterKeyPress();
         });
 
         keyHandlers.put(KeyCode.LEFT, () -> {
-            gameControl.checkLevelVictory();
+            gameLogic.checkLevelVictory();
             if (hero != null) hero.move(Direction.WEST);
-            gameControl.refreshAfterKeyPress();
+            gameLogic.refreshAfterKeyPress();
         });
 
         keyHandlers.put(KeyCode.UP, () -> {
-            gameControl.checkLevelVictory();
+            gameLogic.checkLevelVictory();
             if (hero != null) hero.move(Direction.NORTH);
-            gameControl.refreshAfterKeyPress();
+            gameLogic.refreshAfterKeyPress();
         });
 
         keyHandlers.put(KeyCode.RIGHT, () -> {
-            gameControl.checkLevelVictory();
+            gameLogic.checkLevelVictory();
             if (hero != null) hero.move(Direction.EAST);
-            gameControl.refreshAfterKeyPress();
+            gameLogic.refreshAfterKeyPress();
         });
 
         keyHandlers.put(KeyCode.U, () -> {
-            gameControl.checkLevelVictory();
+            gameLogic.checkLevelVictory();
             if (hero != null) hero.undo();
-            gameControl.refreshAfterKeyPress();
+            gameLogic.refreshAfterKeyPress();
         });
 
-        keyHandlers.put(KeyCode.SPACE, () -> gameControl.nextPhase());
-        keyHandlers.put(KeyCode.R, () -> gameControl.retryLevel());
-        keyHandlers.put(KeyCode.Q, () -> gameControl.quit());
+        keyHandlers.put(KeyCode.SPACE, () -> gameLogic.nextPhase());
+        keyHandlers.put(KeyCode.R, () -> gameLogic.handleRetry());
+        keyHandlers.put(KeyCode.Q, () -> gameLogic.quit());
     }
 
     public void setHero(Hero hero) {
         this.hero = hero;
     }
-
-    public void setGameControl(GameControl gameControl) {
-        this.gameControl = gameControl;
-    }
-
-    public Map<KeyCode, Runnable> getKeyHandlers() {
-        return keyHandlers;
-    }
-
-
-
-
-
 
 
     public void handleKeyInput(KeyCode keyCode) {
@@ -76,13 +63,21 @@ public class InputManager {
 
     public void setSpaceAndQuitKeyMap(Runnable runnable) {
         keyMap = Map.<KeyCode, Runnable>of(
-                KeyCode.SPACE,runnable,
-                KeyCode.Q,()->appController.quitToMainMenu()
+                KeyCode.SPACE, runnable,
+                KeyCode.Q, () -> appController.quitToMainMenu()
         );
     }
 
     public void setGameKeyMap() {
-
+        keyMap = Map.<KeyCode, Runnable>of(
+                KeyCode.UP, () -> appController.getGameLogic().moveHero(Direction.NORTH),
+                KeyCode.RIGHT, () -> appController.getGameLogic().moveHero(Direction.EAST),
+                KeyCode.DOWN, () -> appController.getGameLogic().moveHero(Direction.SOUTH),
+                KeyCode.LEFT, () -> appController.getGameLogic().moveHero(Direction.WEST),
+                KeyCode.U, () -> appController.getGameLogic().undoMove(),
+                KeyCode.R, () -> appController.getGameLogic().handleRetry(),
+                KeyCode.Q, () -> appController.quitToMainMenu()
+        );
     }
 
     public void onNewGame() {

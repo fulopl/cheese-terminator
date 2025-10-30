@@ -4,40 +4,32 @@ import com.fulopl.cheeseterminator.model.GameElement;
 import com.fulopl.cheeseterminator.model.GameElementType;
 import com.fulopl.cheeseterminator.model.GameMap;
 import com.fulopl.cheeseterminator.model.item.Cheese;
+import com.fulopl.cheeseterminator.model.player.Direction;
 import com.fulopl.cheeseterminator.ui.UI;
 
 import java.util.Arrays;
 
-public class GameLogic implements GameControl {
+public class GameLogic {
     private static final int STARTING_NUMBER_OF_LIVES = 3;
     private final int FIRST_LEVEL = 1;
     private final int LAST_LEVEL = 50;
     private int actualLevel;
-    private int level;
-    private int lives;
-    private String gamePhase;
-    private GameMap map;
     private UI ui;
     private final InputManager inputManager;
+    private GameMap map;
+
+    private int lives;
+    private String gamePhase;
     private int cheeseTotal = 1;
     private int cheeseInHole = 0;
 
 
     public GameLogic(UI ui, InputManager inputManager, int actualLevel) {
-        gamePhase = "welcome";
         this.ui = ui;
         this.inputManager = inputManager;
         this.actualLevel = actualLevel;
+        setupLevel();
 
-        inputManager.setGameControl(this);
-    }
-
-    public void init() {
-        ui.initiateMainStage();
-        initMap("/maps/welcome_screen.txt");
-        setupScreen("Welcome to Cheese Terminator\n" +
-                "Reborn!\n\n" +
-                "Press SPACE to start the game!\n ");
     }
 
     public void initMap(String fileName) {
@@ -46,20 +38,19 @@ public class GameLogic implements GameControl {
     }
 
     public void setupScreen(String message) {
-        ui.setUpScreen(map.getMapWidth(), map.getMapHeight());
+        ui.initGameScreen(map.getMapWidth(), map.getMapHeight());
         ui.refreshGameBoard(map.getCells());
-        ui.setOnKeyPressed(inputManager.getKeyHandlers());
         ui.displayMessage(message);
     }
 
     public void setupLevel() {
-        String filename = "/maps/level_" + level + ".txt";
+        String filename = "/maps/level_" + actualLevel + ".txt";
         initMap(filename);
         setHearts();
-        setupScreen("Push all the cheeses \nto the mouse holes!\n ");
+        setupScreen("Push all the cheeses \nto the red mouse holes!\n ");
 
         ui.setUpStatusDisplay();
-        ui.displayLevel("LEVEL " + level);
+        ui.displayLevel("LEVEL " + actualLevel);
 
         countCheeses();
         refreshGameStatus();
@@ -100,14 +91,6 @@ public class GameLogic implements GameControl {
         this.ui = ui;
     }
 
-    @Override
-    public void retryLevel() {
-        if (gamePhase.equals("level")) {
-            if (--lives < 0) gameOver();
-            else setupLevel();
-        }
-    }
-
     private void gameOver() {
         gamePhase = "gameover";
         initMap("/maps/gameover.txt");
@@ -117,7 +100,6 @@ public class GameLogic implements GameControl {
                 " a new game!\n ");
     }
 
-    @Override
     public void checkLevelVictory() {
         if (gamePhase.equals("level") && cheeseTotal == cheeseInHole) {
 //            try {
@@ -127,12 +109,11 @@ public class GameLogic implements GameControl {
 //            }
             gamePhase = "levelUp";
             initMap("/maps/levelup.txt");
-            setupScreen("Congratulations!\n\nYou have completed LEVEL " + level
+            setupScreen("Congratulations!\n\nYou have completed LEVEL " + actualLevel
                     + "\n\nPress 'SPACE' to proceed!\n ");
         }
     }
 
-    @Override
     public void refreshAfterKeyPress() {
         countCheeses();
         map.setCellTiles();
@@ -140,7 +121,6 @@ public class GameLogic implements GameControl {
         refreshGameStatus();
     }
 
-    @Override
     public void nextPhase() {
         switch (gamePhase) {
             case "welcome", "gameover" -> {
@@ -148,14 +128,14 @@ public class GameLogic implements GameControl {
                 startNewGame();
             }
             case "levelUp" -> {
-                if (level == LAST_LEVEL) {
+                if (actualLevel == LAST_LEVEL) {
                     gamePhase = "victory";
                     initMap("/maps/victory.txt");
                     setupScreen("You have won the game!\n\n" +
                             "Press SPACE to exit!\n ");
                 } else {
                     gamePhase = "level";
-                    level++;
+                    actualLevel++;
                     setupLevel();
                 }
             }
@@ -164,14 +144,27 @@ public class GameLogic implements GameControl {
     }
 
     private void startNewGame() {
-        level = FIRST_LEVEL;
+        actualLevel = FIRST_LEVEL;
         lives = STARTING_NUMBER_OF_LIVES;
         setupLevel();
     }
 
-    @Override
     public void quit() {
         System.out.println("See ya soon!");
         System.exit(0);
+    }
+
+    public void moveHero(Direction direction) {
+        map.getHero().move(direction);
+        refreshAfterKeyPress();
+    }
+
+    public void undoMove() {
+        map.getHero().undo();
+        refreshAfterKeyPress();
+    }
+
+    public void handleRetry() {
+        setupLevel();
     }
 }
