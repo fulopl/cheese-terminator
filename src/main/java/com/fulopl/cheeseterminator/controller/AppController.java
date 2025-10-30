@@ -19,7 +19,7 @@ public class AppController extends Application {
     public void start(Stage primaryStage) {
         inputManager = new InputManager(this);
         ui = new UI(primaryStage, inputManager);
-        inputManager.setSpaceAndQuitKeyMap(this::initMainMenu);
+        inputManager.setSpaceKeyMap(this::initMainMenu);
         actualLevel = loadSavedLevel();
     }
 
@@ -27,7 +27,8 @@ public class AppController extends Application {
         return 1;
     }
 
-    private void saveLevel() {
+    private void saveLevel(int levelToSave) {
+        System.out.println("Saving level No." + levelToSave);
     }
 
     public void initMainMenu() {
@@ -37,30 +38,33 @@ public class AppController extends Application {
 
     public void startNewGame() {
         inputManager.setGameKeyMap();
-        gameLogic = new GameLogic(ui, inputManager, 1);
+        gameLogic = new GameLogic(ui, inputManager, GameType.NORMAL_GAME, 1);
     }
 
     public void continueGame() {
         inputManager.setGameKeyMap();
-        gameLogic = new GameLogic(ui, inputManager, actualLevel);
+        gameLogic = new GameLogic(ui, inputManager, GameType.NORMAL_GAME, actualLevel);
 
     }
 
     public void practiceLevel() {
         inputManager.setGameKeyMap();
         int chosenLevel = 2;
-        gameLogic = new GameLogic(ui, inputManager, chosenLevel);
+        gameLogic = new GameLogic(ui, inputManager, GameType.PRACTICE_GAME, chosenLevel);
     }
 
     public void exitApp() {
-        saveLevel();
+        //saveLevel(levelToSave);
         System.out.println("Your most recently reached level has been saved!");
         System.out.println("See ya later!");
         System.exit(0);
     }
 
-    public void quitToMainMenu() {
-        saveLevel();
+    public void handleQuitToMainMenu() {
+        if (gameLogic != null && gameLogic.getGameType().equals(GameType.NORMAL_GAME)) {
+            actualLevel = gameLogic.getActualLevel();
+            saveLevel(actualLevel);
+        }
         initMainMenu();
     }
 

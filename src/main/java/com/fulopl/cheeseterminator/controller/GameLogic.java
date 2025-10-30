@@ -13,9 +13,11 @@ public class GameLogic {
     private static final int STARTING_NUMBER_OF_LIVES = 3;
     private final int FIRST_LEVEL = 1;
     private final int LAST_LEVEL = 50;
-    private int actualLevel;
+
     private UI ui;
     private final InputManager inputManager;
+    private final GameType gameType;
+    private int actualLevel;
     private GameMap map;
 
     private int lives;
@@ -24,9 +26,10 @@ public class GameLogic {
     private int cheeseInHole = 0;
 
 
-    public GameLogic(UI ui, InputManager inputManager, int actualLevel) {
+    public GameLogic(UI ui, InputManager inputManager, GameType gameType, int actualLevel) {
         this.ui = ui;
         this.inputManager = inputManager;
+        this.gameType = gameType;
         this.actualLevel = actualLevel;
         setupLevel();
 
@@ -91,26 +94,21 @@ public class GameLogic {
         this.ui = ui;
     }
 
-    private void gameOver() {
-        gamePhase = "gameover";
-        initMap("/maps/gameover.txt");
-        setupScreen("You have no more lives!\n\n" +
-                "Game over!\n\n" +
-                "Press 'SPACE' to start\n" +
-                " a new game!\n ");
-    }
-
     public void checkLevelVictory() {
-        if (gamePhase.equals("level") && cheeseTotal == cheeseInHole) {
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
-            gamePhase = "levelUp";
-            initMap("/maps/levelup.txt");
-            setupScreen("Congratulations!\n\nYou have completed LEVEL " + actualLevel
-                    + "\n\nPress 'SPACE' to proceed!\n ");
+        if (cheeseTotal == cheeseInHole) {
+            if (gameType.equals(GameType.NORMAL_GAME)) {
+                ui.displayMessage("Congratulations!\n\nYou have completed LEVEL " + actualLevel
+                        + "\n\nPress 'SPACE' to proceed!\n ");
+                actualLevel++;
+                inputManager.setSpaceKeyMap(()->{
+                    inputManager.setGameKeyMap();
+                    setupLevel();
+                });
+            } else {
+                ui.displayMessage("Congratulations!\n\nYou have completed LEVEL " + actualLevel
+                        + "\n\nPress 'SPACE' to quit to main menu!\n ");
+                inputManager.setSpaceKeyMap(inputManager::onQuitToMain);
+            }
         }
     }
 
@@ -166,5 +164,13 @@ public class GameLogic {
 
     public void handleRetry() {
         setupLevel();
+    }
+
+    public GameType getGameType() {
+        return gameType;
+    }
+
+    public int getActualLevel() {
+        return actualLevel;
     }
 }

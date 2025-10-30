@@ -61,22 +61,41 @@ public class InputManager {
         if (action != null) action.run();
     }
 
-    public void setSpaceAndQuitKeyMap(Runnable runnable) {
+    public void setKeyMap(Map<KeyCode, Runnable> map){
+        keyMap = map;
+    }
+
+    public void setSpaceKeyMap(Runnable runnable) {
         keyMap = Map.<KeyCode, Runnable>of(
-                KeyCode.SPACE, runnable,
-                KeyCode.Q, () -> appController.quitToMainMenu()
+                KeyCode.SPACE, runnable
         );
     }
 
     public void setGameKeyMap() {
         keyMap = Map.<KeyCode, Runnable>of(
-                KeyCode.UP, () -> appController.getGameLogic().moveHero(Direction.NORTH),
-                KeyCode.RIGHT, () -> appController.getGameLogic().moveHero(Direction.EAST),
-                KeyCode.DOWN, () -> appController.getGameLogic().moveHero(Direction.SOUTH),
-                KeyCode.LEFT, () -> appController.getGameLogic().moveHero(Direction.WEST),
+                KeyCode.UP, () -> {
+                    appController.getGameLogic().moveHero(Direction.NORTH);
+                    appController.getGameLogic().refreshAfterKeyPress();
+                    appController.getGameLogic().checkLevelVictory();
+                },
+                KeyCode.RIGHT, () -> {
+                    appController.getGameLogic().moveHero(Direction.EAST);
+                    appController.getGameLogic().refreshAfterKeyPress();
+                    appController.getGameLogic().checkLevelVictory();
+                },
+                KeyCode.DOWN, () -> {
+                    appController.getGameLogic().moveHero(Direction.SOUTH);
+                    appController.getGameLogic().refreshAfterKeyPress();
+                    appController.getGameLogic().checkLevelVictory();
+                },
+                KeyCode.LEFT, () -> {
+                    appController.getGameLogic().moveHero(Direction.WEST);
+                    appController.getGameLogic().refreshAfterKeyPress();
+                    appController.getGameLogic().checkLevelVictory();
+                },
                 KeyCode.U, () -> appController.getGameLogic().undoMove(),
                 KeyCode.R, () -> appController.getGameLogic().handleRetry(),
-                KeyCode.Q, () -> appController.quitToMainMenu()
+                KeyCode.Q, () -> appController.handleQuitToMainMenu()
         );
     }
 
@@ -94,5 +113,9 @@ public class InputManager {
 
     public void onExit() {
         appController.exitApp();
+    }
+
+    public void onQuitToMain() {
+        appController.handleQuitToMainMenu();
     }
 }

@@ -33,7 +33,7 @@ public class StatusPane {
         numberOfCheesesValue = new Label();
         numberToPlaceLabel = new Label("Number to place: ");
         numberToPlaceValue = new Label();
-        keyMapText = new Label("\nUse ARROW KEYS to move,\npush 'U' to undo last step,\npush 'R' to retry level (-1 heart),\npush 'Q' to quit game");
+        keyMapText = new Label("\nUse ARROW KEYS to move,\npush 'U' to undo last step,\npush 'R' to retry level,\npush 'Q' to quit game");
         gridPane.add(levelText, 0, 1);
         gridPane.add(numberOfCheesesLabel, 0, 2);
         gridPane.add(numberOfCheesesValue, 1, 2);
@@ -47,7 +47,9 @@ public class StatusPane {
     }
 
     public void setGameMessage(String text) {
+        gridPane.getChildren().clear();
         gameMessage.setText(text);
+        gridPane.add(gameMessage, 0, 0);
     }
 
     public void setLevelText(String text) {
