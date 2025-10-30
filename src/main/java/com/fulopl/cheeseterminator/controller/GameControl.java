@@ -1,4 +1,4 @@
-package com.fulopl.cheeseterminator.logic;
+package com.fulopl.cheeseterminator.controller;
 
 public interface GameControl {
     void refreshAfterKeyPress();

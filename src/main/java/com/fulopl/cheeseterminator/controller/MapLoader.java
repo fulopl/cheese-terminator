@@ -1,4 +1,4 @@
-package com.fulopl.cheeseterminator.logic;
+package com.fulopl.cheeseterminator.controller;
 
 import com.fulopl.cheeseterminator.model.Cell;
 import com.fulopl.cheeseterminator.model.GameElement;

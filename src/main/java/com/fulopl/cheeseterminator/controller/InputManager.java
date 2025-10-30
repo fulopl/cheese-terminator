@@ -1,4 +1,4 @@
-package com.fulopl.cheeseterminator.logic;
+package com.fulopl.cheeseterminator.controller;
 
 import com.fulopl.cheeseterminator.model.player.Direction;
 import com.fulopl.cheeseterminator.model.player.Hero;
@@ -11,8 +11,11 @@ public class InputManager {
     private final Map<KeyCode, Runnable> keyHandlers = new HashMap<>();
     private Hero hero;
     private GameControl gameControl;
+    private AppController appController;
+    private Map<KeyCode, Runnable> keyMap;
 
-    public InputManager() {
+    public InputManager(AppController appController) {
+        this.appController = appController;
         keyHandlers.put(KeyCode.DOWN, () -> {
             gameControl.checkLevelVictory();
             if (hero != null) hero.move(Direction.SOUTH);
@@ -58,5 +61,43 @@ public class InputManager {
 
     public Map<KeyCode, Runnable> getKeyHandlers() {
         return keyHandlers;
+    }
+
+
+
+
+
+
+
+    public void handleKeyInput(KeyCode keyCode) {
+        Runnable action = keyMap.get(keyCode);
+        if (action != null) action.run();
+    }
+
+    public void setSpaceAndQuitKeyMap(Runnable runnable) {
+        keyMap = Map.<KeyCode, Runnable>of(
+                KeyCode.SPACE,runnable,
+                KeyCode.Q,()->appController.quitToMainMenu()
+        );
+    }
+
+    public void setGameKeyMap() {
+
+    }
+
+    public void onNewGame() {
+        appController.startNewGame();
+    }
+
+    public void onContinueGame() {
+        appController.continueGame();
+    }
+
+    public void onPracticeLevel() {
+        appController.practiceLevel();
+    }
+
+    public void onExit() {
+        appController.exitApp();
     }
 }

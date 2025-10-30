@@ -1,4 +1,4 @@
-package com.fulopl.cheeseterminator.logic;
+package com.fulopl.cheeseterminator.controller;
 
 import com.fulopl.cheeseterminator.model.GameElement;
 import com.fulopl.cheeseterminator.model.GameElementType;
@@ -10,8 +10,9 @@ import java.util.Arrays;
 
 public class GameLogic implements GameControl {
     private static final int STARTING_NUMBER_OF_LIVES = 3;
-    public final int START_LEVEL = 40;
-    public final int LAST_LEVEL = 50;
+    private final int FIRST_LEVEL = 1;
+    private final int LAST_LEVEL = 50;
+    private int actualLevel;
     private int level;
     private int lives;
     private String gamePhase;
@@ -22,10 +23,12 @@ public class GameLogic implements GameControl {
     private int cheeseInHole = 0;
 
 
-    public GameLogic(UI ui, InputManager inputManager) {
+    public GameLogic(UI ui, InputManager inputManager, int actualLevel) {
         gamePhase = "welcome";
         this.ui = ui;
         this.inputManager = inputManager;
+        this.actualLevel = actualLevel;
+
         inputManager.setGameControl(this);
     }
 
@@ -161,7 +164,7 @@ public class GameLogic implements GameControl {
     }
 
     private void startNewGame() {
-        level = START_LEVEL;
+        level = FIRST_LEVEL;
         lives = STARTING_NUMBER_OF_LIVES;
         setupLevel();
     }
