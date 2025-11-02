@@ -118,4 +118,8 @@ public class InputManager {
     public void onQuitToMain() {
         appController.handleQuitToMainMenu();
     }
+
+    public void onStartPractice(int level) {
+
+    }
 }

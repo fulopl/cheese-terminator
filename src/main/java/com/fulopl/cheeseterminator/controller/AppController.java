@@ -24,16 +24,17 @@ public class AppController extends Application {
     }
 
     private int loadSavedLevel() {
-        return 1;
+        return GameSaveManager.loadGame();
     }
 
     private void saveLevel(int levelToSave) {
+        GameSaveManager.saveGame(levelToSave);
         System.out.println("Saving level No." + levelToSave);
     }
 
     public void initMainMenu() {
-        boolean noLevelProgress = actualLevel == 1;
-        ui.ShowMainMenu(noLevelProgress);
+        boolean noLevelProgress = actualLevel <= 1;
+        ui.showMainMenu(noLevelProgress);
     }
 
     public void startNewGame() {
@@ -48,7 +49,11 @@ public class AppController extends Application {
     }
 
     public void practiceLevel() {
-        inputManager.setGameKeyMap();
+        inputManager.setSpaceKeyMap(() -> System.out.println("d"));
+        ui.initPracticeMenu(true);
+    }
+
+    public void startLevelPractice() {
         int chosenLevel = 2;
         gameLogic = new GameLogic(ui, inputManager, GameType.PRACTICE_GAME, chosenLevel);
     }

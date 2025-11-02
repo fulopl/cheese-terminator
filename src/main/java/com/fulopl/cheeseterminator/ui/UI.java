@@ -10,6 +10,8 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -45,7 +47,7 @@ public class UI {
         });
     }
 
-    public void ShowMainMenu(boolean isContGameButtonDisabled) {
+    public void showMainMenu(boolean isContGameButtonDisabled) {
         Button button0 = new Button("New Game");
         Button button1 = new Button("Continue Game");
         button1.setDisable(isContGameButtonDisabled);
@@ -76,8 +78,16 @@ public class UI {
         root.setRight(statusPane.getPane());
     }
 
+    public void initPracticeMenu(boolean startButtonDisabled) {
 
 
+        root.setCenter(vBox);
+
+        public void setButton0Active() {
+
+        }
+
+    }
 
 
     public void refreshGameBoard(Cell[][] cells) {
@@ -109,9 +119,6 @@ public class UI {
         statusPane.setNumberOfCheesesValue(String.valueOf(cheeseTotal));
         statusPane.setNumberToPlaceValue(String.valueOf(cheeseToScore));
     }
-
-
-
 
 
 }
