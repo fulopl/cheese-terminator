@@ -3,19 +3,15 @@ package com.fulopl.cheeseterminator.ui;
 import com.fulopl.cheeseterminator.controller.InputManager;
 import com.fulopl.cheeseterminator.model.Cell;
 import com.fulopl.cheeseterminator.ui.elements.GameBoard;
+import com.fulopl.cheeseterminator.ui.elements.PracticeMenu;
 import com.fulopl.cheeseterminator.ui.elements.StatusPane;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Tooltip;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -26,15 +22,19 @@ public class UI {
     private final Scene scene;
     private GameBoard gameBoard;
     private StatusPane statusPane;
-    private Canvas canvas;
-    private GraphicsContext context;
+    private PracticeMenu practiceMenu;
 
     public UI(Stage primaryStage, InputManager inputManager) {
         this.inputManager = inputManager;
         root = new BorderPane();
 
-        Text text = new Text("Welcome to Cheese Terminator Reborn\nPress SPACE to continue!");
-        root.setCenter(text);
+        Text text = new Text("Welcome to Cheese Terminator Reborn!");
+        Button button = new Button("Go!");
+        button.setPrefWidth(150);
+        button.setOnAction(e->inputManager.onGo());
+        VBox vBox = new VBox(15, text, button);
+        vBox.setAlignment(Pos.CENTER);
+        root.setCenter(vBox);
 
         scene = new Scene(root, 600, 400);
         primaryStage.setScene(scene);
@@ -60,6 +60,7 @@ public class UI {
             button.setPrefWidth(150);
         }
         vBox.setAlignment(Pos.CENTER);
+        root.getChildren().clear();
         root.setCenter(vBox);
 
         button0.setOnAction(e -> inputManager.onNewGame());
@@ -70,55 +71,28 @@ public class UI {
 
     public void initGameScreen(int mapWidth, int mapHeight) {
         gameBoard = new GameBoard(mapWidth, mapHeight);
-        statusPane = new StatusPane();
-        canvas = gameBoard.getCanvas();
-        context = gameBoard.getContext();
+        statusPane = new StatusPane(inputManager);
 
-        root.setCenter(canvas);
+        root.setCenter(gameBoard.getCanvas());
         root.setRight(statusPane.getPane());
     }
 
-    public void initPracticeMenu(boolean startButtonDisabled) {
-
-
-        root.setCenter(vBox);
-
-        public void setButton0Active() {
-
-        }
-
+    public void initPracticeMenu() {
+        practiceMenu = new PracticeMenu(inputManager);
+        root.setCenter(practiceMenu.getvBox());
     }
-
 
     public void refreshGameBoard(Cell[][] cells) {
-        context.setFill(Color.BLACK);
-        context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        int mapWidth = cells.length;
-        int mapHeight = cells[0].length;
-        for (int x = 0; x < mapWidth; x++) {
-            for (int y = 0; y < mapHeight; y++) {
-                Cell cell = cells[x][y];
-                Tile.drawTile(context, cell, x, y);
-            }
-        }
-    }
-
-    public void setUpStatusDisplay() {
-        statusPane.setupGameStatus();
+        gameBoard.refreshGameBoard(cells);
     }
 
     public void displayMessage(String message) {
-        statusPane.setGameMessage(message);
+        statusPane.setLevelFinish(message);
     }
 
-    public void displayLevel(String message) {
-        statusPane.setLevelText(message);
-    }
-
-    public void displayLevelStatus(int cheeseTotal, int cheeseToScore) {
+    public void refreshStatusDisplay(int level, int cheeseTotal, int cheeseToScore) {
+        statusPane.setLevelText(String.valueOf(level));
         statusPane.setNumberOfCheesesValue(String.valueOf(cheeseTotal));
         statusPane.setNumberToPlaceValue(String.valueOf(cheeseToScore));
     }
-
-
 }

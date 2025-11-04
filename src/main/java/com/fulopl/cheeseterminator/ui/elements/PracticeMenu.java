@@ -8,16 +8,15 @@ import javafx.scene.control.Tooltip;
 import javafx.scene.layout.VBox;
 
 public class PracticeMenu {
-    InputManager inputManager;
-    boolean startButtonDisabled;
-    ChoiceBox<String> choiceBox;
-    Button button;
-    Button button1;
-    VBox vBox;
+    private InputManager inputManager;
+    private ChoiceBox<String> choiceBox;
+    private Button button;
+    private Button button1;
+    private VBox vBox;
+    private int selectedIndex;
 
 
-    public PracticeMenu(InputManager inputManager, boolean startButtonDisabled) {
-        this.startButtonDisabled = startButtonDisabled;
+    public PracticeMenu(InputManager inputManager) {
         this.inputManager = inputManager;
         choiceBox = new ChoiceBox<String>();
         choiceBox.getItems().add("Select level...");
@@ -26,27 +25,32 @@ public class PracticeMenu {
         }
         choiceBox.setValue("Select level...");
 
-        Button button0 = new Button("Start practice");
         choiceBox.setOnAction((event) -> {
-            int selectedIndex = choiceBox.getSelectionModel().getSelectedIndex();
+            selectedIndex = choiceBox.getSelectionModel().getSelectedIndex();
             Object selectedItem = choiceBox.getSelectionModel().getSelectedItem();
 
             System.out.println("Selection made: [" + selectedIndex + "] " + selectedItem);
-
-            if (selectedIndex > 0) button0.setDisable(false);
+            if (selectedIndex > 0) button.setDisable(false);
+            else button.setDisable(true);
         });
         choiceBox.setTooltip(new Tooltip("Select level..."));
 
-        button0.setDisable(startButtonDisabled);
-        button0.setOnAction(event -> inputManager.onStartPractice(choiceBox.getSelectionModel().getSelectedIndex()));
-        Button button1 = new Button("Quit to main menu");
+        button = new Button("Start practice");
+        button.setDisable(true);
+        button.setOnAction(event -> inputManager.onStartPractice(selectedIndex));
+
+        button1 = new Button("Quit to main menu");
         button1.setOnAction((event) -> inputManager.onQuitToMain());
 
         choiceBox.setPrefWidth(150);
-        button0.setPrefWidth(150);
+        button.setPrefWidth(150);
         button1.setPrefWidth(150);
 
-        VBox vBox = new VBox(15, choiceBox, button0, button1);
+        vBox = new VBox(15, choiceBox, button, button1);
         vBox.setAlignment(Pos.CENTER);
+    }
+
+    public VBox getvBox() {
+        return vBox;
     }
 }

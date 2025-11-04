@@ -1,74 +1,30 @@
 package com.fulopl.cheeseterminator.controller;
 
 import com.fulopl.cheeseterminator.model.player.Direction;
-import com.fulopl.cheeseterminator.model.player.Hero;
 import javafx.scene.input.KeyCode;
-
-import java.util.HashMap;
 import java.util.Map;
 
 public class InputManager {
-    private final Map<KeyCode, Runnable> keyHandlers = new HashMap<>();
-    private Hero hero;
-    private GameLogic gameLogic;
     private AppController appController;
     private Map<KeyCode, Runnable> keyMap;
 
     public InputManager(AppController appController) {
         this.appController = appController;
-        keyHandlers.put(KeyCode.DOWN, () -> {
-            gameLogic.checkLevelVictory();
-            if (hero != null) hero.move(Direction.SOUTH);
-            gameLogic.refreshAfterKeyPress();
-        });
-
-        keyHandlers.put(KeyCode.LEFT, () -> {
-            gameLogic.checkLevelVictory();
-            if (hero != null) hero.move(Direction.WEST);
-            gameLogic.refreshAfterKeyPress();
-        });
-
-        keyHandlers.put(KeyCode.UP, () -> {
-            gameLogic.checkLevelVictory();
-            if (hero != null) hero.move(Direction.NORTH);
-            gameLogic.refreshAfterKeyPress();
-        });
-
-        keyHandlers.put(KeyCode.RIGHT, () -> {
-            gameLogic.checkLevelVictory();
-            if (hero != null) hero.move(Direction.EAST);
-            gameLogic.refreshAfterKeyPress();
-        });
-
-        keyHandlers.put(KeyCode.U, () -> {
-            gameLogic.checkLevelVictory();
-            if (hero != null) hero.undo();
-            gameLogic.refreshAfterKeyPress();
-        });
-
-        keyHandlers.put(KeyCode.SPACE, () -> gameLogic.nextPhase());
-        keyHandlers.put(KeyCode.R, () -> gameLogic.handleRetry());
-        keyHandlers.put(KeyCode.Q, () -> gameLogic.quit());
     }
-
-    public void setHero(Hero hero) {
-        this.hero = hero;
-    }
-
 
     public void handleKeyInput(KeyCode keyCode) {
         Runnable action = keyMap.get(keyCode);
         if (action != null) action.run();
     }
 
-    public void setKeyMap(Map<KeyCode, Runnable> map){
-        keyMap = map;
-    }
-
     public void setSpaceKeyMap(Runnable runnable) {
         keyMap = Map.<KeyCode, Runnable>of(
                 KeyCode.SPACE, runnable
         );
+    }
+
+    public void setBlancKeyMap() {
+        keyMap = Map.<KeyCode, Runnable>of();
     }
 
     public void setGameKeyMap() {
@@ -120,6 +76,18 @@ public class InputManager {
     }
 
     public void onStartPractice(int level) {
+        appController.startLevelPractice(level);
+    }
 
+    public void onGo() {
+        appController.initMainMenu();
+    }
+
+    public void onUndo() {
+        appController.getGameLogic().undoMove();
+    }
+
+    public void onRetry() {
+        appController.getGameLogic().handleRetry();
     }
 }

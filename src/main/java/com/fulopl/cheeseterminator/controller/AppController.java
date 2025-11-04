@@ -19,7 +19,7 @@ public class AppController extends Application {
     public void start(Stage primaryStage) {
         inputManager = new InputManager(this);
         ui = new UI(primaryStage, inputManager);
-        inputManager.setSpaceKeyMap(this::initMainMenu);
+        inputManager.setBlancKeyMap();
         actualLevel = loadSavedLevel();
     }
 
@@ -33,6 +33,7 @@ public class AppController extends Application {
     }
 
     public void initMainMenu() {
+        inputManager.setBlancKeyMap();
         boolean noLevelProgress = actualLevel <= 1;
         ui.showMainMenu(noLevelProgress);
     }
@@ -45,21 +46,19 @@ public class AppController extends Application {
     public void continueGame() {
         inputManager.setGameKeyMap();
         gameLogic = new GameLogic(ui, inputManager, GameType.NORMAL_GAME, actualLevel);
-
     }
 
     public void practiceLevel() {
-        inputManager.setSpaceKeyMap(() -> System.out.println("d"));
-        ui.initPracticeMenu(true);
+        inputManager.setSpaceKeyMap(this::handleQuitToMainMenu);
+        ui.initPracticeMenu();
     }
 
-    public void startLevelPractice() {
-        int chosenLevel = 2;
+    public void startLevelPractice(int chosenLevel) {
+        inputManager.setGameKeyMap();
         gameLogic = new GameLogic(ui, inputManager, GameType.PRACTICE_GAME, chosenLevel);
     }
 
     public void exitApp() {
-        //saveLevel(levelToSave);
         System.out.println("Your most recently reached level has been saved!");
         System.out.println("See ya later!");
         System.exit(0);
