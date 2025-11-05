@@ -90,4 +90,9 @@ public class InputManager {
     public void onRetry() {
         appController.getGameLogic().handleRetry();
     }
+
+    public void onNextLevel() {
+        setGameKeyMap();
+        appController.getGameLogic().setupLevel();
+    }
 }

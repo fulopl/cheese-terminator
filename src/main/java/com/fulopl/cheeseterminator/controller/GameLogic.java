@@ -5,6 +5,7 @@ import com.fulopl.cheeseterminator.model.GameMap;
 import com.fulopl.cheeseterminator.model.item.Cheese;
 import com.fulopl.cheeseterminator.model.player.Direction;
 import com.fulopl.cheeseterminator.ui.UI;
+
 import java.util.Arrays;
 
 public class GameLogic {
@@ -59,16 +60,11 @@ public class GameLogic {
     public void checkLevelVictory() {
         if (cheeseTotal == cheeseInHole) {
             if (gameType.equals(GameType.NORMAL_GAME)) {
-                ui.displayMessage("Congratulations!\n\nYou have completed LEVEL " + actualLevel
-                        + "\n\nPress 'SPACE' to proceed!\n ");
                 actualLevel++;
-                inputManager.setSpaceKeyMap(()->{
-                    inputManager.setGameKeyMap();
-                    setupLevel();
-                });
+                ui.initStatusPaneNormalFinish(actualLevel);
+                inputManager.setSpaceKeyMap(inputManager::onNextLevel);
             } else {
-                ui.displayMessage("Congratulations!\n\nYou have completed LEVEL " + actualLevel
-                        + "\n\nPress 'SPACE' to quit\n to the main menu!\n ");
+                ui.initStatusPanePracticeFinish(actualLevel);
                 inputManager.setSpaceKeyMap(inputManager::onQuitToMain);
             }
         }

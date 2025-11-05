@@ -41,11 +41,11 @@ public class StatusPane {
         numberToPlaceLabel = new Label("Number to place: ");
         numberToPlaceValue = new Label();
 
-        Button buttonUndo = new Button("Undo last step");
+        Button buttonUndo = new Button("Undo last step (U)");
         buttonUndo.setOnAction(e -> inputManager.onUndo());
-        Button buttonRetry = new Button("Retry level");
+        Button buttonRetry = new Button("Retry level (R)");
         buttonRetry.setOnAction(e -> inputManager.onRetry());
-        Button buttonQuit = new Button("Quit to main menu");
+        Button buttonQuit = new Button("Quit to main menu (Q)");
         buttonQuit.setOnAction(e -> inputManager.onQuitToMain());
         Set<Button> buttonSet = Set.of(buttonUndo, buttonRetry, buttonQuit);
         buttonSet.forEach(item -> {
@@ -70,10 +70,24 @@ public class StatusPane {
         return gridPane;
     }
 
-    public void setLevelFinish(String text) {
+    public void setNormalLevelFinish(int actualLevel) {
         gridPane.getChildren().clear();
-        gameMessage.setText(text);
+        gameMessage.setText("Congratulations!\n\nYou have completed LEVEL " + actualLevel
+                + "\n\nPress 'SPACE' or click below\n\nto the next level!\n ");
         gridPane.add(gameMessage, 0, 0);
+        Button button = new Button("Proceed to next level!");
+        button.setOnAction(e -> inputManager.onNextLevel());
+        gridPane.add(button, 0, 1);
+    }
+
+    public void setPracticeLevelFinish(int actualLevel) {
+        gridPane.getChildren().clear();
+        gameMessage.setText("Congratulations!\n\nYou have completed LEVEL " + actualLevel
+                + "\n\nPress 'SPACE' or click below\n\nto quit to main menu!\n ");
+        gridPane.add(gameMessage, 0, 0);
+        Button button = new Button("Quit to main menu!");
+        button.setOnAction(e -> inputManager.onQuitToMain());
+        gridPane.add(button, 0, 1);
     }
 
     public void setLevelText(String text) {

@@ -86,8 +86,12 @@ public class UI {
         gameBoard.refreshGameBoard(cells);
     }
 
-    public void displayMessage(String message) {
-        statusPane.setLevelFinish(message);
+    public void initStatusPaneNormalFinish(int actualLevel) {
+        statusPane.setNormalLevelFinish(actualLevel);
+    }
+
+    public void initStatusPanePracticeFinish(int actualLevel) {
+        statusPane.setPracticeLevelFinish(actualLevel);
     }
 
     public void refreshStatusDisplay(int level, int cheeseTotal, int cheeseToScore) {
