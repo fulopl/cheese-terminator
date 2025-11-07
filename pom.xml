@@ -59,7 +59,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>0.0.3</version>
                 <configuration>
-                    <mainClass>com.fulopl.cheeseterminator.logic.Game</mainClass>
+                    <mainClass>com.fulopl.cheeseterminator.controller.AppController</mainClass>
                 </configuration>
             </plugin>
 
@@ -86,7 +86,7 @@
                         <configuration>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                    <mainClass>com.fulopl.cheeseterminator.App</mainClass>
+                                    <mainClass>com.fulopl.cheeseterminator.AppStarter</mainClass>
                                 </transformer>
                             </transformers>
                         </configuration>
