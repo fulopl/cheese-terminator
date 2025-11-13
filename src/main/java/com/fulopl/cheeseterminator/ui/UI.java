@@ -2,10 +2,7 @@ package com.fulopl.cheeseterminator.ui;
 
 import com.fulopl.cheeseterminator.controller.InputManager;
 import com.fulopl.cheeseterminator.model.Cell;
-import com.fulopl.cheeseterminator.ui.elements.GameBoard;
-import com.fulopl.cheeseterminator.ui.elements.MainBackGroundImage;
-import com.fulopl.cheeseterminator.ui.elements.PracticeMenu;
-import com.fulopl.cheeseterminator.ui.elements.StatusPane;
+import com.fulopl.cheeseterminator.ui.elements.*;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -16,7 +13,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class UI {
 
@@ -106,5 +102,10 @@ public class UI {
         statusPane.setLevelText(String.valueOf(level));
         statusPane.setNumberOfCheesesValue(String.valueOf(cheeseTotal));
         statusPane.setNumberToPlaceValue(String.valueOf(cheeseToScore));
+    }
+
+    public boolean initAlertBox(String title, String header, String text) {
+        AlertBox alertBox = new AlertBox(title, header, text);
+        return alertBox.show();
     }
 }

@@ -39,8 +39,15 @@ public class AppController extends Application {
     }
 
     public void startNewGame() {
-        inputManager.setGameKeyMap();
-        gameLogic = new GameLogic(ui, inputManager, GameType.NORMAL_GAME, 1);
+        if (
+                actualLevel <= 1
+                        ||
+                        ui.initAlertBox("Confirm starting new game", "Do you wish to" +
+                                " continue?", "Your current game progress will be lost.")
+        ) {
+            inputManager.setGameKeyMap();
+            gameLogic = new GameLogic(ui, inputManager, GameType.NORMAL_GAME, 1);
+        }
     }
 
     public void continueGame() {
