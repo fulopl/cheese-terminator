@@ -92,6 +92,7 @@ public class InputManager {
     }
 
     public void onNextLevel() {
+        appController.getGameLogic().incrementLevel();
         setGameKeyMap();
         appController.getGameLogic().setupLevel();
     }

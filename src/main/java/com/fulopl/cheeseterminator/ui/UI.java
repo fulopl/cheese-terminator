@@ -3,6 +3,7 @@ package com.fulopl.cheeseterminator.ui;
 import com.fulopl.cheeseterminator.controller.InputManager;
 import com.fulopl.cheeseterminator.model.Cell;
 import com.fulopl.cheeseterminator.ui.elements.GameBoard;
+import com.fulopl.cheeseterminator.ui.elements.MainBackGroundImage;
 import com.fulopl.cheeseterminator.ui.elements.PracticeMenu;
 import com.fulopl.cheeseterminator.ui.elements.StatusPane;
 import javafx.geometry.Pos;
@@ -10,10 +11,12 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class UI {
 
@@ -23,20 +26,25 @@ public class UI {
     private GameBoard gameBoard;
     private StatusPane statusPane;
     private PracticeMenu practiceMenu;
+    private MainBackGroundImage mainBackGroundImage;
 
     public UI(Stage primaryStage, InputManager inputManager) {
         this.inputManager = inputManager;
         root = new BorderPane();
+        mainBackGroundImage = new MainBackGroundImage();
 
-        Text text = new Text("Welcome to Cheese Terminator Reborn!");
+        Text text = new Text("Cheese Terminator Reborn!");
         Button button = new Button("Go!");
         button.setPrefWidth(150);
-        button.setOnAction(e->inputManager.onGo());
+        button.setOnAction(e -> inputManager.onGo());
         VBox vBox = new VBox(15, text, button);
         vBox.setAlignment(Pos.CENTER);
+        vBox.setBackground(new Background(mainBackGroundImage.getElement()));
         root.setCenter(vBox);
 
-        scene = new Scene(root, 600, 400);
+        scene = new Scene(root, 600, 500);
+
+
         primaryStage.setScene(scene);
         primaryStage.setTitle("Cheese Terminator Reborn");
         primaryStage.show();

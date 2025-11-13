@@ -60,7 +60,6 @@ public class GameLogic {
     public void checkLevelVictory() {
         if (cheeseTotal == cheeseInHole) {
             if (gameType.equals(GameType.NORMAL_GAME)) {
-                actualLevel++;
                 ui.initStatusPaneNormalFinish(actualLevel);
                 inputManager.setSpaceKeyMap(inputManager::onNextLevel);
             } else {
@@ -97,5 +96,9 @@ public class GameLogic {
 
     public int getActualLevel() {
         return actualLevel;
+    }
+
+    public void incrementLevel() {
+        actualLevel++;
     }
 }

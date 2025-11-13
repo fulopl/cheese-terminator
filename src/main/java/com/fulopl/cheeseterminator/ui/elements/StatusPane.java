@@ -73,7 +73,7 @@ public class StatusPane {
     public void setNormalLevelFinish(int actualLevel) {
         gridPane.getChildren().clear();
         gameMessage.setText("Congratulations!\n\nYou have completed LEVEL " + actualLevel
-                + "\n\nPress 'SPACE' or click below\n\nto the next level!\n ");
+                + "!\n\nPress 'SPACE' or click below\nto the next level!\n ");
         gridPane.add(gameMessage, 0, 0);
         Button button = new Button("Proceed to next level!");
         button.setOnAction(e -> inputManager.onNextLevel());
@@ -83,7 +83,7 @@ public class StatusPane {
     public void setPracticeLevelFinish(int actualLevel) {
         gridPane.getChildren().clear();
         gameMessage.setText("Congratulations!\n\nYou have completed LEVEL " + actualLevel
-                + "\n\nPress 'SPACE' or click below\n\nto quit to main menu!\n ");
+                + "!\n\nPress 'SPACE' or click below\nto quit to main menu!\n ");
         gridPane.add(gameMessage, 0, 0);
         Button button = new Button("Quit to main menu!");
         button.setOnAction(e -> inputManager.onQuitToMain());
