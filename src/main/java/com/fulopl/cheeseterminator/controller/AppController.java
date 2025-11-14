@@ -42,8 +42,9 @@ public class AppController extends Application {
         if (
                 actualLevel <= 1
                         ||
-                        ui.initAlertBox("Confirm starting new game", "Do you wish to" +
-                                " continue?", "Your current game progress will be lost.")
+                        ui.initQuestionBox("Confirm starting new game", "Your current " +
+                                "game progress will be lost.\nDo you wish to continue?",
+                                "Back", "Continue")
         ) {
             inputManager.setGameKeyMap();
             gameLogic = new GameLogic(ui, inputManager, GameType.NORMAL_GAME, 1);
