@@ -43,7 +43,7 @@ public class AppController extends Application {
                 actualLevel <= 1
                         ||
                         ui.initQuestionBox("Confirm starting new game", "Your current " +
-                                "game progress will be lost.\nDo you wish to continue?",
+                                        "game progress will be lost.\nDo you wish to continue?",
                                 "Back", "Continue")
         ) {
             inputManager.setGameKeyMap();
@@ -80,13 +80,12 @@ public class AppController extends Application {
         initMainMenu();
     }
 
-
     public GameLogic getGameLogic() {
         return gameLogic;
     }
 
-    public void setGameLogic(GameLogic gameLogic) {
-        this.gameLogic = gameLogic;
+    public void handleVictoryScreen() {
+        ui.initVictoryScreen();
+        inputManager.setSpaceKeyMap(this::initMainMenu);
     }
-
 }

@@ -14,6 +14,7 @@ public class GameLogic {
     private final InputManager inputManager;
     private final GameType gameType;
     private int actualLevel;
+    private final int LAST_LEVEL = 50;
     private GameMap map;
 
     private int cheeseTotal = 1;
@@ -60,8 +61,13 @@ public class GameLogic {
     public void checkLevelVictory() {
         if (cheeseTotal == cheeseInHole) {
             if (gameType.equals(GameType.NORMAL_GAME)) {
-                ui.initStatusPaneNormalFinish(actualLevel);
-                inputManager.setSpaceKeyMap(inputManager::onNextLevel);
+                if (actualLevel == LAST_LEVEL) {
+                    ui.initStatusPaneVictoryFinish();
+                    inputManager.setSpaceKeyMap(inputManager::onVictoryScreen);
+                } else {
+                    ui.initStatusPaneNormalFinish(actualLevel);
+                    inputManager.setSpaceKeyMap(inputManager::onNextLevel);
+                }
             } else {
                 ui.initStatusPanePracticeFinish(actualLevel);
                 inputManager.setSpaceKeyMap(inputManager::onQuitToMain);
@@ -101,4 +107,5 @@ public class GameLogic {
     public void incrementLevel() {
         actualLevel++;
     }
+
 }

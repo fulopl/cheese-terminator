@@ -80,6 +80,16 @@ public class StatusPane {
         gridPane.add(button, 0, 1);
     }
 
+    public void setVictoryLevelFinish() {
+        gridPane.getChildren().clear();
+        gameMessage.setText("Well done!\n\nYou have finished the last level"
+                + "!\n\nPress 'SPACE' or click below\nto continue!\n ");
+        gridPane.add(gameMessage, 0, 0);
+        Button button = new Button("Continue!");
+        button.setOnAction(e -> inputManager.onVictoryScreen());
+        gridPane.add(button, 0, 1);
+    }
+
     public void setPracticeLevelFinish(int actualLevel) {
         gridPane.getChildren().clear();
         gameMessage.setText("Congratulations!\n\nYou have completed LEVEL " + actualLevel

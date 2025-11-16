@@ -59,7 +59,7 @@ public class UI {
         Button button1 = new Button("Continue Game");
         button1.setDisable(isContGameButtonDisabled);
         Button button2 = new Button("Practice Level");
-        Button button3 = new Button("Exit & Save");
+        Button button3 = new Button("Exit");
 
         VBox vBox = new VBox(15, button0, button1, button2, button3);
         vBox.setBackground(new Background(mainBackGround.getBackgroundImage()));
@@ -75,6 +75,7 @@ public class UI {
         button1.setOnAction(e -> inputManager.onContinueGame());
         button2.setOnAction(e -> inputManager.onPracticeLevel());
         button3.setOnAction(e -> inputManager.onExit());
+
     }
 
     public void initGameScreen(int mapWidth, int mapHeight) {
@@ -98,6 +99,10 @@ public class UI {
         statusPane.setNormalLevelFinish(actualLevel);
     }
 
+    public void initStatusPaneVictoryFinish() {
+        statusPane.setVictoryLevelFinish();
+    }
+
     public void initStatusPanePracticeFinish(int actualLevel) {
         statusPane.setPracticeLevelFinish(actualLevel);
     }
@@ -117,4 +122,11 @@ public class UI {
         QuestionBox questionBox = new QuestionBox(title, mainContent, noLabel, yesLabel);
         return questionBox.show();
     }
+
+    public void initVictoryScreen() {
+        VictoryPane victoryPane = new VictoryPane();
+        root.getChildren().clear();
+        root.setCenter(victoryPane.getContent());
+    }
+
 }
