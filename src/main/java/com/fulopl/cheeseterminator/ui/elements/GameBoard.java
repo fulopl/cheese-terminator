@@ -34,7 +34,4 @@ public class GameBoard {
         return canvas;
     }
 
-    public GraphicsContext getContext() {
-        return context;
-    }
 }

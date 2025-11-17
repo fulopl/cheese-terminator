@@ -2,6 +2,7 @@ package com.fulopl.cheeseterminator.controller;
 
 import com.fulopl.cheeseterminator.model.player.Direction;
 import javafx.scene.input.KeyCode;
+
 import java.util.Map;
 
 public class InputManager {
@@ -92,7 +93,13 @@ public class InputManager {
     }
 
     public void onNextLevel() {
+        appController.getGameLogic().incrementLevel();
         setGameKeyMap();
         appController.getGameLogic().setupLevel();
     }
+
+    public void onVictoryScreen() {
+        appController.handleVictoryScreen();
+    }
+
 }

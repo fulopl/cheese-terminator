@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Tooltip;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.VBox;
 
 public class PracticeMenu {
@@ -14,10 +15,12 @@ public class PracticeMenu {
     private Button button1;
     private VBox vBox;
     private int selectedIndex;
+    private MainBackGround mainBackGround;
 
 
-    public PracticeMenu(InputManager inputManager) {
+    public PracticeMenu(InputManager inputManager, MainBackGround mainBackGround) {
         this.inputManager = inputManager;
+        this.mainBackGround = mainBackGround;
         choiceBox = new ChoiceBox<String>();
         choiceBox.getItems().add("Select level...");
         for (int i = 1; i <= 50; i++) {
@@ -48,6 +51,7 @@ public class PracticeMenu {
 
         vBox = new VBox(15, choiceBox, button, button1);
         vBox.setAlignment(Pos.CENTER);
+        vBox.setBackground(new Background(mainBackGround.getBackgroundImage()));
     }
 
     public VBox getvBox() {

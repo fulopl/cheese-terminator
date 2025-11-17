@@ -39,8 +39,16 @@ public class AppController extends Application {
     }
 
     public void startNewGame() {
-        inputManager.setGameKeyMap();
-        gameLogic = new GameLogic(ui, inputManager, GameType.NORMAL_GAME, 1);
+        if (
+                actualLevel <= 1
+                        ||
+                        ui.initQuestionBox("Confirm starting new game", "Your current " +
+                                        "game progress will be lost.\nDo you wish to continue?",
+                                "Back", "Continue")
+        ) {
+            inputManager.setGameKeyMap();
+            gameLogic = new GameLogic(ui, inputManager, GameType.NORMAL_GAME, 1);
+        }
     }
 
     public void continueGame() {
@@ -72,13 +80,12 @@ public class AppController extends Application {
         initMainMenu();
     }
 
-
     public GameLogic getGameLogic() {
         return gameLogic;
     }
 
-    public void setGameLogic(GameLogic gameLogic) {
-        this.gameLogic = gameLogic;
+    public void handleVictoryScreen() {
+        ui.initVictoryScreen();
+        inputManager.setSpaceKeyMap(this::initMainMenu);
     }
-
 }
